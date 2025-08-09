@@ -9,13 +9,13 @@ export default function Footer() {
                     {/* Business Info */}
                     <div className="md:col-span-2">
                         <div className="flex items-center space-x-3 mb-4">
-                            <span className="text-4xl">🎉</span>
+                            <span className="text-4xl animate-float">🎉</span>
                             <div>
-                                <h3 className="text-2xl font-bold">Mi Fiesta Rentals</h3>
-                                <p className="text-purple-200">{businessConfig.tagline}</p>
+                                <h3 className="font-heading text-2xl text-yellow-300 title-shadow">Mi Fiesta Rentals</h3>
+                                <p className="font-body text-purple-200">{businessConfig.tagline}</p>
                             </div>
                         </div>
-                        <p className="text-purple-100 mb-4 leading-relaxed">
+                        <p className="font-body text-purple-100 mb-4 leading-relaxed">
                             Professional party rental service proudly serving the Rio Grande Valley.
                             Clean, safe, and reliable bounce houses, tables, chairs, and party supplies
                             for all your celebrations!
@@ -25,7 +25,7 @@ export default function Footer() {
                                 href={businessConfig.social.facebook}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-blue-600 hover:bg-blue-700 p-3 rounded-full transition-colors"
+                                className="bg-blue-600 hover:bg-blue-700 p-3 rounded-full transition-all duration-300 party-hover"
                             >
                                 📘
                             </a>
@@ -33,7 +33,7 @@ export default function Footer() {
                                 href={businessConfig.social.instagram}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-pink-600 hover:bg-pink-700 p-3 rounded-full transition-colors"
+                                className="bg-pink-600 hover:bg-pink-700 p-3 rounded-full transition-all duration-300 party-hover"
                             >
                                 📷
                             </a>
@@ -41,7 +41,7 @@ export default function Footer() {
                                 href={businessConfig.social.whatsapp}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-green-600 hover:bg-green-700 p-3 rounded-full transition-colors"
+                                className="bg-green-600 hover:bg-green-700 p-3 rounded-full transition-all duration-300 party-hover"
                             >
                                 💬
                             </a>
@@ -50,30 +50,30 @@ export default function Footer() {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-xl font-bold mb-4 text-yellow-300">Quick Links</h4>
+                        <h4 className="font-heading text-xl mb-4 text-yellow-300">Quick Links</h4>
                         <ul className="space-y-2">
                             <li>
-                                <Link href="/" className="text-purple-100 hover:text-yellow-300 transition-colors">
+                                <Link href="/" className="font-body text-purple-100 hover:text-yellow-300 transition-colors party-text-hover">
                                     Home
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/inventory" className="text-purple-100 hover:text-yellow-300 transition-colors">
+                                <Link href="/inventory" className="font-body text-purple-100 hover:text-yellow-300 transition-colors party-text-hover">
                                     Inventory
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/rental-info" className="text-purple-100 hover:text-yellow-300 transition-colors">
+                                <Link href="/rental-info" className="font-body text-purple-100 hover:text-yellow-300 transition-colors party-text-hover">
                                     Rental Info
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/faq" className="text-purple-100 hover:text-yellow-300 transition-colors">
+                                <Link href="/faq" className="font-body text-purple-100 hover:text-yellow-300 transition-colors party-text-hover">
                                     FAQ
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/contact" className="text-purple-100 hover:text-yellow-300 transition-colors">
+                                <Link href="/contact" className="font-body text-purple-100 hover:text-yellow-300 transition-colors party-text-hover">
                                     Contact
                                 </Link>
                             </li>
@@ -82,13 +82,13 @@ export default function Footer() {
 
                     {/* Contact Info */}
                     <div>
-                        <h4 className="text-xl font-bold mb-4 text-yellow-300">Contact Us</h4>
+                        <h4 className="font-heading text-xl mb-4 text-yellow-300">Contact Us</h4>
                         <div className="space-y-3">
                             <div className="flex items-center space-x-2">
                                 <span>📞</span>
                                 <a
                                     href={`tel:${businessConfig.phone}`}
-                                    className="text-purple-100 hover:text-yellow-300 transition-colors font-medium"
+                                    className="font-body-bold text-purple-100 hover:text-yellow-300 transition-colors"
                                 >
                                     {businessConfig.phone}
                                 </a>
@@ -97,7 +97,7 @@ export default function Footer() {
                                 <span>📧</span>
                                 <a
                                     href={`mailto:${businessConfig.email}`}
-                                    className="text-purple-100 hover:text-yellow-300 transition-colors"
+                                    className="font-body text-purple-100 hover:text-yellow-300 transition-colors"
                                 >
                                     {businessConfig.email}
                                 </a>
@@ -105,65 +105,23 @@ export default function Footer() {
                             <div className="flex items-start space-x-2">
                                 <span>🌮</span>
                                 <div>
-                                    <p className="text-purple-100 font-medium">Serving RGV:</p>
-                                    <p className="text-purple-200 text-sm">
+                                    <p className="font-body-bold text-purple-100">Serving RGV:</p>
+                                    <p className="font-body text-purple-200 text-sm">
                                         {businessConfig.cities.slice(0, 4).join(', ')} + more
                                     </p>
                                 </div>
                             </div>
-                            <div className="flex items-start space-x-2">
-                                <span>⏰</span>
-                                <div>
-                                    <p className="text-purple-100 text-sm">
-                                        Mon-Fri: {businessConfig.hours.weekdays}<br />
-                                        Sat: {businessConfig.hours.saturday}<br />
-                                        Sun: {businessConfig.hours.sunday}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Service Areas */}
-                <div className="mt-8 pt-8 border-t border-purple-600">
-                    <h4 className="text-lg font-bold mb-4 text-yellow-300 text-center">
-                        🚚 We Deliver Throughout the Rio Grande Valley
-                    </h4>
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-center">
-                        {businessConfig.cities.map(city => (
-                            <div key={city} className="bg-purple-600/50 p-2 rounded text-sm">
-                                {city}
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                        </div >
+                    </div >
+                </div >
 
                 {/* Bottom Bar */}
-                <div className="mt-8 pt-8 border-t border-purple-600 flex flex-col md:flex-row justify-between items-center">
-                    <div className="text-purple-200 text-sm mb-4 md:mb-0">
-                        © 2025 Mi Fiesta Rentals. All rights reserved. | Licensed & Insured
-                    </div>
-                    <div className="flex space-x-6 text-sm">
-                        <button className="text-purple-200 hover:text-yellow-300 transition-colors">
-                            Privacy Policy
-                        </button>
-                        <button className="text-purple-200 hover:text-yellow-300 transition-colors">
-                            Terms of Service
-                        </button>
-                    </div>
-                </div>
-
-                {/* Emergency Contact */}
-                <div className="mt-6 bg-red-600/20 border border-red-400 p-4 rounded-lg text-center">
-                    <p className="text-yellow-300 font-bold">
-                        🚨 Day-of-Event Emergency Contact: {businessConfig.phone}
+                < div className="border-t border-purple-600 mt-8 pt-8 text-center" >
+                    <p className="font-body text-purple-200">
+                        © 2024 Mi Fiesta Rentals. All rights reserved. Made with ❤️ for the RGV community.
                     </p>
-                    <p className="text-purple-100 text-sm">
-                        For delivery, pickup, or equipment issues on your event day
-                    </p>
-                </div>
-            </div>
-        </footer>
+                </div >
+            </div >
+        </footer >
     )
 }

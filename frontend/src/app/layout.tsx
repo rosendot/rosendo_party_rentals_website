@@ -1,10 +1,31 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Fredoka, Nunito, Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
-const inter = Inter({ subsets: ['latin'] })
+// Primary display font - fun and rounded for headings
+const fredoka = Fredoka({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-fredoka',
+  display: 'swap'
+})
+
+// Secondary font - energetic and friendly for body text
+const nunito = Nunito({
+  subsets: ['latin'],
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-nunito',
+  display: 'swap'
+})
+
+// Fallback font - Inter for any technical text
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap'
+})
 
 export const metadata: Metadata = {
   title: 'Mi Fiesta Rentals - Party Rentals Rio Grande Valley',
@@ -19,7 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${fredoka.variable} ${nunito.variable} ${inter.variable} font-nunito antialiased`}>
         <Header />
         <main className="min-h-screen">
           {children}

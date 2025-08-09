@@ -12,31 +12,125 @@
   --animate-bounce-slow: bounce 2s infinite;
   --animate-pulse-slow: pulse 3s infinite;
   --animate-spin-slow: spin 3s linear infinite;
+
+  /* Font family variables */
+  --font-fredoka: 'Fredoka Variable', system-ui, sans-serif;
+  --font-nunito: 'Nunito Variable', system-ui, sans-serif;
+  --font-inter: 'Inter Variable', system-ui, sans-serif;
 }
 
-/* Custom utility classes for the party theme */
+/* Typography utilities for energetic fonts */
+.font-display {
+  font-family: var(--font-fredoka);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.font-heading {
+  font-family: var(--font-fredoka);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.font-subheading {
+  font-family: var(--font-fredoka);
+  font-weight: 500;
+}
+
+.font-body {
+  font-family: var(--font-nunito);
+  font-weight: 400;
+}
+
+.font-body-bold {
+  font-family: var(--font-nunito);
+  font-weight: 700;
+}
+
+/* Energetic text effects */
+.text-bounce {
+  animation: textBounce 2s ease-in-out infinite;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.text-party {
+  background: linear-gradient(45deg, var(--color-fiesta-pink), var(--color-fiesta-purple), var(--color-fiesta-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+.text-fiesta-gradient {
+  background: linear-gradient(135deg, var(--color-fiesta-orange), var(--color-fiesta-yellow), var(--color-fiesta-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Text animations */
+@keyframes textBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes textPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.text-pulse {
+  animation: textPulse 2s ease-in-out infinite;
+}
+
+/* Custom color classes with enhanced visibility */
 .text-fiesta-pink {
   color: var(--color-fiesta-pink);
+  font-weight: 600;
 }
 
 .text-fiesta-purple {
   color: var(--color-fiesta-purple);
+  font-weight: 600;
 }
 
 .text-fiesta-blue {
   color: var(--color-fiesta-blue);
+  font-weight: 600;
 }
 
 .text-fiesta-yellow {
   color: var(--color-fiesta-yellow);
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .text-fiesta-green {
   color: var(--color-fiesta-green);
+  font-weight: 600;
 }
 
 .text-fiesta-orange {
   color: var(--color-fiesta-orange);
+  font-weight: 600;
 }
 
 .bg-fiesta-pink {
@@ -85,10 +179,19 @@
   background: linear-gradient(45deg, var(--color-fiesta-orange), var(--color-fiesta-yellow), var(--color-fiesta-green));
 }
 
-/* Hover effects for interactive elements */
+/* Enhanced hover effects for interactive elements */
 .party-hover:hover {
   transform: scale(1.05);
-  transition: transform 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  font-weight: 600;
+}
+
+.party-text-hover:hover {
+  background: linear-gradient(45deg, var(--color-fiesta-pink), var(--color-fiesta-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Custom scrollbar for fun */
@@ -143,4 +246,13 @@
 
 .animate-sparkle {
   animation: sparkle 1.5s ease-in-out infinite;
+}
+
+/* Title emphasis effects */
+.title-shadow {
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.title-outline {
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.8);
 }
