@@ -1,0 +1,47 @@
+[
+    {
+        "id": "bh-01",
+        "category": "Bounce Houses",
+        "type": "bounce",
+        "name": "Classic Castle (13x13)",
+        "size": "13ft x 13ft",
+        "priceFrom": 119,
+        "photo": "bounce-classic.jpg"
+    },
+    {
+        "id": "combo-01",
+        "category": "Combos (Dry)",
+        "type": "combo",
+        "name": "Slide Combo (13x25)",
+        "size": "13ft x 25ft",
+        "priceFrom": 169,
+        "photo": "combo-slide.jpg"
+    },
+    {
+        "id": "tbl-01",
+        "category": "Tables & Chairs",
+        "type": "table",
+        "name": "Rectangular Table (6ft)",
+        "size": "Seats 6–8",
+        "priceFrom": 8,
+        "photo": "table-6ft.jpg"
+    },
+    {
+        "id": "chr-01",
+        "category": "Tables & Chairs",
+        "type": "chair",
+        "name": "Folding Chair (White)",
+        "size": "—",
+        "priceFrom": 1.25,
+        "photo": "chair-white.jpg"
+    },
+    {
+        "id": "add-01",
+        "category": "Add-ons",
+        "type": "addon",
+        "name": "50ft Extension Cord",
+        "size": "—",
+        "priceFrom": 5,
+        "photo": "extension-cord.jpg"
+    }
+]
