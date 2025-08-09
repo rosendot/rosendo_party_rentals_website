@@ -1,47 +1,95 @@
-[
-    {
-        "id": "bh-01",
-        "category": "Bounce Houses",
-        "type": "bounce",
-        "name": "Classic Castle (13x13)",
-        "size": "13ft x 13ft",
-        "priceFrom": 119,
-        "photo": "bounce-classic.jpg"
-    },
-    {
-        "id": "combo-01",
-        "category": "Combos (Dry)",
-        "type": "combo",
-        "name": "Slide Combo (13x25)",
-        "size": "13ft x 25ft",
-        "priceFrom": 169,
-        "photo": "combo-slide.jpg"
-    },
-    {
-        "id": "tbl-01",
-        "category": "Tables & Chairs",
-        "type": "table",
-        "name": "Rectangular Table (6ft)",
-        "size": "Seats 6–8",
-        "priceFrom": 8,
-        "photo": "table-6ft.jpg"
-    },
-    {
-        "id": "chr-01",
-        "category": "Tables & Chairs",
-        "type": "chair",
-        "name": "Folding Chair (White)",
-        "size": "—",
-        "priceFrom": 1.25,
-        "photo": "chair-white.jpg"
-    },
-    {
-        "id": "add-01",
-        "category": "Add-ons",
-        "type": "addon",
-        "name": "50ft Extension Cord",
-        "size": "—",
-        "priceFrom": 5,
-        "photo": "extension-cord.jpg"
-    }
-]
+{
+    "bounceHouses": [
+        {
+            "id": "bh001",
+            "name": "Casa de Brincos Arcoíris",
+            "englishName": "Rainbow Bounce House",
+            "size": "15' x 15'",
+            "capacity": "8-10 niños",
+            "priceFrom": 120,
+            "image": "/images/rainbow-bounce.jpg",
+            "description": "Colorful rainbow bounce house perfect for any celebration"
+        },
+        {
+            "id": "bh002",
+            "name": "Castillo de Princesas",
+            "englishName": "Princess Castle",
+            "size": "13' x 13'",
+            "capacity": "6-8 niños",
+            "priceFrom": 110,
+            "image": "/images/princess-castle.jpg",
+            "description": "Pink and purple castle for little princesses"
+        },
+        {
+            "id": "bh003",
+            "name": "Aventura de Superhéroes",
+            "englishName": "Superhero Adventure",
+            "size": "15' x 15'",
+            "capacity": "8-10 niños",
+            "priceFrom": 125,
+            "image": "/images/superhero-bounce.jpg",
+            "description": "Action-packed superhero themed bounce house"
+        }
+    ],
+    "combos": [
+        {
+            "id": "cb001",
+            "name": "Combo Tropical",
+            "englishName": "Tropical Combo",
+            "size": "20' x 15'",
+            "capacity": "10-12 niños",
+            "priceFrom": 180,
+            "image": "/images/tropical-combo.jpg",
+            "description": "Bounce area with slide - perfect for hot days!"
+        },
+        {
+            "id": "cb002",
+            "name": "Combo Fiesta Mexicana",
+            "englishName": "Mexican Fiesta Combo",
+            "size": "18' x 15'",
+            "capacity": "8-10 niños",
+            "priceFrom": 170,
+            "image": "/images/fiesta-combo.jpg",
+            "description": "Colorful Mexican-themed combo with slide"
+        }
+    ],
+    "tablesChairs": [
+        {
+            "id": "tc001",
+            "name": "Mesa Redonda",
+            "englishName": "Round Table",
+            "size": "60\" diameter",
+            "capacity": "8 personas",
+            "priceFrom": 12,
+            "image": "/images/round-table.jpg",
+            "description": "Perfect for family gatherings"
+        },
+        {
+            "id": "tc002",
+            "name": "Sillas de Fiesta",
+            "englishName": "Party Chairs",
+            "capacity": "Adultos/Kids",
+            "priceFrom": 2,
+            "image": "/images/party-chairs.jpg",
+            "description": "Comfortable folding chairs"
+        }
+    ],
+    "addOns": [
+        {
+            "id": "ao001",
+            "name": "Máquina de Raspas",
+            "englishName": "Snow Cone Machine",
+            "priceFrom": 45,
+            "image": "/images/snow-cone.jpg",
+            "description": "Cool treats for hot days!"
+        },
+        {
+            "id": "ao002",
+            "name": "Máquina de Palomitas",
+            "englishName": "Popcorn Machine",
+            "priceFrom": 40,
+            "image": "/images/popcorn.jpg",
+            "description": "Fresh popcorn for your party"
+        }
+    ]
+}

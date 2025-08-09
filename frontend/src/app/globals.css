@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Custom color variables for our fiesta theme */
+@theme {
+  --color-fiesta-pink: #FF69B4;
+  --color-fiesta-purple: #9932CC;
+  --color-fiesta-blue: #1E90FF;
+  --color-fiesta-yellow: #FFD700;
+  --color-fiesta-green: #32CD32;
+  --color-fiesta-orange: #FF6347;
+
+  --animate-bounce-slow: bounce 2s infinite;
+  --animate-pulse-slow: pulse 3s infinite;
+  --animate-spin-slow: spin 3s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom utility classes for the party theme */
+.text-fiesta-pink {
+  color: var(--color-fiesta-pink);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.text-fiesta-purple {
+  color: var(--color-fiesta-purple);
+}
+
+.text-fiesta-blue {
+  color: var(--color-fiesta-blue);
+}
+
+.text-fiesta-yellow {
+  color: var(--color-fiesta-yellow);
+}
+
+.text-fiesta-green {
+  color: var(--color-fiesta-green);
+}
+
+.text-fiesta-orange {
+  color: var(--color-fiesta-orange);
+}
+
+.bg-fiesta-pink {
+  background-color: var(--color-fiesta-pink);
+}
+
+.bg-fiesta-purple {
+  background-color: var(--color-fiesta-purple);
+}
+
+.bg-fiesta-blue {
+  background-color: var(--color-fiesta-blue);
+}
+
+.bg-fiesta-yellow {
+  background-color: var(--color-fiesta-yellow);
+}
+
+.bg-fiesta-green {
+  background-color: var(--color-fiesta-green);
+}
+
+.bg-fiesta-orange {
+  background-color: var(--color-fiesta-orange);
+}
+
+/* Fun party animations */
+.animate-bounce-slow {
+  animation: var(--animate-bounce-slow);
+}
+
+.animate-pulse-slow {
+  animation: var(--animate-pulse-slow);
+}
+
+.animate-spin-slow {
+  animation: var(--animate-spin-slow);
+}
+
+/* Party gradient backgrounds */
+.bg-party-gradient {
+  background: linear-gradient(135deg, var(--color-fiesta-pink), var(--color-fiesta-purple), var(--color-fiesta-blue));
+}
+
+.bg-fiesta-gradient {
+  background: linear-gradient(45deg, var(--color-fiesta-orange), var(--color-fiesta-yellow), var(--color-fiesta-green));
+}
+
+/* Hover effects for interactive elements */
+.party-hover:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Custom scrollbar for fun */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-fiesta-pink), var(--color-fiesta-purple));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--color-fiesta-purple), var(--color-fiesta-blue));
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Confetti-like sparkle effect */
+@keyframes sparkle {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle 1.5s ease-in-out infinite;
 }
