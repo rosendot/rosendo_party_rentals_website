@@ -6,12 +6,12 @@ const faqData = [
     {
         question: "How far in advance should I book?",
         questionSpanish: "¿Con cuánta anticipación debo reservar?",
-        answer: "We recommend booking 2-3 weeks in advance, especially for weekends and popular dates. However, we often have same-day availability - just call us!"
+        answer: "We recommend booking 1-2 weeks in advance, especially for weekends and popular dates. However, we often have same-day availability - just call us!"
     },
     {
         question: "What's included in the rental price?",
         questionSpanish: "¿Qué incluye el precio del alquiler?",
-        answer: "All rentals include professional delivery, setup, and pickup. We also provide extension cords, stakes/sandbags for securing, and basic safety instructions."
+        answer: "All rentals include professional delivery, setup, and pickup. We'll bring everything to your location and set it up for you!"
     },
     {
         question: "Do you require a deposit?",
@@ -19,14 +19,9 @@ const faqData = [
         answer: "Yes, we require a 50% deposit to secure your booking. The remaining balance is due on delivery day. We accept cash, check, or card."
     },
     {
-        question: "What if it rains on my event day?",
-        questionSpanish: "¿Qué pasa si llueve el día de mi evento?",
-        answer: "Safety first! If there's heavy rain, lightning, or strong winds, we'll work with you to reschedule at no extra charge. Light rain is usually okay for covered setups."
-    },
-    {
-        question: "How much space do I need?",
-        questionSpanish: "¿Cuánto espacio necesito?",
-        answer: "Each item has different space requirements. Generally, add 3 feet on all sides of the bounce house dimensions. We'll help you measure during booking!"
+        question: "How many tables and chairs do I need?",
+        questionSpanish: "¿Cuántas mesas y sillas necesito?",
+        answer: "A good rule of thumb: our round tables seat 8 people comfortably. Count your guests and we'll help you plan the perfect setup for your event!"
     },
     {
         question: "Do you deliver to apartments/condos?",
@@ -34,19 +29,19 @@ const faqData = [
         answer: "Yes! We deliver to apartments, condos, and community centers. Just let us know about any access restrictions, stairs, or gates we should know about."
     },
     {
-        question: "Are your bounce houses clean and safe?",
-        questionSpanish: "¿Están limpias y seguras sus casas de brincos?",
-        answer: "Absolutely! Every item is cleaned and sanitized before each rental. All our equipment is licensed, insured, and regularly inspected for safety."
+        question: "Are your tables and chairs clean?",
+        questionSpanish: "¿Están limpias las mesas y sillas?",
+        answer: "Absolutely! Every item is cleaned and sanitized before each rental. We take pride in providing quality, clean equipment for your events."
     },
     {
-        question: "Can adults use the bounce houses?",
-        questionSpanish: "¿Pueden los adultos usar las casas de brincos?",
-        answer: "Most of our bounce houses have weight limits and are designed for children. However, some larger units can accommodate adults. Ask us about weight limits when booking!"
+        question: "What types of events do you cater to?",
+        questionSpanish: "¿Qué tipos de eventos atienden?",
+        answer: "We serve all types of events! Birthdays, graduations, weddings, family reunions, quinceañeras, corporate events, and more. If you need seating, we've got you covered!"
     },
     {
-        question: "Do you provide supervision/attendants?",
-        questionSpanish: "¿Proporcionan supervisión/asistentes?",
-        answer: "Adult supervision is the responsibility of the renter. We provide safety rules and guidelines, but you'll need to have responsible adults monitoring the children."
+        question: "Can I pick up instead of delivery?",
+        questionSpanish: "¿Puedo recoger en lugar de entrega?",
+        answer: "We primarily offer delivery and setup service to ensure everything is set up properly. Contact us to discuss your specific needs!"
     },
     {
         question: "What are your delivery areas?",
@@ -165,7 +160,7 @@ export default function FAQ() {
                         <div className="text-4xl mb-3">🎉</div>
                         <h4 className="text-lg font-bold text-green-700 mb-2">Party Planning</h4>
                         <p className="text-green-600 text-sm">
-                            Consider combo packages! Tables + bounce house + concessions = better value.
+                            Need both tables and chairs? We've got you covered! Mix and match to fit your event perfectly.
                         </p>
                     </div>
 
