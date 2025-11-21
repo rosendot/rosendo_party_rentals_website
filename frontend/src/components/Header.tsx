@@ -32,6 +32,9 @@ export default function Header() {
                         <Link href="/inventory" className="font-subheading text-lg party-text-hover transition-all duration-300">
                             Inventory
                         </Link>
+                        <Link href="/service-areas" className="font-subheading text-lg party-text-hover transition-all duration-300">
+                            Service Areas
+                        </Link>
                         <Link href="/rental-info" className="font-subheading text-lg party-text-hover transition-all duration-300">
                             Rental Info
                         </Link>
@@ -71,6 +74,9 @@ export default function Header() {
                             </Link>
                             <Link href="/inventory" className="font-subheading text-lg hover:text-yellow-300 transition-colors">
                                 Inventory
+                            </Link>
+                            <Link href="/service-areas" className="font-subheading text-lg hover:text-yellow-300 transition-colors">
+                                Service Areas
                             </Link>
                             <Link href="/rental-info" className="font-subheading text-lg hover:text-yellow-300 transition-colors">
                                 Rental Info

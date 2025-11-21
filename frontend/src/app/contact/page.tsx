@@ -16,85 +16,96 @@ export default function Contact() {
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                    {/* Contact Methods */}
-                    <div className="space-y-8">
-                        <h2 className="text-3xl font-bold text-purple-700 mb-6">
-                            Get In Touch / Ponte en Contacto
+                    {/* Quick Contact Card */}
+                    <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-purple-200">
+                        <h2 className="text-3xl font-bold text-purple-700 mb-2 text-center">
+                            Get In Touch
                         </h2>
+                        <p className="text-gray-600 text-center mb-6">
+                            Ponte en Contacto - Choose your preferred method
+                        </p>
 
-                        {/* Phone */}
-                        <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-green-200">
-                            <div className="flex items-center mb-4">
-                                <span className="text-4xl mr-4">📞</span>
-                                <div>
-                                    <h3 className="text-xl font-bold text-green-700">Call / Llama</h3>
-                                    <p className="text-gray-600">Fastest way to get a quote!</p>
-                                </div>
-                            </div>
+                        {/* Contact Info Display */}
+                        <div className="text-center mb-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                            <p className="text-sm text-gray-600 mb-1">Call or Text Us</p>
                             <a
                                 href={`tel:${businessConfig.phone}`}
-                                className="text-2xl font-bold text-green-600 hover:text-green-700 transition-colors"
+                                className="text-3xl font-bold text-purple-700 hover:text-purple-800 transition-colors block"
                             >
                                 {businessConfig.phone}
                             </a>
-                            <p className="text-sm text-gray-500 mt-2">
-                                Hours: {businessConfig.hours.weekdays} (Mon-Fri)<br />
-                                {businessConfig.hours.saturday} (Saturday)<br />
-                                {businessConfig.hours.sunday} (Sunday)
-                            </p>
-                        </div>
-
-                        {/* Text/SMS */}
-                        <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-blue-200">
-                            <div className="flex items-center mb-4">
-                                <span className="text-4xl mr-4">💬</span>
-                                <div>
-                                    <h3 className="text-xl font-bold text-blue-700">Text / Manda Texto</h3>
-                                    <p className="text-gray-600">Quick and easy messaging</p>
-                                </div>
-                            </div>
                             <a
-                                href={`sms:${businessConfig.phone}?&body=Hola! I need a quote for: DATE: _____ CITY: _____ ITEMS: _____`}
-                                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition-colors inline-block"
+                                href={`mailto:${businessConfig.email}`}
+                                className="text-sm text-purple-600 hover:text-purple-700 transition-colors mt-2 inline-block"
                             >
-                                📱 Text {businessConfig.phone}
+                                {businessConfig.email}
                             </a>
                         </div>
 
-                        {/* WhatsApp */}
-                        <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-green-200">
-                            <div className="flex items-center mb-4">
-                                <span className="text-4xl mr-4">💚</span>
-                                <div>
-                                    <h3 className="text-xl font-bold text-green-700">WhatsApp</h3>
-                                    <p className="text-gray-600">Chat with us instantly</p>
-                                </div>
-                            </div>
+                        {/* Contact Method Buttons */}
+                        <div className="grid grid-cols-2 gap-4 mb-6">
+                            {/* Call Button */}
+                            <a
+                                href={`tel:${businessConfig.phone}`}
+                                className="bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-4 rounded-xl transition-all transform hover:scale-105 shadow-lg text-center"
+                            >
+                                <div className="text-3xl mb-1">📞</div>
+                                <div className="text-sm">Call Now</div>
+                                <div className="text-xs opacity-90">Llama</div>
+                            </a>
+
+                            {/* Text/SMS Button */}
+                            <a
+                                href={`sms:${businessConfig.phone}?&body=Hola! I need a quote for: DATE: _____ CITY: _____ ITEMS: _____`}
+                                className="bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-4 px-4 rounded-xl transition-all transform hover:scale-105 shadow-lg text-center"
+                            >
+                                <div className="text-3xl mb-1">💬</div>
+                                <div className="text-sm">Text Message</div>
+                                <div className="text-xs opacity-90">Manda Texto</div>
+                            </a>
+
+                            {/* WhatsApp Button */}
                             <a
                                 href={businessConfig.social.whatsapp}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition-colors inline-block"
+                                className="bg-gradient-to-br from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold py-4 px-4 rounded-xl transition-all transform hover:scale-105 shadow-lg text-center"
                             >
-                                💬 WhatsApp Chat
+                                <div className="text-3xl mb-1">💚</div>
+                                <div className="text-sm">WhatsApp</div>
+                                <div className="text-xs opacity-90">Chat Instant</div>
+                            </a>
+
+                            {/* Email Button */}
+                            <a
+                                href={`mailto:${businessConfig.email}?subject=Party Rental Quote Request&body=Hi Mi Fiesta Rentals!%0A%0AEvent Date: ______%0AEvent Time: ______%0ALocation/City: ______%0ANumber of guests: ______%0A%0AItems needed:%0A- ______%0A- ______%0A%0AAdditional details:%0A______%0A%0AThank you!`}
+                                className="bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-4 px-4 rounded-xl transition-all transform hover:scale-105 shadow-lg text-center"
+                            >
+                                <div className="text-3xl mb-1">📧</div>
+                                <div className="text-sm">Email Us</div>
+                                <div className="text-xs opacity-90">Correo</div>
                             </a>
                         </div>
 
-                        {/* Email */}
-                        <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-purple-200">
-                            <div className="flex items-center mb-4">
-                                <span className="text-4xl mr-4">📧</span>
-                                <div>
-                                    <h3 className="text-xl font-bold text-purple-700">Email / Correo</h3>
-                                    <p className="text-gray-600">Send us detailed requests</p>
+                        {/* Business Hours */}
+                        <div className="border-t-2 border-gray-200 pt-6">
+                            <h3 className="text-lg font-bold text-gray-700 mb-3 text-center">
+                                Business Hours / Horario
+                            </h3>
+                            <div className="space-y-2 text-center text-gray-600">
+                                <div className="flex justify-between items-center max-w-xs mx-auto">
+                                    <span className="font-medium">Monday - Friday:</span>
+                                    <span>{businessConfig.hours.weekdays}</span>
+                                </div>
+                                <div className="flex justify-between items-center max-w-xs mx-auto">
+                                    <span className="font-medium">Saturday:</span>
+                                    <span>{businessConfig.hours.saturday}</span>
+                                </div>
+                                <div className="flex justify-between items-center max-w-xs mx-auto">
+                                    <span className="font-medium">Sunday:</span>
+                                    <span>{businessConfig.hours.sunday}</span>
                                 </div>
                             </div>
-                            <a
-                                href={`mailto:${businessConfig.email}?subject=Party Rental Quote Request&body=Hi Mi Fiesta Rentals!%0A%0AEvent Date: ______%0AEvent Time: ______%0ALocation/City: ______%0ANumber of guests: ______%0A%0AItems needed:%0A- ______%0A- ______%0A%0AAdditional details:%0A______%0A%0AThank you!`}
-                                className="text-lg font-bold text-purple-600 hover:text-purple-700 transition-colors"
-                            >
-                                {businessConfig.email}
-                            </a>
                         </div>
                     </div>
 
@@ -204,38 +215,6 @@ export default function Contact() {
                     </div>
                 </div>
 
-                {/* Service Area */}
-                <div className="mt-16 bg-gradient-to-r from-blue-500 to-purple-500 text-white p-8 rounded-xl text-center">
-                    <h3 className="text-3xl font-bold mb-4">
-                        We Serve the Entire Rio Grande Valley! 🌮
-                    </h3>
-                    <div className="grid md:grid-cols-5 gap-4 text-center">
-                        {businessConfig.cities.map(city => (
-                            <div key={city} className="bg-white/20 p-3 rounded-lg">
-                                <span className="font-medium">{city}</span>
-                            </div>
-                        ))}
-                    </div>
-                    <p className="mt-6 text-lg">
-                        Professional delivery, setup, and pickup included in all rentals!
-                    </p>
-                </div>
-
-                {/* Emergency/Last Minute */}
-                <div className="mt-12 bg-red-100 border-2 border-red-300 p-6 rounded-xl text-center">
-                    <h3 className="text-2xl font-bold text-red-700 mb-2">
-                        🚨 Last Minute Party? No Problem!
-                    </h3>
-                    <p className="text-red-600 mb-4">
-                        Call us for same-day and next-day availability (subject to availability)
-                    </p>
-                    <a
-                        href={`tel:${businessConfig.phone}`}
-                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full transition-colors"
-                    >
-                        📞 Call for Emergency Bookings
-                    </a>
-                </div>
             </div>
         </div>
     )
