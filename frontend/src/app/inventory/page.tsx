@@ -8,10 +8,10 @@ export default function Inventory() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-5xl font-bold text-purple-800 mb-4">
-                        Our Inventory 🎪
+                        Our Inventory
                     </h1>
                     <p className="text-xl text-gray-600 mb-6">
-                        Everything you need for the perfect fiesta!
+                        Quality tables and chairs for your event / Mesas y sillas de calidad para tu evento
                     </p>
                     <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4 max-w-2xl mx-auto">
                         <p className="text-yellow-800 font-medium">
@@ -20,73 +20,13 @@ export default function Inventory() {
                     </div>
                 </div>
 
-                {/* Bounce Houses */}
-                <section className="mb-16">
-                    <h2 className="text-4xl font-bold text-pink-600 mb-8 text-center">
-                        🏰 Bounce Houses / Casas de Brincos
-                    </h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {inventoryData.bounceHouses.map((item) => (
-                            <div key={item.id} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105 overflow-hidden border-2 border-pink-200">
-                                <div className="h-48 bg-gradient-to-br from-pink-200 to-pink-300 flex items-center justify-center">
-                                    <span className="text-6xl">🏰</span>
-                                </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-pink-700 mb-2">
-                                        {item.name}
-                                    </h3>
-                                    <p className="text-gray-600 mb-2">{item.englishName}</p>
-                                    <div className="flex justify-between items-center mb-3">
-                                        <span className="text-sm text-gray-500">{item.size}</span>
-                                        <span className="text-sm text-gray-500">{item.capacity}</span>
-                                    </div>
-                                    <p className="text-sm text-gray-600 mb-4">{item.description}</p>
-                                    <div className="text-2xl font-bold text-pink-600">
-                                        From ${item.priceFrom}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Combo Units */}
-                <section className="mb-16">
-                    <h2 className="text-4xl font-bold text-blue-600 mb-8 text-center">
-                        🛝 Combo Units / Combos Secos
-                    </h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {inventoryData.combos.map((item) => (
-                            <div key={item.id} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105 overflow-hidden border-2 border-blue-200">
-                                <div className="h-48 bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center">
-                                    <span className="text-6xl">🛝</span>
-                                </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-blue-700 mb-2">
-                                        {item.name}
-                                    </h3>
-                                    <p className="text-gray-600 mb-2">{item.englishName}</p>
-                                    <div className="flex justify-between items-center mb-3">
-                                        <span className="text-sm text-gray-500">{item.size}</span>
-                                        <span className="text-sm text-gray-500">{item.capacity}</span>
-                                    </div>
-                                    <p className="text-sm text-gray-600 mb-4">{item.description}</p>
-                                    <div className="text-2xl font-bold text-blue-600">
-                                        From ${item.priceFrom}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Tables & Chairs */}
+                {/* Tables */}
                 <section className="mb-16">
                     <h2 className="text-4xl font-bold text-green-600 mb-8 text-center">
-                        🪑 Tables & Chairs / Mesas y Sillas
+                        Tables / Mesas
                     </h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {inventoryData.tablesChairs.map((item) => (
+                        {inventoryData.tables.map((item) => (
                             <div key={item.id} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105 overflow-hidden border-2 border-green-200">
                                 <div className="h-48 bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center">
                                     <span className="text-6xl">🪑</span>
@@ -110,24 +50,27 @@ export default function Inventory() {
                     </div>
                 </section>
 
-                {/* Add-ons */}
+                {/* Chairs */}
                 <section className="mb-16">
-                    <h2 className="text-4xl font-bold text-yellow-600 mb-8 text-center">
-                        🍿 Party Add-ons / Extras de Fiesta
+                    <h2 className="text-4xl font-bold text-blue-600 mb-8 text-center">
+                        Chairs / Sillas
                     </h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {inventoryData.addOns.map((item) => (
-                            <div key={item.id} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105 overflow-hidden border-2 border-yellow-200">
-                                <div className="h-48 bg-gradient-to-br from-yellow-200 to-yellow-300 flex items-center justify-center">
-                                    <span className="text-6xl">🍿</span>
+                        {inventoryData.chairs.map((item) => (
+                            <div key={item.id} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105 overflow-hidden border-2 border-blue-200">
+                                <div className="h-48 bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center">
+                                    <span className="text-6xl">🪑</span>
                                 </div>
                                 <div className="p-6">
-                                    <h3 className="text-xl font-bold text-yellow-700 mb-2">
+                                    <h3 className="text-xl font-bold text-blue-700 mb-2">
                                         {item.name}
                                     </h3>
                                     <p className="text-gray-600 mb-2">{item.englishName}</p>
+                                    <div className="flex justify-between items-center mb-3">
+                                        <span className="text-sm text-gray-500">{item.capacity}</span>
+                                    </div>
                                     <p className="text-sm text-gray-600 mb-4">{item.description}</p>
-                                    <div className="text-2xl font-bold text-yellow-600">
+                                    <div className="text-2xl font-bold text-blue-600">
                                         From ${item.priceFrom}
                                     </div>
                                 </div>

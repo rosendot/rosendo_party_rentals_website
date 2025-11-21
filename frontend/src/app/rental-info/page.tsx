@@ -26,57 +26,25 @@ export default function RentalInfo() {
 
                             <div className="space-y-4">
                                 <div className="border-b border-green-100 pb-4">
-                                    <h3 className="text-xl font-bold text-green-600 mb-2">🏰 Bounce Houses</h3>
+                                    <h3 className="text-xl font-bold text-green-600 mb-2">🪑 Tables / Mesas</h3>
                                     <div className="flex justify-between">
-                                        <span>Standard (13x13)</span>
-                                        <span className="font-bold">$110 - $125</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Large (15x15)</span>
-                                        <span className="font-bold">$120 - $140</span>
-                                    </div>
-                                </div>
-
-                                <div className="border-b border-green-100 pb-4">
-                                    <h3 className="text-xl font-bold text-green-600 mb-2">🛝 Combo Units</h3>
-                                    <div className="flex justify-between">
-                                        <span>Dry Combos</span>
-                                        <span className="font-bold">$170 - $200</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Large Combos</span>
-                                        <span className="font-bold">$180 - $220</span>
-                                    </div>
-                                </div>
-
-                                <div className="border-b border-green-100 pb-4">
-                                    <h3 className="text-xl font-bold text-green-600 mb-2">🪑 Tables & Chairs</h3>
-                                    <div className="flex justify-between">
-                                        <span>Round Tables (60")</span>
+                                        <span>Round Tables (60") / Mesas Redondas</span>
                                         <span className="font-bold">$12 each</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Folding Chairs</span>
-                                        <span className="font-bold">$2 each</span>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-xl font-bold text-green-600 mb-2">🍿 Concessions</h3>
+                                    <h3 className="text-xl font-bold text-green-600 mb-2">🪑 Chairs / Sillas</h3>
                                     <div className="flex justify-between">
-                                        <span>Popcorn Machine</span>
-                                        <span className="font-bold">$40 + supplies</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Snow Cone Machine</span>
-                                        <span className="font-bold">$45 + supplies</span>
+                                        <span>Folding Chairs / Sillas Plegables</span>
+                                        <span className="font-bold">$2 each</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-300">
                                 <p className="text-yellow-800 text-sm font-medium">
-                                    💡 <strong>Package Deals Available!</strong> Save money by combining multiple items.
+                                    💡 <strong>Package Deals Available!</strong> Save money by renting multiple tables and chairs together.
                                 </p>
                             </div>
                         </div>
@@ -149,56 +117,56 @@ export default function RentalInfo() {
                                 </div>
 
                                 <div>
-                                    <h3 className="text-xl font-bold text-purple-600 mb-3">🛡️ Safety & Supervision</h3>
+                                    <h3 className="text-xl font-bold text-purple-600 mb-3">🛡️ Care & Safety</h3>
                                     <ul className="space-y-2 text-gray-700">
-                                        <li>• Adult supervision required at all times</li>
-                                        <li>• No shoes, glasses, or sharp objects in bounce houses</li>
-                                        <li>• Age/weight limits strictly enforced</li>
+                                        <li>• Please use tables and chairs as intended</li>
+                                        <li>• Do not stand on tables or chairs</li>
+                                        <li>• Maximum weight capacity: 250 lbs per chair</li>
                                         <li>• Customer responsible for any damages</li>
-                                        <li>• We provide safety rules with each rental</li>
+                                        <li>• Report any issues immediately</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Weather & Setup */}
+                        {/* Setup & Delivery */}
                         <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-orange-200">
                             <h2 className="text-3xl font-bold text-orange-700 mb-6 flex items-center">
-                                <span className="mr-3">🌤️</span>
-                                Weather & Setup / Clima y Instalación
+                                <span className="mr-3">🚚</span>
+                                Setup & Delivery / Instalación y Entrega
                             </h2>
 
                             <div className="space-y-6">
                                 <div>
-                                    <h3 className="text-xl font-bold text-orange-600 mb-3">☀️ Weather Policy</h3>
+                                    <h3 className="text-xl font-bold text-orange-600 mb-3">🏠 Delivery Requirements</h3>
                                     <ul className="space-y-2 text-gray-700">
-                                        <li>• Light rain: Events can continue (covered areas)</li>
-                                        <li>• Heavy rain/storms: Free rescheduling available</li>
-                                        <li>• Lightning: Immediate shutdown for safety</li>
-                                        <li>• Wind over 25 mph: Units must be deflated</li>
-                                        <li>• We monitor weather and will contact you</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-xl font-bold text-orange-600 mb-3">🏠 Setup Requirements</h3>
-                                    <ul className="space-y-2 text-gray-700">
-                                        <li>• Level ground with 3ft clearance on all sides</li>
-                                        <li>• Access to electrical outlet within 100ft</li>
-                                        <li>• Clear path for delivery (gates, doors)</li>
-                                        <li>• No sprinkler systems in setup area</li>
-                                        <li>• We provide extension cords and stakes</li>
+                                        <li>• Clear path for delivery (gates, doors, walkways)</li>
+                                        <li>• Access to setup area for unloading</li>
+                                        <li>• Someone must be present for delivery and pickup</li>
+                                        <li>• Notify us of any stairs or difficult access</li>
+                                        <li>• We handle all setup and breakdown</li>
                                     </ul>
                                 </div>
 
                                 <div>
                                     <h3 className="text-xl font-bold text-orange-600 mb-3">📏 Space Requirements</h3>
                                     <ul className="space-y-2 text-gray-700">
-                                        <li>• 13x13 Bounce House: 16x16 space minimum</li>
-                                        <li>• 15x15 Bounce House: 18x18 space minimum</li>
-                                        <li>• Combo Units: 23x18 space minimum</li>
-                                        <li>• Tables: 8ft diameter clear space each</li>
-                                        <li>• Ask us to help measure your space!</li>
+                                        <li>• Round Tables (60"): 8ft diameter clear space each</li>
+                                        <li>• Chairs: Allow 2-3 feet per chair</li>
+                                        <li>• Indoor or outdoor setup available</li>
+                                        <li>• We recommend measuring your space beforehand</li>
+                                        <li>• Call us to help plan your layout!</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h3 className="text-xl font-bold text-orange-600 mb-3">⚡ Setup Details</h3>
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li>• Tables and chairs arrive clean and ready to use</li>
+                                        <li>• We set up at your preferred location</li>
+                                        <li>• Setup typically takes 15-30 minutes</li>
+                                        <li>• Pickup scheduled after your event ends</li>
+                                        <li>• No cleaning required - we handle it all!</li>
                                     </ul>
                                 </div>
                             </div>
@@ -235,13 +203,13 @@ export default function RentalInfo() {
                     <div className="bg-red-100 border-2 border-red-300 p-6 rounded-xl">
                         <h4 className="text-xl font-bold text-red-700 mb-3 flex items-center">
                             <span className="mr-2">⚠️</span>
-                            Important Safety Notes
+                            Important Care Notes
                         </h4>
                         <ul className="text-red-600 space-y-1 text-sm">
-                            <li>• No food, drinks, or gum in bounce houses</li>
-                            <li>• Separate smaller kids from bigger kids</li>
-                            <li>• Maximum occupancy limits must be followed</li>
-                            <li>• Adult must supervise at all times</li>
+                            <li>• Use tables and chairs as intended only</li>
+                            <li>• Do not drag furniture on rough surfaces</li>
+                            <li>• Keep away from open flames or heat sources</li>
+                            <li>• Maximum weight capacity: 250 lbs per chair</li>
                             <li>• Report any damage immediately</li>
                         </ul>
                     </div>
@@ -253,10 +221,10 @@ export default function RentalInfo() {
                         </h4>
                         <ul className="text-green-600 space-y-1 text-sm">
                             <li>• Professional delivery and setup</li>
-                            <li>• Extension cords and blowers</li>
-                            <li>• Stakes or sandbags for anchoring</li>
-                            <li>• Safety instructions and rules</li>
+                            <li>• Clean, sanitized tables and chairs</li>
+                            <li>• Setup at your preferred location</li>
                             <li>• Pickup and breakdown service</li>
+                            <li>• No cleaning required from you</li>
                         </ul>
                     </div>
                 </div>
