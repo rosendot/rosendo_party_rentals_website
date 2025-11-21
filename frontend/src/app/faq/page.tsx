@@ -72,7 +72,6 @@ export default function FAQ() {
                     <p className="text-xl text-gray-600 mb-6">
                         Preguntas Frecuentes - Everything you need to know!
                     </p>
-                    <div className="text-6xl mb-4">🎪</div>
                     <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4 max-w-2xl mx-auto">
                         <p className="text-yellow-800 font-medium">
                             Can't find your answer? Call us at <a href={`tel:${businessConfig.phone}`} className="font-bold underline">{businessConfig.phone}</a>

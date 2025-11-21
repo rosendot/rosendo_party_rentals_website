@@ -1,4 +1,4 @@
-import { businessConfig } from '@/lib/config'
+import Link from 'next/link'
 
 export default function RentalInfo() {
     return (
@@ -7,12 +7,11 @@ export default function RentalInfo() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-5xl font-bold text-purple-800 mb-4">
-                        Rental Information 📋
+                        Rental Information
                     </h1>
                     <p className="text-xl text-gray-600 mb-6">
                         Everything you need to know / Todo lo que necesitas saber
                     </p>
-                    <div className="text-6xl mb-4">📝</div>
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12">
@@ -26,18 +25,18 @@ export default function RentalInfo() {
 
                             <div className="space-y-4">
                                 <div className="border-b border-green-100 pb-4">
-                                    <h3 className="text-xl font-bold text-green-600 mb-2">🪑 Tables / Mesas</h3>
+                                    <h3 className="text-xl font-bold text-green-600 mb-2">Tables / Mesas</h3>
                                     <div className="flex justify-between">
-                                        <span>Round Tables (60") / Mesas Redondas</span>
-                                        <span className="font-bold">$12 each</span>
+                                        <span>Round Tables 60" / Mesas Redondas</span>
+                                        <span className="font-bold">$12/day</span>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-xl font-bold text-green-600 mb-2">🪑 Chairs / Sillas</h3>
+                                    <h3 className="text-xl font-bold text-green-600 mb-2">Chairs / Sillas</h3>
                                     <div className="flex justify-between">
                                         <span>Folding Chairs / Sillas Plegables</span>
-                                        <span className="font-bold">$2 each</span>
+                                        <span className="font-bold">$2/day</span>
                                     </div>
                                 </div>
                             </div>
@@ -56,32 +55,13 @@ export default function RentalInfo() {
                                 Delivery Areas / Áreas de Entrega
                             </h2>
 
-                            <div className="grid grid-cols-2 gap-4 mb-6">
-                                {businessConfig.cities.map(city => (
-                                    <div key={city} className="bg-blue-50 p-3 rounded-lg text-center">
-                                        <span className="font-medium text-blue-700">{city}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="space-y-3">
-                                <div className="flex justify-between border-b border-blue-100 pb-2">
-                                    <span>McAllen, Mission, Edinburg, Pharr</span>
-                                    <span className="font-bold text-green-600">FREE Delivery</span>
-                                </div>
-                                <div className="flex justify-between border-b border-blue-100 pb-2">
-                                    <span>Weslaco, Mercedes, Alamo</span>
-                                    <span className="font-bold">$15 Delivery</span>
-                                </div>
-                                <div className="flex justify-between border-b border-blue-100 pb-2">
-                                    <span>Brownsville, Harlingen</span>
-                                    <span className="font-bold">$25 Delivery</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Other RGV areas</span>
-                                    <span className="font-bold">Call for Quote</span>
-                                </div>
-                            </div>
+                            <p className="text-gray-700 mb-4">
+                                We serve various cities across the Rio Grande Valley. View our complete service area map and delivery pricing on our{' '}
+                                <Link href="/service-areas" className="text-blue-600 hover:text-blue-700 font-semibold underline">
+                                    Service Areas page
+                                </Link>
+                                .
+                            </p>
                         </div>
                     </div>
 
@@ -97,33 +77,21 @@ export default function RentalInfo() {
                                 <div>
                                     <h3 className="text-xl font-bold text-purple-600 mb-3">📅 Booking & Payment</h3>
                                     <ul className="space-y-2 text-gray-700">
-                                        <li>• 50% deposit required to secure booking</li>
-                                        <li>• Remaining balance due on delivery day</li>
-                                        <li>• We accept cash, check, and all major credit cards</li>
-                                        <li>• Cancellations 48+ hours: full refund of deposit</li>
-                                        <li>• Cancellations less than 48 hours: 50% deposit fee</li>
+                                        <li>• No deposit required</li>
+                                        <li>• Payment due on delivery day</li>
+                                        <li>• We accept cash or third-party payment apps like Zelle, CashApp, PayPal, etc.</li>
+                                        <li>• Cancellations 2+ days before: No fee</li>
+                                        <li>• Cancellations less than 2 days: $20 flat cancellation fee</li>
                                     </ul>
                                 </div>
 
                                 <div>
                                     <h3 className="text-xl font-bold text-purple-600 mb-3">⏰ Rental Times</h3>
                                     <ul className="space-y-2 text-gray-700">
-                                        <li>• Standard rental: 6-8 hours</li>
-                                        <li>• Delivery: Usually 8-10 AM</li>
-                                        <li>• Pickup: Usually 6-8 PM</li>
-                                        <li>• Extended rentals available for additional fee</li>
-                                        <li>• Overnight rentals: +50% of daily rate</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-xl font-bold text-purple-600 mb-3">🛡️ Care & Safety</h3>
-                                    <ul className="space-y-2 text-gray-700">
-                                        <li>• Please use tables and chairs as intended</li>
-                                        <li>• Do not stand on tables or chairs</li>
-                                        <li>• Maximum weight capacity: 250 lbs per chair</li>
-                                        <li>• Customer responsible for any damages</li>
-                                        <li>• Report any issues immediately</li>
+                                        <li>• Day-by-day rentals</li>
+                                        <li>• Overnight rentals included</li>
+                                        <li>• Delivery/Setup: 12pm - 5pm on rental start day</li>
+                                        <li>• Pickup: 12pm - 5pm on pickup day</li>
                                     </ul>
                                 </div>
                             </div>
@@ -138,94 +106,24 @@ export default function RentalInfo() {
 
                             <div className="space-y-6">
                                 <div>
-                                    <h3 className="text-xl font-bold text-orange-600 mb-3">🏠 Delivery Requirements</h3>
+                                    <h3 className="text-xl font-bold text-orange-600 mb-3">Delivery & Setup</h3>
                                     <ul className="space-y-2 text-gray-700">
-                                        <li>• Clear path for delivery (gates, doors, walkways)</li>
-                                        <li>• Access to setup area for unloading</li>
-                                        <li>• Someone must be present for delivery and pickup</li>
-                                        <li>• Notify us of any stairs or difficult access</li>
-                                        <li>• We handle all setup and breakdown</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-xl font-bold text-orange-600 mb-3">📏 Space Requirements</h3>
-                                    <ul className="space-y-2 text-gray-700">
-                                        <li>• Round Tables (60"): 8ft diameter clear space each</li>
-                                        <li>• Chairs: Allow 2-3 feet per chair</li>
-                                        <li>• Indoor or outdoor setup available</li>
-                                        <li>• We recommend measuring your space beforehand</li>
-                                        <li>• Call us to help plan your layout!</li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-xl font-bold text-orange-600 mb-3">⚡ Setup Details</h3>
-                                    <ul className="space-y-2 text-gray-700">
+                                        <li>• We handle all delivery and setup</li>
                                         <li>• Tables and chairs arrive clean and ready to use</li>
-                                        <li>• We set up at your preferred location</li>
-                                        <li>• Setup typically takes 15-30 minutes</li>
-                                        <li>• Pickup scheduled after your event ends</li>
-                                        <li>• No cleaning required - we handle it all!</li>
+                                        <li>• We set everything up at your preferred location</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h3 className="text-xl font-bold text-orange-600 mb-3">Teardown & Pickup</h3>
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li>• We handle all teardown and pickup</li>
+                                        <li>• Please clean off all tables and chairs before we arrive</li>
+                                        <li>• No need to fold or put away - we take care of that</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                {/* Contact for Custom Quotes */}
-                <div className="mt-16 bg-gradient-to-r from-purple-500 to-pink-500 text-white p-8 rounded-xl text-center">
-                    <h3 className="text-3xl font-bold mb-4">
-                        Need a Custom Quote? 🎯
-                    </h3>
-                    <p className="text-xl mb-6">
-                        Every party is different! Call us for personalized pricing and packages.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a
-                            href={`tel:${businessConfig.phone}`}
-                            className="bg-white text-purple-600 font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition-colors"
-                        >
-                            📞 Call for Quote: {businessConfig.phone}
-                        </a>
-                        <a
-                            href={`sms:${businessConfig.phone}?&body=Hi! I need a custom quote for: DATE: _____ LOCATION: _____ ITEMS: _____`}
-                            className="bg-green-500 hover:bg-green-400 text-white font-bold py-3 px-6 rounded-full transition-colors"
-                        >
-                            💬 Text for Quote
-                        </a>
-                    </div>
-                </div>
-
-                {/* Important Notes */}
-                <div className="mt-12 grid md:grid-cols-2 gap-6">
-                    <div className="bg-red-100 border-2 border-red-300 p-6 rounded-xl">
-                        <h4 className="text-xl font-bold text-red-700 mb-3 flex items-center">
-                            <span className="mr-2">⚠️</span>
-                            Important Care Notes
-                        </h4>
-                        <ul className="text-red-600 space-y-1 text-sm">
-                            <li>• Use tables and chairs as intended only</li>
-                            <li>• Do not drag furniture on rough surfaces</li>
-                            <li>• Keep away from open flames or heat sources</li>
-                            <li>• Maximum weight capacity: 250 lbs per chair</li>
-                            <li>• Report any damage immediately</li>
-                        </ul>
-                    </div>
-
-                    <div className="bg-green-100 border-2 border-green-300 p-6 rounded-xl">
-                        <h4 className="text-xl font-bold text-green-700 mb-3 flex items-center">
-                            <span className="mr-2">✅</span>
-                            What's Included
-                        </h4>
-                        <ul className="text-green-600 space-y-1 text-sm">
-                            <li>• Professional delivery and setup</li>
-                            <li>• Clean, sanitized tables and chairs</li>
-                            <li>• Setup at your preferred location</li>
-                            <li>• Pickup and breakdown service</li>
-                            <li>• No cleaning required from you</li>
-                        </ul>
                     </div>
                 </div>
             </div>

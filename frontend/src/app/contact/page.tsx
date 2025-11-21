@@ -12,7 +12,6 @@ export default function Contact() {
                     <p className="text-xl text-gray-600 mb-6">
                         ¡Contáctanos hoy! Ready to plan your perfect fiesta?
                     </p>
-                    <div className="text-6xl mb-4">🎉</div>
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">

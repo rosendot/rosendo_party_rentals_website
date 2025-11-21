@@ -1,7 +1,6 @@
 'use client'
 import { businessConfig } from '@/lib/config'
 import dynamic from 'next/dynamic'
-import { useMemo } from 'react'
 
 // Dynamically import map to avoid SSR issues
 const Map = dynamic(() => import('@/components/ServiceAreaMap'), {
@@ -25,7 +24,6 @@ export default function ServiceAreas() {
                     <p className="text-xl text-gray-600 mb-6">
                         Áreas de Servicio - We proudly serve the entire Rio Grande Valley!
                     </p>
-                    <div className="text-6xl mb-4">📍</div>
                 </div>
 
                 {/* Interactive Map */}
