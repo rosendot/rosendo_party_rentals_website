@@ -1,8 +1,8 @@
 export const businessConfig = {
     name: "Mi Fiesta Rentals",
     tagline: "¡Hacemos que tu fiesta sea perfecta!",
-    phone: "(956) 123-4567", // Replace with your actual number
-    email: "info@mifiestarentals.com", // Replace with your actual email
+    phone: "(956) 534-2589",
+    email: "mifiestarentals@gmail.com",
     serviceArea: "Rio Grande Valley",
     cities: [
         "McAllen", "Edinburg", "Mission", "Pharr", "Brownsville",
@@ -16,6 +16,6 @@ export const businessConfig = {
     social: {
         facebook: "https://facebook.com/mifiestarentals",
         instagram: "https://instagram.com/mifiestarentals",
-        whatsapp: "https://wa.me/19561234567" // Replace with your WhatsApp number
+        whatsapp: "https://wa.me/19565342589"
     }
 };
