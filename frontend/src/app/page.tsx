@@ -8,14 +8,14 @@ export default function Home() {
       <section className="container mx-auto px-4 py-16 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="font-heading text-5xl md:text-7xl text-party mb-6 title-shadow animate-pulse">
-            ¡Tu Fiesta Perfecta! 🎉
+            ¡Tu Evento Perfecto! 🎉
           </h1>
           <h2 className="font-display text-3xl md:text-4xl text-purple-800 mb-6">
-            Your Perfect Party Awaits!
+            Your Perfect Event Awaits!
           </h2>
           <p className="font-body text-xl text-gray-700 mb-8 leading-relaxed">
-            Professional bounce house and party rentals serving the Rio Grande Valley.
-            Clean, safe, and always on time! <span className="font-body-bold text-fiesta-purple">¡Hacemos que tu fiesta sea perfecta!</span>
+            Professional table and chair rentals serving the Rio Grande Valley.
+            Clean, quality furniture delivered on time! <span className="font-body-bold text-fiesta-purple">¡Hacemos que tu evento sea perfecto!</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -29,7 +29,7 @@ export default function Home() {
               href="/inventory"
               className="bg-gradient-to-r from-yellow-400 to-orange-500 text-purple-800 px-8 py-4 rounded-full font-heading text-xl hover:from-yellow-500 hover:to-orange-600 transition-all duration-300 party-hover shadow-xl"
             >
-              🏰 See Our Inventory
+              🪑 See Our Inventory
             </Link>
           </div>
 
@@ -45,36 +45,24 @@ export default function Home() {
       {/* What We Offer */}
       < section className="container mx-auto px-4 py-16" >
         <h2 className="font-heading text-4xl md:text-5xl text-center text-purple-800 mb-12 title-shadow">
-          🎪 What We Offer / Lo Que Ofrecemos
+          🪑 What We Offer / Lo Que Ofrecemos
         </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="text-center bg-gradient-to-br from-pink-100 to-pink-200 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
-            <div className="text-6xl mb-4 animate-bounce">🏰</div>
-            <h3 className="font-heading text-xl text-pink-700 mb-2">Bounce Houses</h3>
-            <p className="font-body text-gray-600">Casas de brincos seguras y divertidas</p>
-            <p className="font-body-bold text-sm text-pink-600 mt-2">From $110</p>
+        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          <div className="text-center bg-gradient-to-br from-green-100 to-green-200 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+            <div className="text-7xl mb-4 animate-bounce">🪑</div>
+            <h3 className="font-heading text-2xl text-green-700 mb-2">Round Tables</h3>
+            <p className="font-body text-gray-600 mb-2">Mesas redondas de 60"</p>
+            <p className="font-body text-sm text-gray-500 mb-3">Perfect for 8 people</p>
+            <p className="font-body-bold text-lg text-green-600 mt-2">$12 each</p>
           </div>
 
-          <div className="text-center bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
-            <div className="text-6xl mb-4 animate-bounce" style={{ animationDelay: '0.5s' }}>🛝</div>
-            <h3 className="font-heading text-xl text-blue-700 mb-2">Combo Units</h3>
-            <p className="font-body text-gray-600">Bounce + slide combinations</p>
-            <p className="font-body-bold text-sm text-blue-600 mt-2">From $170</p>
-          </div>
-
-          <div className="text-center bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
-            <div className="text-6xl mb-4 animate-bounce" style={{ animationDelay: '1s' }}>🪑</div>
-            <h3 className="font-heading text-xl text-green-700 mb-2">Tables & Chairs</h3>
-            <p className="font-body text-gray-600">Mesas y sillas para todos</p>
-            <p className="font-body-bold text-sm text-green-600 mt-2">From $2</p>
-          </div>
-
-          <div className="text-center bg-gradient-to-br from-yellow-100 to-yellow-200 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
-            <div className="text-6xl mb-4 animate-bounce" style={{ animationDelay: '1.5s' }}>🍿</div>
-            <h3 className="font-heading text-xl text-yellow-700 mb-2">Party Add-ons</h3>
-            <p className="font-body text-gray-600">Popcorn, snow cones & more!</p>
-            <p className="font-body-bold text-sm text-yellow-600 mt-2">From $40</p>
+          <div className="text-center bg-gradient-to-br from-blue-100 to-blue-200 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+            <div className="text-7xl mb-4 animate-bounce" style={{ animationDelay: '0.5s' }}>🪑</div>
+            <h3 className="font-heading text-2xl text-blue-700 mb-2">Folding Chairs</h3>
+            <p className="font-body text-gray-600 mb-2">Sillas plegables cómodas</p>
+            <p className="font-body text-sm text-gray-500 mb-3">Adults & kids</p>
+            <p className="font-body-bold text-lg text-blue-600 mt-2">$2 each</p>
           </div>
         </div>
       </section >
@@ -112,10 +100,10 @@ export default function Home() {
       < section className="container mx-auto px-4 py-16 text-center" >
         <div className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-2xl p-8 md:p-12 shadow-2xl">
           <h2 className="font-heading text-4xl md:text-5xl text-purple-800 mb-6 title-shadow">
-            Ready to Party? 🎊
+            Ready to Book? 🎊
           </h2>
           <p className="font-body text-xl text-gray-700 mb-8">
-            <span className="font-body-bold text-fiesta-purple">¡Llámanos hoy!</span> Call us today for your free quote!
+            <span className="font-body-bold text-fiesta-purple">¡Llámanos hoy!</span> Call us today for your free quote on tables and chairs!
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
