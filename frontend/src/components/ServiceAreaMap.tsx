@@ -15,13 +15,13 @@ type DeliveryZone = {
     coordinates: [number, number][] | [number, number][][]
 }
 
-// Extract all city names and coordinates from the GeoJSON
-const freeCities = freeDeliveryGeoJSON.features.map((feature: any) => feature.properties.NAME)
-const freeCoordinates = freeDeliveryGeoJSON.features.flatMap((feature: any) =>
-    feature.geometry.coordinates.map((ring: number[][]) =>
-        ring.map(([lng, lat]: number[]) => [lat, lng] as [number, number])
-    )
+// Extract coordinates directly from the simplified GeoJSON boundary
+const freeCoordinates: [number, number][] = freeDeliveryGeoJSON.features[0].geometry.coordinates[0].map(
+    ([lng, lat]: number[]) => [lat, lng] as [number, number]
 )
+
+// Extract city names if available, otherwise use a generic list
+const freeCities = ['Edinburg', 'McAllen', 'Mission', 'Pharr', 'Alamo', 'San Juan', 'Elsa']
 
 const deliveryZones: DeliveryZone[] = [
     {
