@@ -15,13 +15,13 @@ type DeliveryZone = {
     coordinates: [number, number][] | [number, number][][]
 }
 
-// Extract coordinates directly from the simplified GeoJSON boundary
-const freeCoordinates: [number, number][] = freeDeliveryGeoJSON.features[0].geometry.coordinates[0].map(
+// Extract coordinates from simplified JSON (convert from [lng, lat] to [lat, lng] for Leaflet)
+const freeCoordinates: [number, number][] = (freeDeliveryGeoJSON as any).coordinates.map(
     ([lng, lat]: number[]) => [lat, lng] as [number, number]
 )
 
-// Extract city names if available, otherwise use a generic list
-const freeCities = ['Edinburg', 'McAllen', 'Mission', 'Pharr', 'Alamo', 'San Juan', 'Elsa']
+// Extract city names from simplified JSON
+const freeCities = (freeDeliveryGeoJSON as any).cities
 
 const deliveryZones: DeliveryZone[] = [
     {
