@@ -1,5 +1,5 @@
 'use client'
-import { MapContainer, TileLayer, Polygon, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Polygon, Popup, CircleMarker, Tooltip } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useEffect } from 'react'
@@ -17,13 +17,16 @@ type DeliveryZone = {
 }
 
 // Extract coordinates from simplified JSON (convert from [lng, lat] to [lat, lng] for Leaflet)
-const freeCoordinates: [number, number][] = (freeDeliveryGeoJSON as any).coordinates.map(
-    ([lng, lat]: number[]) => [lat, lng] as [number, number]
+const freeCoordinates: [number, number][] = (freeDeliveryGeoJSON as any).points.map(
+    (point: any) => [point.lat, point.lng] as [number, number]
 )
 
-const fifteenDollarCoordinates: [number, number][] = (fifteenDollarZone as any).coordinates.map(
-    ([lng, lat]: number[]) => [lat, lng] as [number, number]
+const fifteenDollarCoordinates: [number, number][] = (fifteenDollarZone as any).points.map(
+    (point: any) => [point.lat, point.lng] as [number, number]
 )
+
+const fifteenDollarPoints = (fifteenDollarZone as any).points
+const freePoints = (freeDeliveryGeoJSON as any).points
 
 // Extract city names from simplified JSON
 const freeCities = (freeDeliveryGeoJSON as any).cities
@@ -162,6 +165,44 @@ export default function ServiceAreaMap() {
                                 </div>
                             </Popup>
                         </Polygon>
+                    ))}
+
+                    {/* Debug markers for free zone points */}
+                    {freePoints.map((point: any, index: number) => (
+                        <CircleMarker
+                            key={`free-point-${index}`}
+                            center={[point.lat, point.lng]}
+                            radius={5}
+                            pathOptions={{
+                                color: 'yellow',
+                                fillColor: 'yellow',
+                                fillOpacity: 0.8,
+                                weight: 2
+                            }}
+                        >
+                            <Tooltip permanent direction="top" offset={[0, -5]}>
+                                {point.name}
+                            </Tooltip>
+                        </CircleMarker>
+                    ))}
+
+                    {/* Debug markers for $15 zone points */}
+                    {fifteenDollarPoints.map((point: any, index: number) => (
+                        <CircleMarker
+                            key={`point-${index}`}
+                            center={[point.lat, point.lng]}
+                            radius={5}
+                            pathOptions={{
+                                color: 'red',
+                                fillColor: 'red',
+                                fillOpacity: 0.8,
+                                weight: 2
+                            }}
+                        >
+                            <Tooltip permanent direction="top" offset={[0, -5]}>
+                                {point.name}
+                            </Tooltip>
+                        </CircleMarker>
                     ))}
                 </MapContainer>
             </div>
