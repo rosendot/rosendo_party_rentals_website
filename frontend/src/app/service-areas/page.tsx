@@ -16,16 +16,6 @@ export default function ServiceAreas() {
     return (
         <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 min-h-screen py-12">
             <div className="container mx-auto px-4">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    <h1 className="text-5xl font-bold text-purple-800 mb-4">
-                        Service Areas
-                    </h1>
-                    <p className="text-xl text-gray-600 mb-6">
-                        We proudly serve the entire Rio Grande Valley!
-                    </p>
-                </div>
-
                 {/* Interactive Map */}
                 <div className="max-w-6xl mx-auto mb-12">
                     <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-purple-200">
@@ -84,32 +74,6 @@ export default function ServiceAreas() {
                                     </p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Call to Action */}
-                <div className="max-w-4xl mx-auto">
-                    <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-8 rounded-xl text-center shadow-lg">
-                        <h3 className="text-3xl font-bold mb-4">
-                            Ready to Book?
-                        </h3>
-                        <p className="text-xl mb-6">
-                            Don't see your city? Give us a call - we may be able to help!
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a
-                                href={`tel:${businessConfig.phone}`}
-                                className="bg-white text-purple-600 font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition-colors"
-                            >
-                                📞 Call Us: {businessConfig.phone}
-                            </a>
-                            <a
-                                href="/contact"
-                                className="bg-green-500 hover:bg-green-400 text-white font-bold py-3 px-6 rounded-full transition-colors"
-                            >
-                                💬 Contact Us
-                            </a>
                         </div>
                     </div>
                 </div>

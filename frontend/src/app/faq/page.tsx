@@ -55,18 +55,6 @@ export default function FAQ() {
     return (
         <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 min-h-screen py-12">
             <div className="container mx-auto px-4 max-w-4xl">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    <h1 className="text-5xl font-bold text-purple-800 mb-4">
-                        Frequently Asked Questions
-                    </h1>
-                    <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4 max-w-2xl mx-auto">
-                        <p className="text-yellow-800 font-medium">
-                            Can't find your answer? Call us at <a href={`tel:${businessConfig.phone}`} className="font-bold underline">{businessConfig.phone}</a>
-                        </p>
-                    </div>
-                </div>
-
                 {/* FAQ Items */}
                 <div className="space-y-4">
                     {faqData.map((item, index) => (

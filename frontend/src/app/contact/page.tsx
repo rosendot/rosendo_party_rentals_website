@@ -4,16 +4,6 @@ export default function Contact() {
     return (
         <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 min-h-screen py-12">
             <div className="container mx-auto px-4">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    <h1 className="text-5xl font-bold text-purple-800 mb-4">
-                        Contact Us
-                    </h1>
-                    <p className="text-xl text-gray-600 mb-6">
-                        Ready to plan your perfect party?
-                    </p>
-                </div>
-
                 <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
                     {/* Quick Contact Card */}
                     <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-purple-200">
@@ -203,6 +193,6 @@ export default function Contact() {
                 </div>
 
             </div>
-        </div>
+        </div >
     )
 }

@@ -4,13 +4,6 @@ export default function RentalInfo() {
     return (
         <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 min-h-screen py-12">
             <div className="container mx-auto px-4 max-w-6xl">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    <h1 className="text-5xl font-bold text-purple-800 mb-4">
-                        Rental Information
-                    </h1>
-                </div>
-
                 <div className="grid lg:grid-cols-2 gap-12">
                     {/* Pricing & Packages */}
                     <div className="space-y-8">
