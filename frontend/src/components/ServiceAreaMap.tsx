@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useEffect } from 'react'
 import freeDeliveryGeoJSON from '@/data/free-delivery-zones.json'
+import fifteenDollarZone from '@/data/15-dollar-delivery-zone.json'
 
 // Delivery pricing zones with their regions
 type DeliveryZone = {
@@ -20,8 +21,13 @@ const freeCoordinates: [number, number][] = (freeDeliveryGeoJSON as any).coordin
     ([lng, lat]: number[]) => [lat, lng] as [number, number]
 )
 
+const fifteenDollarCoordinates: [number, number][] = (fifteenDollarZone as any).coordinates.map(
+    ([lng, lat]: number[]) => [lat, lng] as [number, number]
+)
+
 // Extract city names from simplified JSON
 const freeCities = (freeDeliveryGeoJSON as any).cities
+const fifteenDollarCities = (fifteenDollarZone as any).cities
 
 const deliveryZones: DeliveryZone[] = [
     {
@@ -30,7 +36,6 @@ const deliveryZones: DeliveryZone[] = [
         color: '#15803d',
         fillColor: '#86efac',
         regions: freeCities,
-        // Actual city boundaries from GeoJSON
         coordinates: freeCoordinates
     },
     {
@@ -38,14 +43,8 @@ const deliveryZones: DeliveryZone[] = [
         fee: 15,
         color: '#ca8a04',
         fillColor: '#fde047',
-        regions: ['Weslaco', 'Donna', 'Mercedes', 'Harlingen', 'San Benito'],
-        // Polygon covering Weslaco/Harlingen area
-        coordinates: [
-            [26.4000, -98.0500], // NW (continues from free zone)
-            [26.4000, -97.5000], // NE
-            [26.0500, -97.5000], // SE
-            [26.0500, -98.0500], // SW
-        ]
+        regions: fifteenDollarCities,
+        coordinates: fifteenDollarCoordinates
     },
     {
         name: '$30 Delivery Fee',
