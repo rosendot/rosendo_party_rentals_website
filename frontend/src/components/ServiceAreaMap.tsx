@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Polygon, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useEffect } from 'react'
+import freeDeliveryGeoJSON from '@/data/free-delivery-zones.json'
 
 // Delivery pricing zones with their regions
 type DeliveryZone = {
@@ -11,8 +12,16 @@ type DeliveryZone = {
     color: string
     fillColor: string
     regions: string[]
-    coordinates: [number, number][]
+    coordinates: [number, number][] | [number, number][][]
 }
+
+// Extract all city names and coordinates from the GeoJSON
+const freeCities = freeDeliveryGeoJSON.features.map((feature: any) => feature.properties.NAME)
+const freeCoordinates = freeDeliveryGeoJSON.features.flatMap((feature: any) =>
+    feature.geometry.coordinates.map((ring: number[][]) =>
+        ring.map(([lng, lat]: number[]) => [lat, lng] as [number, number])
+    )
+)
 
 const deliveryZones: DeliveryZone[] = [
     {
@@ -20,14 +29,9 @@ const deliveryZones: DeliveryZone[] = [
         fee: 0,
         color: '#15803d',
         fillColor: '#86efac',
-        regions: ['Edinburg', 'McAllen', 'Mission', 'Pharr', 'San Juan', 'Alamo'],
-        // Polygon covering Edinburg/McAllen/Mission/Pharr/San Juan/Alamo area
-        coordinates: [
-            [26.4000, -98.4500], // NW
-            [26.4000, -98.0500], // NE
-            [26.1000, -98.0500], // SE
-            [26.1000, -98.4500], // SW
-        ]
+        regions: freeCities,
+        // Actual city boundaries from GeoJSON
+        coordinates: freeCoordinates
     },
     {
         name: '$15 Delivery Fee',
@@ -120,7 +124,7 @@ export default function ServiceAreaMap() {
             <div className="w-full h-[500px] rounded-lg overflow-hidden border-2 border-gray-300">
                 <MapContainer
                     center={center}
-                    zoom={9}
+                    zoom={10}
                     scrollWheelZoom={false}
                     style={{ height: '100%', width: '100%' }}
                     className="z-0"
