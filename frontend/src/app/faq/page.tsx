@@ -5,47 +5,38 @@ import { businessConfig } from '@/lib/config'
 const faqData = [
     {
         question: "How far in advance should I book?",
-        questionSpanish: "¿Con cuánta anticipación debo reservar?",
         answer: "We recommend booking 1-2 weeks in advance, especially for weekends and popular dates. However, we often have same-day availability - just call us!"
     },
     {
         question: "What's included in the rental price?",
-        questionSpanish: "¿Qué incluye el precio del alquiler?",
         answer: "All rentals include professional delivery, setup, and pickup. We'll bring everything to your location and set it up for you!"
     },
     {
         question: "Do you require a deposit?",
-        questionSpanish: "¿Requieren un depósito?",
-        answer: "Yes, we require a 50% deposit to secure your booking. The remaining balance is due on delivery day. We accept cash, check, or card."
+        answer: "No deposit needed! Full payment is due on delivery day. We accept cash or digital payments like Zelle, CashApp, and PayPal."
     },
     {
         question: "How many tables and chairs do I need?",
-        questionSpanish: "¿Cuántas mesas y sillas necesito?",
         answer: "A good rule of thumb: our round tables seat 8 people comfortably. Count your guests and we'll help you plan the perfect setup for your event!"
     },
     {
         question: "Do you deliver to apartments/condos?",
-        questionSpanish: "¿Entregan a apartamentos/condominios?",
         answer: "Yes! We deliver to apartments, condos, and community centers. Just let us know about any access restrictions, stairs, or gates we should know about."
     },
     {
         question: "Are your tables and chairs clean?",
-        questionSpanish: "¿Están limpias las mesas y sillas?",
         answer: "Absolutely! Every item is cleaned and sanitized before each rental. We take pride in providing quality, clean equipment for your events."
     },
     {
         question: "What types of events do you cater to?",
-        questionSpanish: "¿Qué tipos de eventos atienden?",
-        answer: "We serve all types of events! Birthdays, graduations, weddings, family reunions, quinceañeras, corporate events, and more. If you need seating, we've got you covered!"
+        answer: "We specialize in birthday parties and celebrations! Our day-by-day rentals with overnight use are perfect for parties, family gatherings, and special occasions."
     },
     {
         question: "Can I pick up instead of delivery?",
-        questionSpanish: "¿Puedo recoger en lugar de entrega?",
         answer: "We primarily offer delivery and setup service to ensure everything is set up properly. Contact us to discuss your specific needs!"
     },
     {
         question: "What are your delivery areas?",
-        questionSpanish: "¿Cuáles son sus áreas de entrega?",
         answer: `We deliver throughout the Rio Grande Valley including: ${businessConfig.cities.join(', ')}. Delivery fees may apply based on distance.`
     }
 ]
@@ -67,11 +58,8 @@ export default function FAQ() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-5xl font-bold text-purple-800 mb-4">
-                        Frequently Asked Questions ❓
+                        Frequently Asked Questions
                     </h1>
-                    <p className="text-xl text-gray-600 mb-6">
-                        Preguntas Frecuentes - Everything you need to know!
-                    </p>
                     <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4 max-w-2xl mx-auto">
                         <p className="text-yellow-800 font-medium">
                             Can't find your answer? Call us at <a href={`tel:${businessConfig.phone}`} className="font-bold underline">{businessConfig.phone}</a>
@@ -88,14 +76,9 @@ export default function FAQ() {
                                 className="w-full p-6 text-left hover:bg-purple-50 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500"
                             >
                                 <div className="flex justify-between items-center">
-                                    <div>
-                                        <h3 className="text-lg font-bold text-purple-700 mb-1">
-                                            {item.question}
-                                        </h3>
-                                        <p className="text-sm text-gray-600 italic">
-                                            {item.questionSpanish}
-                                        </p>
-                                    </div>
+                                    <h3 className="text-lg font-bold text-purple-700">
+                                        {item.question}
+                                    </h3>
                                     <span className={`text-2xl transition-transform ${openItems.includes(index) ? 'rotate-180' : ''}`}>
                                         ⬇️
                                     </span>

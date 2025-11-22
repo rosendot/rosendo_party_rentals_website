@@ -7,10 +7,10 @@ export default function Contact() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-5xl font-bold text-purple-800 mb-4">
-                        Contact Us 📞
+                        Contact Us
                     </h1>
                     <p className="text-xl text-gray-600 mb-6">
-                        ¡Contáctanos hoy! Ready to plan your perfect fiesta?
+                        Ready to plan your perfect party?
                     </p>
                 </div>
 
@@ -21,7 +21,7 @@ export default function Contact() {
                             Get In Touch
                         </h2>
                         <p className="text-gray-600 text-center mb-6">
-                            Ponte en Contacto - Choose your preferred method
+                            Choose your preferred method
                         </p>
 
                         {/* Contact Info Display */}
@@ -50,17 +50,15 @@ export default function Contact() {
                             >
                                 <div className="text-3xl mb-1">📞</div>
                                 <div className="text-sm">Call Now</div>
-                                <div className="text-xs opacity-90">Llama</div>
                             </a>
 
                             {/* Text/SMS Button */}
                             <a
-                                href={`sms:${businessConfig.phone}?&body=Hola! I need a quote for: DATE: _____ CITY: _____ ITEMS: _____`}
+                                href={`sms:${businessConfig.phone}?&body=Hi! I need a quote for: DATE: _____ CITY: _____ ITEMS: _____`}
                                 className="bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-4 px-4 rounded-xl transition-all transform hover:scale-105 shadow-lg text-center"
                             >
                                 <div className="text-3xl mb-1">💬</div>
                                 <div className="text-sm">Text Message</div>
-                                <div className="text-xs opacity-90">Manda Texto</div>
                             </a>
 
                             {/* WhatsApp Button */}
@@ -72,7 +70,6 @@ export default function Contact() {
                             >
                                 <div className="text-3xl mb-1">💚</div>
                                 <div className="text-sm">WhatsApp</div>
-                                <div className="text-xs opacity-90">Chat Instant</div>
                             </a>
 
                             {/* Email Button */}
@@ -82,14 +79,13 @@ export default function Contact() {
                             >
                                 <div className="text-3xl mb-1">📧</div>
                                 <div className="text-sm">Email Us</div>
-                                <div className="text-xs opacity-90">Correo</div>
                             </a>
                         </div>
 
                         {/* Business Hours */}
                         <div className="border-t-2 border-gray-200 pt-6">
                             <h3 className="text-lg font-bold text-gray-700 mb-3 text-center">
-                                Business Hours / Horario
+                                Business Hours
                             </h3>
                             <div className="space-y-2 text-center text-gray-600">
                                 <div className="flex justify-between items-center max-w-xs mx-auto">
@@ -111,13 +107,13 @@ export default function Contact() {
                     {/* Quick Quote Form */}
                     <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-yellow-200">
                         <h2 className="text-3xl font-bold text-yellow-700 mb-6 text-center">
-                            Quick Quote Form 📝
+                            Quick Quote Form
                         </h2>
 
                         <form className="space-y-4">
                             <div>
                                 <label className="block text-sm font-bold text-gray-700 mb-2">
-                                    Name / Nombre *
+                                    Name *
                                 </label>
                                 <input
                                     type="text"
@@ -129,7 +125,7 @@ export default function Contact() {
 
                             <div>
                                 <label className="block text-sm font-bold text-gray-700 mb-2">
-                                    Phone / Teléfono *
+                                    Phone *
                                 </label>
                                 <input
                                     type="tel"
@@ -141,7 +137,7 @@ export default function Contact() {
 
                             <div>
                                 <label className="block text-sm font-bold text-gray-700 mb-2">
-                                    Event Date / Fecha *
+                                    Event Date *
                                 </label>
                                 <input
                                     type="date"
@@ -152,44 +148,36 @@ export default function Contact() {
 
                             <div>
                                 <label className="block text-sm font-bold text-gray-700 mb-2">
-                                    City / Ciudad *
+                                    City *
                                 </label>
                                 <select className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none">
                                     <option value="">Select your city</option>
                                     {businessConfig.cities.map(city => (
                                         <option key={city} value={city}>{city}</option>
                                     ))}
-                                    <option value="other">Other (please specify in message)</option>
+                                    <option value="other">Other - please specify in message</option>
                                 </select>
                             </div>
 
                             <div>
                                 <label className="block text-sm font-bold text-gray-700 mb-2">
-                                    Items Needed / Artículos Necesarios
+                                    Items Needed
                                 </label>
                                 <div className="grid grid-cols-2 gap-2 text-sm">
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" />
-                                        Bounce Houses
+                                        Tables
                                     </label>
                                     <label className="flex items-center">
                                         <input type="checkbox" className="mr-2" />
-                                        Combo Units
-                                    </label>
-                                    <label className="flex items-center">
-                                        <input type="checkbox" className="mr-2" />
-                                        Tables & Chairs
-                                    </label>
-                                    <label className="flex items-center">
-                                        <input type="checkbox" className="mr-2" />
-                                        Concessions
+                                        Chairs
                                     </label>
                                 </div>
                             </div>
 
                             <div>
                                 <label className="block text-sm font-bold text-gray-700 mb-2">
-                                    Additional Details / Detalles Adicionales
+                                    Additional Details
                                 </label>
                                 <textarea
                                     className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none h-24"

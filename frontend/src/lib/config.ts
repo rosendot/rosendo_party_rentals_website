@@ -1,6 +1,6 @@
 export const businessConfig = {
     name: "Mi Fiesta Rentals",
-    tagline: "¡Hacemos que tu fiesta sea perfecta!",
+    tagline: "Quality tables and chairs for your celebration",
     phone: "(956) 534-2589",
     email: "mifiestarentals@gmail.com",
     serviceArea: "Rio Grande Valley",

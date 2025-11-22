@@ -2,24 +2,24 @@
     "chairs": [
         {
             "id": "ch001",
-            "name": "Sillas de Fiesta",
-            "englishName": "Party Chairs",
-            "capacity": "Adultos/Kids",
+            "name": "Folding Chairs",
+            "englishName": "Folding Chairs",
+            "capacity": "Adults/Kids",
             "priceFrom": 2,
             "image": "/images/party-chairs.jpg",
-            "description": "Comfortable folding chairs"
+            "description": "Comfortable folding chairs for any event"
         }
     ],
     "tables": [
         {
             "id": "tb001",
-            "name": "Mesa Redonda",
+            "name": "Round Table",
             "englishName": "Round Table",
             "size": "60\" diameter",
-            "capacity": "8 personas",
+            "capacity": "Seats 8",
             "priceFrom": 12,
             "image": "/images/round-table.jpg",
-            "description": "Perfect for family gatherings"
+            "description": "Perfect for birthday parties and family gatherings"
         }
     ]
 }

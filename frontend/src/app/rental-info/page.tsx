@@ -9,9 +9,6 @@ export default function RentalInfo() {
                     <h1 className="text-5xl font-bold text-purple-800 mb-4">
                         Rental Information
                     </h1>
-                    <p className="text-xl text-gray-600 mb-6">
-                        Everything you need to know / Todo lo que necesitas saber
-                    </p>
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12">
@@ -20,22 +17,22 @@ export default function RentalInfo() {
                         <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-green-200">
                             <h2 className="text-3xl font-bold text-green-700 mb-6 flex items-center">
                                 <span className="mr-3">💰</span>
-                                Pricing / Precios
+                                Pricing
                             </h2>
 
                             <div className="space-y-4">
                                 <div className="border-b border-green-100 pb-4">
-                                    <h3 className="text-xl font-bold text-green-600 mb-2">Tables / Mesas</h3>
+                                    <h3 className="text-xl font-bold text-green-600 mb-2">Tables</h3>
                                     <div className="flex justify-between">
-                                        <span>Round Tables 60" / Mesas Redondas</span>
+                                        <span>Round Tables 60"</span>
                                         <span className="font-bold">$12/day</span>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-xl font-bold text-green-600 mb-2">Chairs / Sillas</h3>
+                                    <h3 className="text-xl font-bold text-green-600 mb-2">Chairs</h3>
                                     <div className="flex justify-between">
-                                        <span>Folding Chairs / Sillas Plegables</span>
+                                        <span>Folding Chairs</span>
                                         <span className="font-bold">$2/day</span>
                                     </div>
                                 </div>
@@ -52,7 +49,7 @@ export default function RentalInfo() {
                         <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-blue-200">
                             <h2 className="text-3xl font-bold text-blue-700 mb-6 flex items-center">
                                 <span className="mr-3">🚚</span>
-                                Delivery Areas / Áreas de Entrega
+                                Delivery Areas
                             </h2>
 
                             <p className="text-gray-700 mb-4">
@@ -70,28 +67,28 @@ export default function RentalInfo() {
                         <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-purple-200">
                             <h2 className="text-3xl font-bold text-purple-700 mb-6 flex items-center">
                                 <span className="mr-3">📜</span>
-                                Rental Policies / Políticas
+                                Rental Policies
                             </h2>
 
                             <div className="space-y-6">
                                 <div>
                                     <h3 className="text-xl font-bold text-purple-600 mb-3">📅 Booking & Payment</h3>
                                     <ul className="space-y-2 text-gray-700">
-                                        <li>• No deposit required</li>
-                                        <li>• Payment due on delivery day</li>
-                                        <li>• We accept cash or third-party payment apps like Zelle, CashApp, PayPal, etc.</li>
-                                        <li>• Cancellations 2+ days before: No fee</li>
-                                        <li>• Cancellations less than 2 days: $20 flat cancellation fee</li>
+                                        <li>• No deposit needed to reserve your rental</li>
+                                        <li>• Full payment due at delivery</li>
+                                        <li>• Cash or digital payments accepted: Zelle, CashApp, PayPal</li>
+                                        <li>• Cancel 2+ days in advance at no charge</li>
+                                        <li>• Late cancellations: $20 fee</li>
                                     </ul>
                                 </div>
 
                                 <div>
                                     <h3 className="text-xl font-bold text-purple-600 mb-3">⏰ Rental Times</h3>
                                     <ul className="space-y-2 text-gray-700">
-                                        <li>• Day-by-day rentals</li>
-                                        <li>• Overnight rentals included</li>
-                                        <li>• Delivery/Setup: 12pm - 5pm on rental start day</li>
-                                        <li>• Pickup: 12pm - 5pm on pickup day</li>
+                                        <li>• Priced per day with overnight use included</li>
+                                        <li>• Perfect for birthday parties and celebrations</li>
+                                        <li>• Delivery & setup between 12pm - 5pm</li>
+                                        <li>• Pickup window: 12pm - 5pm next day</li>
                                     </ul>
                                 </div>
                             </div>
@@ -101,25 +98,25 @@ export default function RentalInfo() {
                         <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-orange-200">
                             <h2 className="text-3xl font-bold text-orange-700 mb-6 flex items-center">
                                 <span className="mr-3">🚚</span>
-                                Setup & Delivery / Instalación y Entrega
+                                Setup & Delivery
                             </h2>
 
                             <div className="space-y-6">
                                 <div>
                                     <h3 className="text-xl font-bold text-orange-600 mb-3">Delivery & Setup</h3>
                                     <ul className="space-y-2 text-gray-700">
-                                        <li>• We handle all delivery and setup</li>
-                                        <li>• Tables and chairs arrive clean and ready to use</li>
-                                        <li>• We set everything up at your preferred location</li>
+                                        <li>• We deliver and set up everything for you</li>
+                                        <li>• All items arrive sanitized and party-ready</li>
+                                        <li>• Setup at your preferred location on-site</li>
                                     </ul>
                                 </div>
 
                                 <div>
                                     <h3 className="text-xl font-bold text-orange-600 mb-3">Teardown & Pickup</h3>
                                     <ul className="space-y-2 text-gray-700">
-                                        <li>• We handle all teardown and pickup</li>
-                                        <li>• Please clean off all tables and chairs before we arrive</li>
-                                        <li>• No need to fold or put away - we take care of that</li>
+                                        <li>• We take care of all breakdown and removal</li>
+                                        <li>• Just wipe down the tables and chairs after your event</li>
+                                        <li>• Leave everything out - we'll pack it all up</li>
                                     </ul>
                                 </div>
                             </div>

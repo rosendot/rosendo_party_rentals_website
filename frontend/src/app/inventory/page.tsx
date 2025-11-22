@@ -11,7 +11,7 @@ export default function Inventory() {
                         Our Inventory
                     </h1>
                     <p className="text-xl text-gray-600 mb-6">
-                        Quality tables and chairs for your event / Mesas y sillas de calidad para tu evento
+                        Quality tables and chairs for your event
                     </p>
                     <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4 max-w-2xl mx-auto">
                         <p className="text-yellow-800 font-medium">
@@ -23,7 +23,7 @@ export default function Inventory() {
                 {/* Tables */}
                 <section className="mb-16">
                     <h2 className="text-4xl font-bold text-green-600 mb-8 text-center">
-                        Tables / Mesas
+                        Tables
                     </h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {inventoryData.tables.map((item) => (
@@ -33,16 +33,15 @@ export default function Inventory() {
                                 </div>
                                 <div className="p-6">
                                     <h3 className="text-xl font-bold text-green-700 mb-2">
-                                        {item.name}
+                                        {item.englishName || item.name}
                                     </h3>
-                                    <p className="text-gray-600 mb-2">{item.englishName}</p>
                                     <div className="flex justify-between items-center mb-3">
                                         {item.size && <span className="text-sm text-gray-500">{item.size}</span>}
                                         <span className="text-sm text-gray-500">{item.capacity}</span>
                                     </div>
                                     <p className="text-sm text-gray-600 mb-4">{item.description}</p>
                                     <div className="text-2xl font-bold text-green-600">
-                                        From ${item.priceFrom}
+                                        ${item.priceFrom}/day
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +52,7 @@ export default function Inventory() {
                 {/* Chairs */}
                 <section className="mb-16">
                     <h2 className="text-4xl font-bold text-blue-600 mb-8 text-center">
-                        Chairs / Sillas
+                        Chairs
                     </h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {inventoryData.chairs.map((item) => (
@@ -63,15 +62,14 @@ export default function Inventory() {
                                 </div>
                                 <div className="p-6">
                                     <h3 className="text-xl font-bold text-blue-700 mb-2">
-                                        {item.name}
+                                        {item.englishName || item.name}
                                     </h3>
-                                    <p className="text-gray-600 mb-2">{item.englishName}</p>
                                     <div className="flex justify-between items-center mb-3">
                                         <span className="text-sm text-gray-500">{item.capacity}</span>
                                     </div>
                                     <p className="text-sm text-gray-600 mb-4">{item.description}</p>
                                     <div className="text-2xl font-bold text-blue-600">
-                                        From ${item.priceFrom}
+                                        ${item.priceFrom}/day
                                     </div>
                                 </div>
                             </div>
