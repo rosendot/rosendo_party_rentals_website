@@ -20,10 +20,10 @@ export default function ServiceAreas() {
                 <div className="max-w-6xl mx-auto mb-12">
                     <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-purple-200">
                         <h2 className="text-2xl font-bold text-purple-700 mb-4 text-center">
-                            Interactive Coverage Map
+                            Delivery Pricing Map
                         </h2>
                         <p className="text-center text-gray-600 mb-6">
-                            Click on any marker to see city details
+                            Click on colored zones to see pricing and cities covered
                         </p>
                         <Map />
                     </div>
@@ -54,9 +54,9 @@ export default function ServiceAreas() {
                             <div className="grid md:grid-cols-3 gap-6">
                                 <div className="text-center">
                                     <div className="text-4xl mb-2">🚚</div>
-                                    <h4 className="font-bold text-gray-700 mb-2">Free Delivery</h4>
+                                    <h4 className="font-bold text-gray-700 mb-2">Delivery & Pickup</h4>
                                     <p className="text-sm text-gray-600">
-                                        Professional delivery to your location
+                                        Professional delivery to your location (pricing varies by zone)
                                     </p>
                                 </div>
                                 <div className="text-center">
@@ -67,10 +67,10 @@ export default function ServiceAreas() {
                                     </p>
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-4xl mb-2">📦</div>
-                                    <h4 className="font-bold text-gray-700 mb-2">Pickup Service</h4>
+                                    <div className="text-4xl mb-2">📍</div>
+                                    <h4 className="font-bold text-gray-700 mb-2">Based in Edinburg</h4>
                                     <p className="text-sm text-gray-600">
-                                        We'll pick everything up when you're done
+                                        Serving the entire Rio Grande Valley region
                                     </p>
                                 </div>
                             </div>

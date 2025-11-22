@@ -1,34 +1,77 @@
 'use client'
-import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet'
-import { businessConfig } from '@/lib/config'
+import { MapContainer, TileLayer, Polygon, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useEffect } from 'react'
 
-// Fix for default marker icon in react-leaflet
-const icon = L.icon({
-    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-    iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-    shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-})
-
-// Approximate coordinates for RGV cities
-const cityCoordinates: Record<string, [number, number]> = {
-    "McAllen": [26.2034, -98.2300],
-    "Edinburg": [26.3017, -98.1633],
-    "Mission": [26.2159, -98.3253],
-    "Pharr": [26.1948, -98.1836],
-    "Brownsville": [25.9017, -97.4975],
-    "Harlingen": [26.1906, -97.6961],
-    "Weslaco": [26.1595, -97.9908],
-    "Mercedes": [26.1498, -97.9142],
-    "La Joya": [26.2459, -98.4753],
-    "Alamo": [26.1837, -98.1228]
+// Delivery pricing zones with their regions
+type DeliveryZone = {
+    name: string
+    fee: number
+    color: string
+    fillColor: string
+    regions: string[]
+    coordinates: [number, number][]
 }
+
+const deliveryZones: DeliveryZone[] = [
+    {
+        name: 'FREE Delivery',
+        fee: 0,
+        color: '#15803d',
+        fillColor: '#86efac',
+        regions: ['Edinburg', 'McAllen', 'Mission', 'Pharr', 'San Juan', 'Alamo'],
+        // Polygon covering Edinburg/McAllen/Mission/Pharr/San Juan/Alamo area
+        coordinates: [
+            [26.4000, -98.4500], // NW
+            [26.4000, -98.0500], // NE
+            [26.1000, -98.0500], // SE
+            [26.1000, -98.4500], // SW
+        ]
+    },
+    {
+        name: '$15 Delivery Fee',
+        fee: 15,
+        color: '#ca8a04',
+        fillColor: '#fde047',
+        regions: ['Weslaco', 'Donna', 'Mercedes', 'Harlingen', 'San Benito'],
+        // Polygon covering Weslaco/Harlingen area
+        coordinates: [
+            [26.4000, -98.0500], // NW (continues from free zone)
+            [26.4000, -97.5000], // NE
+            [26.0500, -97.5000], // SE
+            [26.0500, -98.0500], // SW
+        ]
+    },
+    {
+        name: '$30 Delivery Fee',
+        fee: 30,
+        color: '#ea580c',
+        fillColor: '#fdba74',
+        regions: ['Brownsville', 'Los Fresnos', 'Rio Grande City', 'Roma', 'Raymondville'],
+        // Polygon covering Brownsville/Roma/Raymondville area
+        coordinates: [
+            [26.5000, -99.0000], // NW (Roma area)
+            [26.5000, -97.0000], // NE
+            [25.8000, -97.0000], // SE (Brownsville area)
+            [25.8000, -99.0000], // SW
+        ]
+    },
+    {
+        name: '$50 Delivery Fee',
+        fee: 50,
+        color: '#dc2626',
+        fillColor: '#fca5a5',
+        regions: ['South Padre Island', 'Port Isabel', 'Extended areas'],
+        // Polygon covering outer areas
+        coordinates: [
+            [26.5000, -97.0000], // NW
+            [26.5000, -96.5000], // NE (SPI area)
+            [25.8000, -96.5000], // SE
+            [25.8000, -97.0000], // SW
+        ]
+    }
+]
 
 export default function ServiceAreaMap() {
     useEffect(() => {
@@ -41,65 +84,84 @@ export default function ServiceAreaMap() {
         })
     }, [])
 
-    // Center of RGV (approximately McAllen)
-    const center: [number, number] = [26.2034, -98.2300]
+    // Center on Edinburg (business base)
+    const center: [number, number] = [26.3017, -98.1633]
 
     return (
-        <div className="w-full h-[500px] rounded-lg overflow-hidden border-2 border-gray-300">
-            <MapContainer
-                center={center}
-                zoom={9}
-                scrollWheelZoom={false}
-                style={{ height: '100%', width: '100%' }}
-                className="z-0"
-            >
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
+        <div className="w-full space-y-4">
+            {/* Map Legend */}
+            <div className="bg-white p-4 rounded-lg border-2 border-purple-200">
+                <h3 className="font-bold text-gray-700 mb-3">Delivery Pricing Zones</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {deliveryZones.map(zone => (
+                        <div key={zone.name} className="flex items-center gap-2">
+                            <div
+                                className="w-6 h-6 rounded border-2"
+                                style={{
+                                    backgroundColor: zone.fillColor,
+                                    borderColor: zone.color
+                                }}
+                            />
+                            <div>
+                                <div className="font-bold text-sm" style={{ color: zone.color }}>
+                                    {zone.fee === 0 ? 'FREE' : `$${zone.fee}`}
+                                </div>
+                                <div className="text-xs text-gray-600">
+                                    {zone.regions.slice(0, 2).join(', ')}
+                                    {zone.regions.length > 2 && '...'}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
 
-                {/* Service area circle overlay */}
-                <Circle
+            {/* Interactive Map */}
+            <div className="w-full h-[500px] rounded-lg overflow-hidden border-2 border-gray-300">
+                <MapContainer
                     center={center}
-                    radius={50000} // 50km radius
-                    pathOptions={{
-                        color: '#9333ea',
-                        fillColor: '#c084fc',
-                        fillOpacity: 0.1,
-                        weight: 2
-                    }}
-                />
+                    zoom={9}
+                    scrollWheelZoom={false}
+                    style={{ height: '100%', width: '100%' }}
+                    className="z-0"
+                >
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
 
-                {/* City markers */}
-                {businessConfig.cities.map(city => {
-                    const coords = cityCoordinates[city]
-                    if (!coords) return null
-
-                    return (
-                        <Marker key={city} position={coords} icon={icon}>
+                    {/* Delivery zone polygons */}
+                    {deliveryZones.map(zone => (
+                        <Polygon
+                            key={zone.name}
+                            positions={zone.coordinates}
+                            pathOptions={{
+                                color: zone.color,
+                                fillColor: zone.fillColor,
+                                fillOpacity: 0.3,
+                                weight: 2
+                            }}
+                        >
                             <Popup>
                                 <div className="text-center p-2">
-                                    <h3 className="font-bold text-purple-700 text-lg mb-2">
-                                        {city}
+                                    <h3 className="font-bold text-lg mb-2" style={{ color: zone.color }}>
+                                        {zone.name}
                                     </h3>
-                                    <p className="text-green-600 font-semibold mb-2">
-                                        ✓ We deliver here!
+                                    <p className="text-2xl font-bold mb-2">
+                                        {zone.fee === 0 ? 'FREE' : `$${zone.fee}`}
                                     </p>
-                                    <p className="text-sm text-gray-600">
-                                        Professional delivery, setup & pickup included
-                                    </p>
-                                    <a
-                                        href={`tel:${businessConfig.phone}`}
-                                        className="inline-block mt-3 bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-purple-700 transition-colors"
-                                    >
-                                        📞 Call to Book
-                                    </a>
+                                    <div className="text-sm text-gray-600 mb-2">
+                                        <strong>Covers:</strong>
+                                    </div>
+                                    <div className="text-sm text-gray-700">
+                                        {zone.regions.join(', ')}
+                                    </div>
                                 </div>
                             </Popup>
-                        </Marker>
-                    )
-                })}
-            </MapContainer>
+                        </Polygon>
+                    ))}
+                </MapContainer>
+            </div>
         </div>
     )
 }
