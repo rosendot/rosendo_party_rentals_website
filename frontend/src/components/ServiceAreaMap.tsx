@@ -1,10 +1,9 @@
 'use client'
-import { MapContainer, TileLayer, Polygon, Popup, CircleMarker, Tooltip } from 'react-leaflet'
+import { MapContainer, TileLayer, Polygon, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useEffect } from 'react'
-import freeDeliveryGeoJSON from '@/data/free-delivery-zones.json'
-import fifteenDollarZone from '@/data/15-dollar-delivery-zone.json'
+import freeZonesGeoJSON from '@/data/free-zones.json'
 
 // Delivery pricing zones with their regions
 type DeliveryZone = {
@@ -13,24 +12,20 @@ type DeliveryZone = {
     color: string
     fillColor: string
     regions: string[]
-    coordinates: [number, number][] | [number, number][][]
+    coordinates: [number, number][][] | [number, number][]
 }
 
-// Extract coordinates from simplified JSON (convert from [lng, lat] to [lat, lng] for Leaflet)
-const freeCoordinates: [number, number][] = (freeDeliveryGeoJSON as any).points.map(
-    (point: any) => [point.lat, point.lng] as [number, number]
+// Extract coordinates from GeoJSON (convert from [lng, lat] to [lat, lng] for Leaflet)
+const freeZoneCoordinates: [number, number][][] = (freeZonesGeoJSON as any).features.map(
+    (feature: any) => feature.geometry.coordinates[0].map(
+        (coord: [number, number]) => [coord[1], coord[0]] as [number, number]
+    )
 )
 
-const fifteenDollarCoordinates: [number, number][] = (fifteenDollarZone as any).points.map(
-    (point: any) => [point.lat, point.lng] as [number, number]
+// Extract region names from GeoJSON
+const freeZoneNames: string[] = (freeZonesGeoJSON as any).features.map(
+    (feature: any) => feature.properties.NAME
 )
-
-const fifteenDollarPoints = (fifteenDollarZone as any).points
-const freePoints = (freeDeliveryGeoJSON as any).points
-
-// Extract city names from simplified JSON
-const freeCities = (freeDeliveryGeoJSON as any).cities
-const fifteenDollarCities = (fifteenDollarZone as any).cities
 
 const deliveryZones: DeliveryZone[] = [
     {
@@ -38,16 +33,8 @@ const deliveryZones: DeliveryZone[] = [
         fee: 0,
         color: '#15803d',
         fillColor: '#86efac',
-        regions: freeCities,
-        coordinates: freeCoordinates
-    },
-    {
-        name: '$15 Delivery Fee',
-        fee: 15,
-        color: '#ca8a04',
-        fillColor: '#fde047',
-        regions: fifteenDollarCities,
-        coordinates: fifteenDollarCoordinates
+        regions: freeZoneNames,
+        coordinates: freeZoneCoordinates
     },
     {
         name: '$30 Delivery Fee',
@@ -165,44 +152,6 @@ export default function ServiceAreaMap() {
                                 </div>
                             </Popup>
                         </Polygon>
-                    ))}
-
-                    {/* Debug markers for free zone points */}
-                    {freePoints.map((point: any, index: number) => (
-                        <CircleMarker
-                            key={`free-point-${index}`}
-                            center={[point.lat, point.lng]}
-                            radius={5}
-                            pathOptions={{
-                                color: 'yellow',
-                                fillColor: 'yellow',
-                                fillOpacity: 0.8,
-                                weight: 2
-                            }}
-                        >
-                            <Tooltip permanent direction="top" offset={[0, -5]}>
-                                {point.name}
-                            </Tooltip>
-                        </CircleMarker>
-                    ))}
-
-                    {/* Debug markers for $15 zone points */}
-                    {fifteenDollarPoints.map((point: any, index: number) => (
-                        <CircleMarker
-                            key={`point-${index}`}
-                            center={[point.lat, point.lng]}
-                            radius={5}
-                            pathOptions={{
-                                color: 'red',
-                                fillColor: 'red',
-                                fillOpacity: 0.8,
-                                weight: 2
-                            }}
-                        >
-                            <Tooltip permanent direction="top" offset={[0, -5]}>
-                                {point.name}
-                            </Tooltip>
-                        </CircleMarker>
                     ))}
                 </MapContainer>
             </div>
