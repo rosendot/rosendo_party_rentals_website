@@ -71,40 +71,12 @@ const deliveryZones: DeliveryZone[] = [
         coordinates: twentyDollarZoneCoordinates
     },
     {
-        name: '$30 Delivery Fee',
-        fee: 30,
-        color: '#ea580c',
-        fillColor: '#fdba74',
-        regions: ['Brownsville', 'Los Fresnos', 'Rio Grande City', 'Roma', 'Raymondville'],
-        // Polygon covering Brownsville/Roma/Raymondville area
-        coordinates: [
-            [26.5000, -99.0000], // NW (Roma area)
-            [26.5000, -97.0000], // NE
-            [25.8000, -97.0000], // SE (Brownsville area)
-            [25.8000, -99.0000], // SW
-        ]
-    },
-    {
         name: '$40 Delivery Fee',
         fee: 40,
         color: '#c2410c',
         fillColor: '#fed7aa',
         regions: fortyDollarZoneNames,
         coordinates: fortyDollarZoneCoordinates
-    },
-    {
-        name: '$50 Delivery Fee',
-        fee: 50,
-        color: '#dc2626',
-        fillColor: '#fca5a5',
-        regions: ['South Padre Island', 'Port Isabel', 'Extended areas'],
-        // Polygon covering outer areas
-        coordinates: [
-            [26.5000, -97.0000], // NW
-            [26.5000, -96.5000], // NE (SPI area)
-            [25.8000, -96.5000], // SE
-            [25.8000, -97.0000], // SW
-        ]
     }
 ]
 
