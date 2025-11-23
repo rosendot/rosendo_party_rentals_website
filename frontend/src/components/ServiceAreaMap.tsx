@@ -4,6 +4,8 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useEffect } from 'react'
 import freeZonesGeoJSON from '@/data/free-zones.json'
+import twentyDollarZonesGeoJSON from '@/data/20-dollar-zones.json'
+import fortyDollarZonesGeoJSON from '@/data/40-dollar-zones.json'
 
 // Delivery pricing zones with their regions
 type DeliveryZone = {
@@ -27,6 +29,30 @@ const freeZoneNames: string[] = (freeZonesGeoJSON as any).features.map(
     (feature: any) => feature.properties.NAME
 )
 
+// Extract coordinates for $20 zone from GeoJSON
+const twentyDollarZoneCoordinates: [number, number][][] = (twentyDollarZonesGeoJSON as any).features.map(
+    (feature: any) => feature.geometry.coordinates[0].map(
+        (coord: [number, number]) => [coord[1], coord[0]] as [number, number]
+    )
+)
+
+// Extract region names for $20 zone from GeoJSON
+const twentyDollarZoneNames: string[] = (twentyDollarZonesGeoJSON as any).features.map(
+    (feature: any) => feature.properties.NAME
+)
+
+// Extract coordinates for $40 zone from GeoJSON
+const fortyDollarZoneCoordinates: [number, number][][] = (fortyDollarZonesGeoJSON as any).features.map(
+    (feature: any) => feature.geometry.coordinates[0].map(
+        (coord: [number, number]) => [coord[1], coord[0]] as [number, number]
+    )
+)
+
+// Extract region names for $40 zone from GeoJSON
+const fortyDollarZoneNames: string[] = (fortyDollarZonesGeoJSON as any).features.map(
+    (feature: any) => feature.properties.NAME
+)
+
 const deliveryZones: DeliveryZone[] = [
     {
         name: 'FREE Delivery',
@@ -35,6 +61,14 @@ const deliveryZones: DeliveryZone[] = [
         fillColor: '#86efac',
         regions: freeZoneNames,
         coordinates: freeZoneCoordinates
+    },
+    {
+        name: '$20 Delivery Fee',
+        fee: 20,
+        color: '#d97706',
+        fillColor: '#fcd34d',
+        regions: twentyDollarZoneNames,
+        coordinates: twentyDollarZoneCoordinates
     },
     {
         name: '$30 Delivery Fee',
@@ -49,6 +83,14 @@ const deliveryZones: DeliveryZone[] = [
             [25.8000, -97.0000], // SE (Brownsville area)
             [25.8000, -99.0000], // SW
         ]
+    },
+    {
+        name: '$40 Delivery Fee',
+        fee: 40,
+        color: '#c2410c',
+        fillColor: '#fed7aa',
+        regions: fortyDollarZoneNames,
+        coordinates: fortyDollarZoneCoordinates
     },
     {
         name: '$50 Delivery Fee',
