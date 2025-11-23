@@ -13,45 +13,36 @@ type DeliveryZone = {
     fee: number
     color: string
     fillColor: string
-    regions: string[]
+    regions: string
     coordinates: [number, number][][] | [number, number][]
 }
 
-// Extract coordinates from GeoJSON (convert from [lng, lat] to [lat, lng] for Leaflet)
-const freeZoneCoordinates: [number, number][][] = (freeZonesGeoJSON as any).features.map(
-    (feature: any) => feature.geometry.coordinates[0].map(
-        (coord: [number, number]) => [coord[1], coord[0]] as [number, number]
-    )
-)
+// Helper function to extract coordinates from GeoJSON (handles both Polygon and MultiPolygon)
+const extractCoordinates = (feature: any): [number, number][][] | [number, number][] => {
+    const geom = feature.geometry
+    const coords = geom.coordinates
 
-// Extract region names from GeoJSON
-const freeZoneNames: string[] = (freeZonesGeoJSON as any).features.map(
-    (feature: any) => feature.properties.NAME
-)
+    if (geom.type === 'Polygon') {
+        // Single polygon - convert outer ring from [lng, lat] to [lat, lng]
+        return coords[0].map((coord: [number, number]) => [coord[1], coord[0]] as [number, number])
+    } else if (geom.type === 'MultiPolygon') {
+        // Multiple polygons - convert each outer ring
+        return coords.map((polygon: any) =>
+            polygon[0].map((coord: [number, number]) => [coord[1], coord[0]] as [number, number])
+        )
+    }
+    return []
+}
 
-// Extract coordinates for $20 zone from GeoJSON
-const twentyDollarZoneCoordinates: [number, number][][] = (twentyDollarZonesGeoJSON as any).features.map(
-    (feature: any) => feature.geometry.coordinates[0].map(
-        (coord: [number, number]) => [coord[1], coord[0]] as [number, number]
-    )
-)
+// Extract coordinates from merged GeoJSON
+const freeZoneCoordinates = extractCoordinates((freeZonesGeoJSON as any).features[0])
+const twentyDollarZoneCoordinates = extractCoordinates((twentyDollarZonesGeoJSON as any).features[0])
+const fortyDollarZoneCoordinates = extractCoordinates((fortyDollarZonesGeoJSON as any).features[0])
 
-// Extract region names for $20 zone from GeoJSON
-const twentyDollarZoneNames: string[] = (twentyDollarZonesGeoJSON as any).features.map(
-    (feature: any) => feature.properties.NAME
-)
-
-// Extract coordinates for $40 zone from GeoJSON
-const fortyDollarZoneCoordinates: [number, number][][] = (fortyDollarZonesGeoJSON as any).features.map(
-    (feature: any) => feature.geometry.coordinates[0].map(
-        (coord: [number, number]) => [coord[1], coord[0]] as [number, number]
-    )
-)
-
-// Extract region names for $40 zone from GeoJSON
-const fortyDollarZoneNames: string[] = (fortyDollarZonesGeoJSON as any).features.map(
-    (feature: any) => feature.properties.NAME
-)
+// Extract region names from merged GeoJSON
+const freeZoneNames = (freeZonesGeoJSON as any).features[0].properties.NAME
+const twentyDollarZoneNames = (twentyDollarZonesGeoJSON as any).features[0].properties.NAME
+const fortyDollarZoneNames = (fortyDollarZonesGeoJSON as any).features[0].properties.NAME
 
 const deliveryZones: DeliveryZone[] = [
     {
@@ -114,8 +105,8 @@ export default function ServiceAreaMap() {
                                     {zone.fee === 0 ? 'FREE' : `$${zone.fee}`}
                                 </div>
                                 <div className="text-xs text-gray-600">
-                                    {zone.regions.slice(0, 2).join(', ')}
-                                    {zone.regions.length > 2 && '...'}
+                                    {zone.regions.split(', ').slice(0, 2).join(', ')}
+                                    {zone.regions.split(', ').length > 2 && '...'}
                                 </div>
                             </div>
                         </div>
@@ -161,7 +152,7 @@ export default function ServiceAreaMap() {
                                         <strong>Covers:</strong>
                                     </div>
                                     <div className="text-sm text-gray-700">
-                                        {zone.regions.join(', ')}
+                                        {zone.regions}
                                     </div>
                                 </div>
                             </Popup>
