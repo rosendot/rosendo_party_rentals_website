@@ -1,52 +1,70 @@
-# Rosendo Party Rentals Website
+# Mi Fiesta Rentals Website
 
-A modern, responsive website for Rosendo's party rental business in the Rio Grande Valley, built with Next.js and TailwindCSS.
+A modern, responsive display website for Mi Fiesta Rentals party rental business in the Rio Grande Valley, built with Next.js and TailwindCSS.
 
 ## 🎯 Project Overview
 
-This repository contains the complete website for Rosendo Party Rentals, showcasing bounce houses, combo units, tables & chairs, and party add-ons for the Rio Grande Valley area. The site provides easy contact options for customers to request quotes and book rentals.
+This repository contains a display-only website for Mi Fiesta Rentals, showcasing tables & chairs rental services for the Rio Grande Valley area. The site provides comprehensive rental information, interactive delivery zone mapping, and multiple contact options for customers to request quotes.
+
+**Current Status:** Display website with JSON-based data management (no backend required)
+**Future Plans:** Integration with Stripe or Shopify for online booking and payments
 
 ## 🚀 Features
 
 - **Responsive Design** - Works perfectly on desktop, tablet, and mobile devices
-- **Inventory Showcase** - Professional grid layout displaying all rental items with photos and pricing
+- **Inventory Display** - Tables and chairs with pricing and descriptions
+- **Interactive Delivery Zone Map** - Leaflet-powered map showing three pricing tiers (Free, $20, $40 delivery zones) with GeoJSON polygon boundaries
 - **Multiple Contact Options** - Phone, SMS, WhatsApp, and email integration for easy customer communication
-- **Rental Information** - Comprehensive pricing, delivery areas, setup requirements, and policies
-- **FAQ Section** - Common questions and answers to help customers
-- **Professional Styling** - Clean, modern design optimized for the party rental industry
+- **Rental Information Page** - Comprehensive pricing details, delivery areas, setup requirements, and rental policies
+- **FAQ Section** - 9 common questions and answers with expandable accordion interface
+- **Service Areas** - Covering 10 cities in the Rio Grande Valley with zone-based delivery pricing
+- **Party-Themed Design** - Gradient backgrounds, custom animations, and festive styling
 
 ## 🛠 Tech Stack
 
-### Frontend
+### Frontend (Current)
 - **Framework:** Next.js 15.4.6 (App Router)
+- **UI Library:** React 19.0.0
 - **Styling:** TailwindCSS 4.x
-- **Language:** TypeScript
-- **Data Management:** JSON-based inventory system (expandable to database)
+- **Language:** TypeScript 5.0.0
+- **Maps:** Leaflet 1.9.4 + React-Leaflet 5.0.0 for interactive delivery zones
+- **Data Management:** JSON files for inventory and GeoJSON for delivery zones
+- **Fonts:** Google Fonts (Fredoka, Nunito, Inter)
 - **Deployment:** Optimized for Vercel hosting
 
-### Backend (Planned)
-- **Database:** Supabase or Firebase
-- **API:** Next.js API routes or separate backend service
-- **Authentication:** Admin dashboard for inventory management
-- **Booking System:** Real-time availability and reservations
+### Future Integration (Planned)
+- **Payment Processing:** Stripe or Shopify for online booking and payments
+- **Booking System:** Real-time availability and reservations (TBD based on chosen platform)
 
 ## 📁 Repository Structure
 
 ```
-rosendo_party_rentals_website/
+mi_fiesta_rentals/
 ├── frontend/                   # Main website application
 │   ├── src/
-│   │   ├── app/               # Next.js pages (Home, Inventory, Contact, etc.)
+│   │   ├── app/               # Next.js App Router pages
+│   │   │   ├── page.tsx              # Home page
+│   │   │   ├── inventory/            # Product showcase
+│   │   │   ├── service-areas/        # Interactive delivery map
+│   │   │   ├── rental-info/          # Policies & pricing
+│   │   │   ├── faq/                  # FAQ accordion
+│   │   │   ├── contact/              # Contact & quote form
+│   │   │   └── layout.tsx            # Root layout with Header/Footer
 │   │   ├── components/        # Reusable UI components
-│   │   ├── data/             # Inventory and business data
+│   │   │   ├── Header.tsx            # Navigation header
+│   │   │   ├── Footer.tsx            # Footer with links
+│   │   │   ├── ServiceAreaMap.tsx    # Leaflet map component
+│   │   │   └── ItemCard.tsx          # Product card
+│   │   ├── data/             # JSON-based data storage
+│   │   │   ├── inventory.json        # Tables & chairs catalog
+│   │   │   ├── free-zones.json       # Free delivery GeoJSON
+│   │   │   ├── 20-dollar-zones.json  # $20 delivery GeoJSON
+│   │   │   └── 40-dollar-zones.json  # $40 delivery GeoJSON
 │   │   └── lib/              # Configuration and utilities
-│   ├── public/               # Static assets (images, icons)
-│   ├── package.json          # Dependencies and scripts
-│   └── README.md             # Frontend-specific documentation
-├── backend/                   # Future backend services (planned)
-│   ├── api/                  # API endpoints
-│   ├── database/             # Database schemas and migrations
-│   └── services/             # Business logic services
+│   │       └── config.ts             # Business info & settings
+│   ├── public/               # Static assets (SVG icons)
+│   └── package.json          # Dependencies and scripts
+├── backend/                   # Reserved for future use (empty)
 └── README.md                 # This file - main project documentation
 ```
 
@@ -77,15 +95,26 @@ rosendo_party_rentals_website/
 
 ## 📝 Content Management
 
+All content is managed through JSON files and TypeScript configuration - **no backend or database required**.
+
 ### Business Information
-- **Contact Details:** Update in `frontend/src/lib/config.ts`
-- **Rental Policies:** Edit `frontend/src/app/rental-info/page.tsx`
-- **FAQ Content:** Modify `frontend/src/app/faq/page.tsx`
+- **Contact Details:** Update in [frontend/src/lib/config.ts](frontend/src/lib/config.ts)
+  - Phone: (956) 534-2589
+  - Email: mifiestarentals@gmail.com
+  - Business hours, social media links
+- **Rental Policies:** Edit [frontend/src/app/rental-info/page.tsx](frontend/src/app/rental-info/page.tsx)
+- **FAQ Content:** Modify [frontend/src/app/faq/page.tsx](frontend/src/app/faq/page.tsx)
 
 ### Inventory Management
-- **Add Items:** Update `frontend/src/data/inventory.json`
-- **Item Photos:** Place in `frontend/public/images/` directory
-- **Pricing:** Set starting prices for each category
+- **Add/Edit Items:** Update [frontend/src/data/inventory.json](frontend/src/data/inventory.json)
+- **Pricing:** Set per-day rental prices for each item
+- **Descriptions:** Add capacity and feature details
+
+### Delivery Zone Configuration
+- **Free Zone:** Edit [frontend/src/data/free-zones.json](frontend/src/data/free-zones.json)
+- **$20 Zone:** Edit [frontend/src/data/20-dollar-zones.json](frontend/src/data/20-dollar-zones.json)
+- **$40 Zone:** Edit [frontend/src/data/40-dollar-zones.json](frontend/src/data/40-dollar-zones.json)
+- Format: GeoJSON with Polygon/MultiPolygon geometries
 
 ## 🌐 Deployment Options
 
@@ -101,28 +130,27 @@ rosendo_party_rentals_website/
 
 ## 🔄 Development Roadmap
 
-### Phase 1: Static Website (Current)
-- [x] Responsive frontend with Next.js
-- [x] Inventory showcase
-- [x] Contact integration
-- [x] Business information pages
+### Phase 1: Display Website (✅ Complete)
+- [x] Responsive frontend with Next.js and TypeScript
+- [x] Tables & chairs inventory display
+- [x] Interactive delivery zone map with GeoJSON polygons
+- [x] Service areas covering 10 cities in Rio Grande Valley
+- [x] Multiple contact options (phone, SMS, WhatsApp, email)
+- [x] Rental information and FAQ pages
+- [x] Party-themed design with gradients and animations
+- [x] JSON-based data management (no backend needed)
 
-### Phase 2: Backend Integration (Planned)
-- [ ] **Database Setup** - Move from JSON to proper database (Supabase/Firebase)
-- [ ] **Admin Dashboard** - Manage inventory, pricing, and availability
-- [ ] **API Development** - Backend services for data management
+### Phase 2: Online Booking (Planned)
+- [ ] **Platform Selection** - Choose between Stripe or Shopify integration
+- [ ] **Payment Processing** - Accept online bookings and deposits
+- [ ] **Booking Interface** - Date selection and item reservation
+- [ ] **Email Confirmations** - Automated booking confirmations
 
-### Phase 3: Booking System (Future)
-- [ ] **Online Reservations** - Allow customers to check availability and book online
-- [ ] **Payment Processing** - Accept deposits and payments online
-- [ ] **Calendar Integration** - Real-time availability checking
-- [ ] **Customer Portal** - Order history and rental tracking
-
-### Phase 4: Advanced Features (Future)
-- [ ] **Automated Communications** - Email/SMS confirmations and reminders
-- [ ] **Inventory Tracking** - Real-time equipment status and maintenance
-- [ ] **Analytics Dashboard** - Business insights and reporting
-- [ ] **Mobile App** - Native iOS/Android applications
+### Phase 3: Enhanced Features (Future)
+- [ ] **Availability Calendar** - Real-time booking status
+- [ ] **Customer Portal** - Order tracking and history
+- [ ] **Admin Dashboard** - Manage inventory and bookings
+- [ ] **Automated Reminders** - SMS/Email notifications
 
 ## 📊 Performance & SEO
 
@@ -131,26 +159,51 @@ rosendo_party_rentals_website/
 - Mobile-first responsive design
 - Structured data for better search visibility
 
+## 📊 Current Website Pages
+
+1. **Home** (`/`) - Landing page with call-to-action buttons
+2. **Inventory** (`/inventory`) - Tables and chairs catalog with pricing
+3. **Service Areas** (`/service-areas`) - Interactive map with delivery zones and pricing
+4. **Rental Info** (`/rental-info`) - Policies, pricing details, and booking information
+5. **FAQ** (`/faq`) - Frequently asked questions with expandable answers
+6. **Contact** (`/contact`) - Multiple contact methods and quick quote form
+
 ## 📞 Business Contact
 
-**Rosendo Party Rentals**
-- Serving the Rio Grande Valley
-- Bounce houses, tables, chairs, and party essentials
-- Professional setup and delivery service
+**Mi Fiesta Rentals**
+- **Phone:** (956) 534-2589
+- **Email:** mifiestarentals@gmail.com
+- **Service Area:** Rio Grande Valley (10 cities)
+- **Products:** Tables and chairs for parties and events
+- **Delivery:** Zone-based pricing (Free, $20, or $40 based on location)
 
-## 🤝 Development Support
+## 🗺️ Service Areas
 
-For detailed technical documentation:
-- **Frontend:** See `frontend/README.md` for setup and customization
-- **Backend:** Documentation will be added as backend development begins
+**Cities Served:**
+- Edcouch-Elsa
+- Edinburg
+- McAllen
+- Pharr
+- Mission
+- Hidalgo
+- Sullivan City
+- Raymondville
+- Harlingen
+- San Benito
 
-## 📋 Development Notes
+**Delivery Zones:**
+- **Free Delivery:** Core service areas
+- **$20 Delivery:** Extended zones (9 regions)
+- **$40 Delivery:** Distant zones (2+ regions)
 
-This project is structured as a monorepo to support future expansion:
-- **Frontend** contains the current Next.js website
-- **Backend** directory reserved for future API and database services
-- Each component can be developed and deployed independently
+## 📋 Technical Notes
+
+- **No Backend Required:** All data stored in JSON files
+- **No Database:** Inventory and zones managed through static files
+- **Easy Updates:** Edit JSON files to modify content
+- **Future-Ready:** Structured for easy integration with Stripe/Shopify
+- **Git History:** Recent focus on delivery zone mapping system
 
 ---
 
-**Built to help Rosendo's business grow in the Rio Grande Valley community**
+**Built to showcase Mi Fiesta Rentals' services in the Rio Grande Valley community**
