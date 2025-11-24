@@ -19,6 +19,7 @@ This repository contains a display-only website for Mi Fiesta Rentals, showcasin
 - **FAQ Section** - 9 common questions and answers with expandable accordion interface
 - **Service Areas** - Covering 10 cities in the Rio Grande Valley with zone-based delivery pricing
 - **Party-Themed Design** - Gradient backgrounds, custom animations, and festive styling
+- **Modern Design System** - Professional iconography, refined typography hierarchy, and micro-interactions
 
 ## 🛠 Tech Stack
 
@@ -27,6 +28,7 @@ This repository contains a display-only website for Mi Fiesta Rentals, showcasin
 - **UI Library:** React 19.0.0
 - **Styling:** TailwindCSS 4.x
 - **Language:** TypeScript 5.0.0
+- **Icons:** Lucide React for professional iconography
 - **Maps:** Leaflet 1.9.4 + React-Leaflet 5.0.0 for interactive delivery zones
 - **Data Management:** JSON files for inventory and GeoJSON for delivery zones
 - **Fonts:** Google Fonts (Fredoka, Nunito, Inter)
@@ -139,6 +141,8 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 - [x] Rental information and FAQ pages
 - [x] Party-themed design with gradients and animations
 - [x] JSON-based data management (no backend needed)
+- [x] Professional design system with Lucide icons and micro-animations
+- [x] Enhanced UX/UI across all pages with skeleton loaders and smooth transitions
 
 ### Phase 2: Online Booking (Planned)
 - [ ] **Platform Selection** - Choose between Stripe or Shopify integration
@@ -196,13 +200,42 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 - **$20 Delivery:** Extended zones (9 regions)
 - **$40 Delivery:** Distant zones (2+ regions)
 
+## 🎨 Design System
+
+### Typography Hierarchy
+- **Headings:** `font-extrabold` with `tracking-tight` for impactful titles
+- **Subheadings:** `font-bold` for section headers and labels
+- **Body Text:** `font-light` for comfortable readability
+- **Price Display:** Large bold numbers with baseline-aligned units
+
+### Component Styling
+- **Cards:** `rounded-2xl` with subtle shadows and hover effects
+- **Padding:** `p-8 lg:p-10` for consistent spacing
+- **Borders:** `border border-gray-100` for subtle separation
+- **Shadows:** `shadow-sm` to `hover:shadow-lg` for depth
+
+### Animations
+- **Page Entry:** `fadeInUp` keyframe with staggered delays
+- **Hover Effects:** Scale transforms, color transitions, and Y-axis translations
+- **Loading States:** Skeleton loaders with pulse animations (inventory page)
+
+### Interactive Elements
+- **Group Hover Patterns:** Coordinated animations on parent hover
+- **Micro-Interactions:** Icon scales, rotations, and translations
+- **Form Focus States:** Ring effects with brand colors
+
+### Icon System
+- **Library:** Lucide React for consistent, professional iconography
+- **Usage:** Semantic icons throughout (Phone, Mail, Package, MapPin, etc.)
+- **Styling:** Coordinated with brand colors and hover states
+
 ## 📋 Technical Notes
 
 - **No Backend Required:** All data stored in JSON files
 - **No Database:** Inventory and zones managed through static files
 - **Easy Updates:** Edit JSON files to modify content
 - **Future-Ready:** Structured for easy integration with Stripe/Shopify
-- **Git History:** Recent focus on delivery zone mapping system
+- **Git History:** Recent focus on delivery zone mapping system and UX/UI enhancements
 
 ---
 
