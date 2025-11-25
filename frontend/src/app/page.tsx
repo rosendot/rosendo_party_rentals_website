@@ -2,14 +2,115 @@
 
 import Link from 'next/link'
 import { PartyPopper, Package, MapPin, HelpCircle, Mail } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false)
+  const cardsRef = useRef<(HTMLAnchorElement | null)[]>([])
+  const heroRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const gradientTextRef = useRef<HTMLSpanElement>(null)
+  const subtitleRef = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
-    setMounted(true)
+    const title = titleRef.current
+    const gradientText = gradientTextRef.current
+    const subtitle = subtitleRef.current
+
+    // GSAP Timeline for staggered entrance
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+    // Animate title
+    tl.from(title, {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'back.out(1.7)',
+    })
+    // Animate gradient text with bounce
+    .from(gradientText, {
+      scale: 0,
+      opacity: 0,
+      rotation: -180,
+      duration: 1,
+      ease: 'elastic.out(1, 0.6)',
+    }, '-=0.3')
+    // Animate subtitle
+    .from(subtitle, {
+      y: 20,
+      opacity: 0,
+      duration: 0.6,
+    }, '-=0.5')
+    // Animate cards
+    .from(cardsRef.current, {
+      y: 60,
+      opacity: 0,
+      scale: 0.8,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'back.out(1.4)',
+    }, '-=0.4')
+    // Animate CTA button
+    .from(ctaRef.current, {
+      y: 30,
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.5,
+    }, '-=0.3')
+
+    // Continuous floating animation for gradient text
+    gsap.to(gradientText, {
+      y: -10,
+      duration: 2,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+    })
+
+    // Subtle shimmer effect on gradient text
+    gsap.to(gradientText, {
+      backgroundPosition: '200% center',
+      duration: 3,
+      ease: 'none',
+      repeat: -1,
+    })
   }, [])
+
+  const handleCardTilt = (e: React.MouseEvent<HTMLAnchorElement>, index: number) => {
+    const card = cardsRef.current[index]
+    if (!card) return
+
+    const rect = card.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+
+    const rotateX = ((y - centerY) / centerY) * -10
+    const rotateY = ((x - centerX) / centerX) * 10
+
+    gsap.to(card, {
+      rotateX,
+      rotateY,
+      transformPerspective: 1000,
+      duration: 0.3,
+      ease: 'power2.out',
+    })
+  }
+
+  const handleCardReset = (index: number) => {
+    const card = cardsRef.current[index]
+    if (!card) return
+
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+    })
+  }
 
   return (
     <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 min-h-[calc(100vh-4rem)] flex items-center">
@@ -17,39 +118,51 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Title */}
           <div
+            ref={heroRef}
             className="mb-12"
-            style={{
-              animation: mounted ? 'fadeInUp 0.6s ease-out both' : 'none'
-            }}
           >
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
+            <h1
+              ref={titleRef}
+              className="text-6xl md:text-7xl lg:text-8xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight"
+              style={{ perspective: '1000px' }}
+            >
               Your Perfect Party <br />
-              <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+              <span
+                ref={gradientTextRef}
+                className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent inline-block"
+                style={{
+                  backgroundSize: '200% auto',
+                }}
+              >
                 Awaits!
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed font-light max-w-2xl mx-auto">
+            <p
+              ref={subtitleRef}
+              className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed font-light max-w-2xl mx-auto"
+            >
               Professional table and chair rentals for birthday parties throughout the Rio Grande Valley.
             </p>
           </div>
 
           {/* Navigation Cards */}
-          <div
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-12"
-            style={{
-              animation: mounted ? 'fadeInUp 0.6s ease-out 0.2s both' : 'none'
-            }}
-          >
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
             <Link
               href="/inventory"
-              className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+              ref={(el) => { cardsRef.current[0] = el }}
+              className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 card-tilt"
+              onMouseMove={(e) => handleCardTilt(e, 0)}
+              onMouseLeave={() => handleCardReset(0)}
             >
               <Package className="w-10 h-10 text-purple-600 mx-auto mb-3 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
               <span className="block font-bold text-gray-900 text-lg tracking-tight">Inventory</span>
             </Link>
             <Link
               href="/rental-info"
-              className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+              ref={(el) => { cardsRef.current[1] = el }}
+              className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 card-tilt"
+              onMouseMove={(e) => handleCardTilt(e, 1)}
+              onMouseLeave={() => handleCardReset(1)}
             >
               <svg className="w-10 h-10 text-purple-600 mx-auto mb-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -58,21 +171,30 @@ export default function Home() {
             </Link>
             <Link
               href="/service-areas"
-              className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+              ref={(el) => { cardsRef.current[2] = el }}
+              className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 card-tilt"
+              onMouseMove={(e) => handleCardTilt(e, 2)}
+              onMouseLeave={() => handleCardReset(2)}
             >
               <MapPin className="w-10 h-10 text-purple-600 mx-auto mb-3 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
               <span className="block font-bold text-gray-900 text-lg tracking-tight">Service Areas</span>
             </Link>
             <Link
               href="/faq"
-              className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+              ref={(el) => { cardsRef.current[3] = el }}
+              className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 card-tilt"
+              onMouseMove={(e) => handleCardTilt(e, 3)}
+              onMouseLeave={() => handleCardReset(3)}
             >
               <HelpCircle className="w-10 h-10 text-purple-600 mx-auto mb-3 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
               <span className="block font-bold text-gray-900 text-lg tracking-tight">FAQ</span>
             </Link>
             <Link
               href="/contact"
-              className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 col-span-2 md:col-span-1"
+              ref={(el) => { cardsRef.current[4] = el }}
+              className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 col-span-2 md:col-span-1 card-tilt"
+              onMouseMove={(e) => handleCardTilt(e, 4)}
+              onMouseLeave={() => handleCardReset(4)}
             >
               <Mail className="w-10 h-10 text-purple-600 mx-auto mb-3 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
               <span className="block font-bold text-gray-900 text-lg tracking-tight">Contact</span>
@@ -80,11 +202,7 @@ export default function Home() {
           </div>
 
           {/* CTA Button */}
-          <div
-            style={{
-              animation: mounted ? 'fadeInUp 0.6s ease-out 0.4s both' : 'none'
-            }}
-          >
+          <div ref={ctaRef}>
             <Link
               href="/contact"
               className="group inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-5 px-10 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 text-lg"
@@ -96,16 +214,10 @@ export default function Home() {
         </div>
       </section>
 
-      <style jsx global>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+      <style jsx>{`
+        .card-tilt {
+          transform-style: preserve-3d;
+          will-change: transform;
         }
       `}</style>
     </div>
