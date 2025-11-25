@@ -2,13 +2,129 @@
 
 import { businessConfig } from '@/lib/config'
 import { Phone, MessageSquare, Mail, Clock, Send, Sparkles } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 
 export default function Contact() {
-    const [mounted, setMounted] = useState(false)
+    const contactCardRef = useRef<HTMLDivElement>(null)
+    const formCardRef = useRef<HTMLDivElement>(null)
+    const contactHeaderRef = useRef<HTMLDivElement>(null)
+    const formHeaderRef = useRef<HTMLDivElement>(null)
+    const contactInfoBoxRef = useRef<HTMLDivElement>(null)
+    const contactButtonsRef = useRef<(HTMLAnchorElement | null)[]>([])
+    const formFieldsRef = useRef<(HTMLDivElement | null)[]>([])
+    const noteBoxRef = useRef<HTMLDivElement>(null)
+    const submitButtonRef = useRef<HTMLButtonElement>(null)
+    const iconsRef = useRef<(SVGSVGElement | null)[]>([])
 
     useEffect(() => {
-        setMounted(true)
+        // Clear any previous animations
+        gsap.set([contactCardRef.current, formCardRef.current, contactButtonsRef.current, formFieldsRef.current], { clearProps: 'all' })
+
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+        // Animate contact card
+        tl.fromTo(contactCardRef.current,
+            { x: -60, opacity: 0, scale: 0.95 },
+            { x: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }
+        )
+        // Animate contact header
+        .fromTo(contactHeaderRef.current,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.6 },
+            '-=0.4'
+        )
+        // Animate contact info box with bounce
+        .fromTo(contactInfoBoxRef.current,
+            { scale: 0.9, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.7)' },
+            '-=0.3'
+        )
+        // Stagger contact method buttons
+        .fromTo(contactButtonsRef.current,
+            { y: 30, opacity: 0, scale: 0.9 },
+            {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: 0.5,
+                stagger: 0.08,
+                ease: 'back.out(1.4)'
+            },
+            '-=0.3'
+        )
+        // Animate form card
+        .fromTo(formCardRef.current,
+            { x: 60, opacity: 0, scale: 0.95 },
+            { x: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' },
+            '-=0.6'
+        )
+        // Animate form header
+        .fromTo(formHeaderRef.current,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.6 },
+            '-=0.4'
+        )
+        // Stagger form fields
+        .fromTo(formFieldsRef.current,
+            { x: 20, opacity: 0 },
+            {
+                x: 0,
+                opacity: 1,
+                duration: 0.4,
+                stagger: 0.05,
+                ease: 'power2.out'
+            },
+            '-=0.3'
+        )
+        // Animate note box
+        .fromTo(noteBoxRef.current,
+            { scale: 0.95, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.4)' },
+            '-=0.2'
+        )
+        // Animate submit button
+        .fromTo(submitButtonRef.current,
+            { y: 20, opacity: 0, scale: 0.95 },
+            { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' },
+            '-=0.3'
+        )
+
+        // Floating animations for contact icons
+        iconsRef.current.forEach((icon, index) => {
+            if (icon) {
+                gsap.to(icon, {
+                    y: -5,
+                    duration: 1.5 + (index * 0.2),
+                    ease: 'sine.inOut',
+                    repeat: -1,
+                    yoyo: true,
+                    delay: index * 0.15
+                })
+            }
+        })
+
+        // Gentle pulse for info box
+        if (contactInfoBoxRef.current) {
+            gsap.to(contactInfoBoxRef.current, {
+                scale: 1.02,
+                duration: 2.5,
+                ease: 'sine.inOut',
+                repeat: -1,
+                yoyo: true
+            })
+        }
+
+        // Gentle pulse for note box
+        if (noteBoxRef.current) {
+            gsap.to(noteBoxRef.current, {
+                scale: 1.01,
+                duration: 2,
+                ease: 'sine.inOut',
+                repeat: -1,
+                yoyo: true
+            })
+        }
     }, [])
 
     return (
@@ -17,13 +133,11 @@ export default function Contact() {
                 <div className="grid lg:grid-cols-2 gap-8 xl:gap-12">
                     {/* Quick Contact Card */}
                     <div
-                        className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden"
-                        style={{
-                            animation: mounted ? 'fadeInUp 0.6s ease-out both' : 'none'
-                        }}
+                        ref={contactCardRef}
+                        className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden"
                     >
                         <div className="p-8 lg:p-10">
-                            <div className="text-center mb-8">
+                            <div ref={contactHeaderRef} className="text-center mb-8">
                                 <h2 className="text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
                                     Get In Touch
                                 </h2>
@@ -33,7 +147,7 @@ export default function Contact() {
                             </div>
 
                             {/* Contact Info Display */}
-                            <div className="text-center mb-8 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                            <div ref={contactInfoBoxRef} className="text-center mb-8 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-100">
                                 <p className="text-sm text-gray-600 mb-2 font-medium">Call or Text Us</p>
                                 <a
                                     href={`tel:${businessConfig.phone}`}
@@ -54,30 +168,44 @@ export default function Contact() {
                             <div className="grid grid-cols-2 gap-4 mb-8">
                                 {/* Call Button */}
                                 <a
+                                    ref={(el) => { contactButtonsRef.current[0] = el }}
                                     href={`tel:${businessConfig.phone}`}
                                     className="group bg-gradient-to-br from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 text-center"
                                 >
-                                    <Phone className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+                                    <Phone
+                                        ref={(el) => { iconsRef.current[0] = el }}
+                                        className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform"
+                                    />
                                     <div className="text-sm">Call Now</div>
                                 </a>
 
                                 {/* Text/SMS Button */}
                                 <a
+                                    ref={(el) => { contactButtonsRef.current[1] = el }}
                                     href={`sms:${businessConfig.phone}?&body=Hi! I need a quote for: DATE: _____ CITY: _____ ITEMS: _____`}
                                     className="group bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 text-center"
                                 >
-                                    <MessageSquare className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+                                    <MessageSquare
+                                        ref={(el) => { iconsRef.current[1] = el }}
+                                        className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform"
+                                    />
                                     <div className="text-sm">Text Message</div>
                                 </a>
 
                                 {/* WhatsApp Button */}
                                 <a
+                                    ref={(el) => { contactButtonsRef.current[2] = el }}
                                     href={businessConfig.social.whatsapp}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="group bg-gradient-to-br from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold py-5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 text-center"
                                 >
-                                    <svg className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                                    <svg
+                                        ref={(el) => { iconsRef.current[2] = el }}
+                                        className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                    >
                                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                                     </svg>
                                     <div className="text-sm">WhatsApp</div>
@@ -85,10 +213,14 @@ export default function Contact() {
 
                                 {/* Email Button */}
                                 <a
+                                    ref={(el) => { contactButtonsRef.current[3] = el }}
                                     href={`mailto:${businessConfig.email}?subject=Party Rental Quote Request&body=Hi Mi Fiesta Rentals!%0A%0AEvent Date: ______%0AEvent Time: ______%0ALocation/City: ______%0ANumber of guests: ______%0A%0AItems needed:%0A- ______%0A- ______%0A%0AAdditional details:%0A______%0A%0AThank you!`}
                                     className="group bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 text-center"
                                 >
-                                    <Mail className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+                                    <Mail
+                                        ref={(el) => { iconsRef.current[3] = el }}
+                                        className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform"
+                                    />
                                     <div className="text-sm">Email Us</div>
                                 </a>
                             </div>
@@ -121,13 +253,11 @@ export default function Contact() {
 
                     {/* Quick Quote Form */}
                     <div
-                        className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden"
-                        style={{
-                            animation: mounted ? 'fadeInUp 0.6s ease-out 0.1s both' : 'none'
-                        }}
+                        ref={formCardRef}
+                        className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden"
                     >
                         <div className="p-8 lg:p-10">
-                            <div className="text-center mb-8">
+                            <div ref={formHeaderRef} className="text-center mb-8">
                                 <h2 className="text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
                                     Quick Quote Form
                                 </h2>
@@ -137,7 +267,7 @@ export default function Contact() {
                             </div>
 
                             <form className="space-y-5">
-                                <div>
+                                <div ref={(el) => { formFieldsRef.current[0] = el }}>
                                     <label className="block text-sm font-bold text-gray-900 mb-2 tracking-tight">
                                         Name *
                                     </label>
@@ -149,7 +279,7 @@ export default function Contact() {
                                     />
                                 </div>
 
-                                <div>
+                                <div ref={(el) => { formFieldsRef.current[1] = el }}>
                                     <label className="block text-sm font-bold text-gray-900 mb-2 tracking-tight">
                                         Phone *
                                     </label>
@@ -161,7 +291,7 @@ export default function Contact() {
                                     />
                                 </div>
 
-                                <div>
+                                <div ref={(el) => { formFieldsRef.current[2] = el }}>
                                     <label className="block text-sm font-bold text-gray-900 mb-2 tracking-tight">
                                         Event Date *
                                     </label>
@@ -172,7 +302,7 @@ export default function Contact() {
                                     />
                                 </div>
 
-                                <div>
+                                <div ref={(el) => { formFieldsRef.current[3] = el }}>
                                     <label className="block text-sm font-bold text-gray-900 mb-2 tracking-tight">
                                         City *
                                     </label>
@@ -185,7 +315,7 @@ export default function Contact() {
                                     </select>
                                 </div>
 
-                                <div>
+                                <div ref={(el) => { formFieldsRef.current[4] = el }}>
                                     <label className="block text-sm font-bold text-gray-900 mb-3 tracking-tight">
                                         Items Needed
                                     </label>
@@ -201,7 +331,7 @@ export default function Contact() {
                                     </div>
                                 </div>
 
-                                <div>
+                                <div ref={(el) => { formFieldsRef.current[5] = el }}>
                                     <label className="block text-sm font-bold text-gray-900 mb-2 tracking-tight">
                                         Additional Details
                                     </label>
@@ -211,7 +341,7 @@ export default function Contact() {
                                     ></textarea>
                                 </div>
 
-                                <div className="bg-gradient-to-r from-amber-50 to-yellow-50 p-5 rounded-xl border border-amber-200">
+                                <div ref={noteBoxRef} className="bg-gradient-to-r from-amber-50 to-yellow-50 p-5 rounded-xl border border-amber-200">
                                     <div className="flex gap-3">
                                         <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                                         <p className="text-sm text-amber-900 leading-relaxed">
@@ -222,6 +352,7 @@ export default function Contact() {
                                 </div>
 
                                 <button
+                                    ref={submitButtonRef}
                                     type="submit"
                                     className="group w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2"
                                 >
@@ -233,19 +364,6 @@ export default function Contact() {
                     </div>
                 </div>
             </div>
-
-            <style jsx global>{`
-                @keyframes fadeInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-            `}</style>
         </div>
     )
 }

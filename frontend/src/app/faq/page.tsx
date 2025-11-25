@@ -1,7 +1,8 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { businessConfig } from '@/lib/config'
-import { ChevronDown, Phone, MessageSquare, Lightbulb, PartyPopper, Zap, HelpCircle } from 'lucide-react'
+import { ChevronDown, Phone, MessageSquare, HelpCircle } from 'lucide-react'
+import { gsap } from 'gsap'
 
 const faqData = [
     {
@@ -44,18 +45,84 @@ const faqData = [
 
 export default function FAQ() {
     const [openItems, setOpenItems] = useState<number[]>([])
-    const [mounted, setMounted] = useState(false)
+    const headerRef = useRef<HTMLDivElement>(null)
+    const faqItemsRef = useRef<(HTMLDivElement | null)[]>([])
+    const ctaBoxRef = useRef<HTMLDivElement>(null)
+    const ctaIconRef = useRef<SVGSVGElement>(null)
+    const answerRefs = useRef<(HTMLDivElement | null)[]>([])
 
     useEffect(() => {
-        setMounted(true)
+        // Clear any previous animations
+        gsap.set([headerRef.current, faqItemsRef.current, ctaBoxRef.current], { clearProps: 'all' })
+
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+        // Animate header
+        tl.fromTo(headerRef.current,
+            { y: 50, opacity: 0, scale: 0.95 },
+            { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }
+        )
+        // Staggered FAQ items entrance
+        .fromTo(faqItemsRef.current,
+            { y: 40, opacity: 0, scale: 0.98 },
+            {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: 0.5,
+                stagger: 0.08,
+                ease: 'back.out(1.2)'
+            },
+            '-=0.4'
+        )
+        // CTA box with special effect
+        .fromTo(ctaBoxRef.current,
+            { y: 60, opacity: 0, scale: 0.9, rotateX: -20 },
+            { y: 0, opacity: 1, scale: 1, rotateX: 0, duration: 0.8, ease: 'back.out(1.7)' },
+            '-=0.3'
+        )
+
+        // Floating animation for CTA icon
+        if (ctaIconRef.current) {
+            gsap.to(ctaIconRef.current, {
+                y: -8,
+                rotation: 5,
+                duration: 2,
+                ease: 'sine.inOut',
+                repeat: -1,
+                yoyo: true
+            })
+        }
+
+        // Gentle pulse for CTA box
+        if (ctaBoxRef.current) {
+            gsap.to(ctaBoxRef.current, {
+                scale: 1.01,
+                duration: 3,
+                ease: 'sine.inOut',
+                repeat: -1,
+                yoyo: true
+            })
+        }
     }, [])
 
     const toggleItem = (index: number) => {
+        const isOpening = !openItems.includes(index)
+
         setOpenItems(prev =>
             prev.includes(index)
                 ? prev.filter(i => i !== index)
                 : [...prev, index]
         )
+
+        // Animate accordion opening/closing
+        const answer = answerRefs.current[index]
+        if (answer && isOpening) {
+            gsap.fromTo(answer,
+                { opacity: 0, y: -10 },
+                { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 0.1 }
+            )
+        }
     }
 
     return (
@@ -63,10 +130,8 @@ export default function FAQ() {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
                 {/* Page Header */}
                 <div
+                    ref={headerRef}
                     className="text-center mb-12"
-                    style={{
-                        animation: mounted ? 'fadeInUp 0.6s ease-out both' : 'none'
-                    }}
                 >
                     <h1 className="text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
                         Frequently Asked Questions
@@ -81,10 +146,8 @@ export default function FAQ() {
                     {faqData.map((item, index) => (
                         <div
                             key={index}
-                            className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-md"
-                            style={{
-                                animation: mounted ? `fadeInUp 0.5s ease-out ${0.1 + index * 0.05}s both` : 'none'
-                            }}
+                            ref={(el) => { faqItemsRef.current[index] = el }}
+                            className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-shadow duration-300 hover:shadow-md"
                         >
                             <button
                                 onClick={() => toggleItem(index)}
@@ -103,7 +166,10 @@ export default function FAQ() {
                             <div
                                 className={`overflow-hidden transition-all duration-300 ${openItems.includes(index) ? 'max-h-96' : 'max-h-0'}`}
                             >
-                                <div className="px-6 lg:px-8 pb-6 border-t border-gray-100">
+                                <div
+                                    ref={(el) => { answerRefs.current[index] = el }}
+                                    className="px-6 lg:px-8 pb-6 border-t border-gray-100"
+                                >
                                     <p className="text-base text-gray-600 leading-relaxed pt-6 font-light">
                                         {item.answer}
                                     </p>
@@ -115,14 +181,16 @@ export default function FAQ() {
 
                 {/* Still Have Questions */}
                 <div
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl shadow-lg overflow-hidden mb-12"
-                    style={{
-                        animation: mounted ? `fadeInUp 0.6s ease-out ${0.6 + faqData.length * 0.05}s both` : 'none'
-                    }}
+                    ref={ctaBoxRef}
+                    className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl shadow-lg overflow-hidden cta-box"
                 >
                     <div className="p-8 lg:p-10 text-center">
                         <div className="inline-flex p-4 bg-white bg-opacity-20 rounded-2xl mb-4">
-                            <HelpCircle className="w-12 h-12 text-white" strokeWidth={1.5} />
+                            <HelpCircle
+                                ref={ctaIconRef}
+                                className="w-12 h-12 text-white"
+                                strokeWidth={1.5}
+                            />
                         </div>
                         <h3 className="text-4xl font-extrabold mb-4 tracking-tight">
                             Still Have Questions?
@@ -159,66 +227,11 @@ export default function FAQ() {
                         </div>
                     </div>
                 </div>
-
-                {/* Quick Tips */}
-                <div className="grid md:grid-cols-3 gap-6">
-                    <div
-                        className="group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 lg:p-8 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300"
-                        style={{
-                            animation: mounted ? `fadeInUp 0.5s ease-out ${0.7 + faqData.length * 0.05}s both` : 'none'
-                        }}
-                    >
-                        <div className="inline-flex p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <Lightbulb className="w-8 h-8 text-blue-600" strokeWidth={1.5} />
-                        </div>
-                        <h4 className="text-xl font-bold text-gray-900 mb-3 tracking-tight">Pro Tip</h4>
-                        <p className="text-base text-gray-600 font-light leading-relaxed">
-                            Book early for popular weekend dates, especially during party season (spring/summer)!
-                        </p>
-                    </div>
-
-                    <div
-                        className="group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 lg:p-8 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300"
-                        style={{
-                            animation: mounted ? `fadeInUp 0.5s ease-out ${0.75 + faqData.length * 0.05}s both` : 'none'
-                        }}
-                    >
-                        <div className="inline-flex p-4 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <PartyPopper className="w-8 h-8 text-emerald-600" strokeWidth={1.5} />
-                        </div>
-                        <h4 className="text-xl font-bold text-gray-900 mb-3 tracking-tight">Party Planning</h4>
-                        <p className="text-base text-gray-600 font-light leading-relaxed">
-                            Need both tables and chairs? We've got you covered! Mix and match to fit your event perfectly.
-                        </p>
-                    </div>
-
-                    <div
-                        className="group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 lg:p-8 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300"
-                        style={{
-                            animation: mounted ? `fadeInUp 0.5s ease-out ${0.8 + faqData.length * 0.05}s both` : 'none'
-                        }}
-                    >
-                        <div className="inline-flex p-4 bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <Zap className="w-8 h-8 text-amber-600" strokeWidth={1.5} />
-                        </div>
-                        <h4 className="text-xl font-bold text-gray-900 mb-3 tracking-tight">Last Minute?</h4>
-                        <p className="text-base text-gray-600 font-light leading-relaxed">
-                            Call us! We often have same-day availability and love helping with urgent celebrations.
-                        </p>
-                    </div>
-                </div>
             </div>
 
-            <style jsx global>{`
-                @keyframes fadeInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
+            <style jsx>{`
+                .cta-box {
+                    transform-style: preserve-3d;
                 }
             `}</style>
         </div>
