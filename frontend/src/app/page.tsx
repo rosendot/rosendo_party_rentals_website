@@ -18,46 +18,41 @@ export default function Home() {
     const gradientText = gradientTextRef.current
     const subtitle = subtitleRef.current
 
+    // Set initial state to ensure visibility
+    gsap.set([title, gradientText, subtitle, cardsRef.current, ctaRef.current], { clearProps: 'all' })
+
     // GSAP Timeline for staggered entrance
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
     // Animate title
-    tl.from(title, {
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'back.out(1.7)',
-    })
+    tl.fromTo(title,
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: 'back.out(1.7)' }
+    )
     // Animate gradient text with bounce
-    .from(gradientText, {
-      scale: 0,
-      opacity: 0,
-      rotation: -180,
-      duration: 1,
-      ease: 'elastic.out(1, 0.6)',
-    }, '-=0.3')
+    .fromTo(gradientText,
+      { scale: 0, opacity: 0, rotation: -180 },
+      { scale: 1, opacity: 1, rotation: 0, duration: 1, ease: 'elastic.out(1, 0.6)' },
+      '-=0.3'
+    )
     // Animate subtitle
-    .from(subtitle, {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-    }, '-=0.5')
+    .fromTo(subtitle,
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6 },
+      '-=0.5'
+    )
     // Animate cards
-    .from(cardsRef.current, {
-      y: 60,
-      opacity: 0,
-      scale: 0.8,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: 'back.out(1.4)',
-    }, '-=0.4')
+    .fromTo(cardsRef.current,
+      { y: 60, opacity: 0, scale: 0.8 },
+      { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.1, ease: 'back.out(1.4)' },
+      '-=0.4'
+    )
     // Animate CTA button
-    .from(ctaRef.current, {
-      y: 30,
-      opacity: 0,
-      scale: 0.95,
-      duration: 0.5,
-    }, '-=0.3')
+    .fromTo(ctaRef.current,
+      { y: 30, opacity: 0, scale: 0.95 },
+      { y: 0, opacity: 1, scale: 1, duration: 0.5 },
+      '-=0.3'
+    )
 
     // Continuous floating animation for gradient text
     gsap.to(gradientText, {
