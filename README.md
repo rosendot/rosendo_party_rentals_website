@@ -30,6 +30,8 @@ This repository contains a display-only website for Mi Fiesta Rentals, showcasin
 - **UI Library:** React 19.0.0
 - **Styling:** TailwindCSS 4.x
 - **Language:** TypeScript 5.0.0
+- **Animation:** GSAP 3.x for professional animations and interactions
+- **Effects:** Canvas-Confetti for celebratory particle effects
 - **Icons:** Lucide React for professional iconography
 - **Maps:** Leaflet 1.9.4 + React-Leaflet 5.0.0 for interactive delivery zones
 - **Data Management:** JSON files for inventory and GeoJSON for delivery zones
@@ -147,6 +149,9 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 - [x] Enhanced UX/UI across all pages with skeleton loaders and smooth transitions
 - [x] Sticky header with animated navigation and mobile menu with staggered animations
 - [x] Enhanced footer with professional icons and comprehensive navigation
+- [x] GSAP-powered animations throughout the site with 3D effects and interactive elements
+- [x] Advanced home page animations with floating gradient text and card tilt effects
+- [x] Inventory page animations with staggered grid entrance, floating icons, and price counters
 
 ### Phase 2: Online Booking (Planned)
 - [ ] **Platform Selection** - Choose between Stripe or Shopify integration
@@ -219,14 +224,23 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 - **Shadows:** `shadow-sm` to `hover:shadow-lg` for depth
 
 ### Animations
-- **Page Entry:** `fadeInUp` keyframe with staggered delays
-- **Hover Effects:** Scale transforms, color transitions, and Y-axis translations
+- **GSAP Timeline Sequences:** Professional entrance animations with coordinated timing
+- **3D Card Tilt:** Mouse-following 3D rotation effects on hover for interactive cards
+- **Staggered Grid Entrance:** Product cards appear in wave patterns with 3D rotation
+- **Floating Elements:** Continuous gentle floating animations for icons and gradient text
+- **Counter Animations:** Prices count up from $0 for engaging effect
+- **Slide & Reveal:** Section headers slide in from left with bounce effects
+- **Elastic Bounces:** Springy entrance animations for hero elements
+- **Shimmer Effects:** Gradient text with continuous shimmer animation
 - **Loading States:** Skeleton loaders with pulse animations (inventory page)
 
 ### Interactive Elements
 - **Group Hover Patterns:** Coordinated animations on parent hover
-- **Micro-Interactions:** Icon scales, rotations, and translations
+- **3D Card Interactions:** Cards tilt in 3D space following mouse movement
+- **Magnetic Effects:** Elements respond to cursor proximity with smooth GSAP animations
+- **Micro-Interactions:** Icon scales, rotations, and translations with elastic easing
 - **Form Focus States:** Ring effects with brand colors
+- **Dynamic Pricing:** Animated counters that count up to final price values
 
 ### Icon System
 - **Library:** Lucide React for consistent, professional iconography
@@ -246,7 +260,10 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 - **No Database:** Inventory and zones managed through static files
 - **Easy Updates:** Edit JSON files to modify content
 - **Future-Ready:** Structured for easy integration with Stripe/Shopify
-- **Git History:** Recent focus on delivery zone mapping system and UX/UI enhancements
+- **GSAP Integration:** Professional animation library with `fromTo()` methods and proper cleanup
+- **Performance Optimized:** Animations use `will-change` and `transform-style: preserve-3d` for smooth 60fps rendering
+- **Navigation Safety:** Proper animation state management prevents white screen issues when navigating between pages
+- **Git History:** Recent focus on GSAP animations, 3D interactions, and professional motion design
 
 ---
 
