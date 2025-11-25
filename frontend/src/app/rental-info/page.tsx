@@ -2,13 +2,104 @@
 
 import Link from 'next/link'
 import { DollarSign, Truck, FileText, Calendar, Clock, Package, Sparkles, CheckCircle, MapPin } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 
 export default function RentalInfo() {
-    const [mounted, setMounted] = useState(false)
+    const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+    const iconsRef = useRef<(SVGSVGElement | null)[]>([])
+    const pricesRef = useRef<(HTMLSpanElement | null)[]>([])
+    const listItemsRef = useRef<(HTMLLIElement | null)[]>([])
+    const highlightBoxRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        setMounted(true)
+        // Clear any previous animations
+        gsap.set([cardsRef.current, listItemsRef.current], { clearProps: 'all' })
+
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+        // Staggered card entrance with 3D rotation
+        tl.fromTo(cardsRef.current,
+            { y: 80, opacity: 0, scale: 0.95, rotateX: -15 },
+            {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                rotateX: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: 'back.out(1.4)'
+            }
+        )
+
+        // Animate list items with stagger
+        .fromTo(listItemsRef.current,
+            { x: -20, opacity: 0 },
+            {
+                x: 0,
+                opacity: 1,
+                duration: 0.5,
+                stagger: 0.05,
+                ease: 'power2.out'
+            },
+            '-=0.4'
+        )
+
+        // Highlight box special effect
+        if (highlightBoxRef.current) {
+            tl.fromTo(highlightBoxRef.current,
+                { scale: 0.9, opacity: 0 },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'back.out(1.7)'
+                },
+                '-=0.6'
+            )
+
+            // Continuous gentle pulse
+            gsap.to(highlightBoxRef.current, {
+                scale: 1.02,
+                duration: 2,
+                ease: 'sine.inOut',
+                repeat: -1,
+                yoyo: true
+            })
+        }
+
+        // Floating animations for header icons
+        iconsRef.current.forEach((icon, index) => {
+            if (icon) {
+                gsap.to(icon, {
+                    y: -6,
+                    duration: 2 + (index * 0.3),
+                    ease: 'sine.inOut',
+                    repeat: -1,
+                    yoyo: true,
+                    delay: index * 0.2
+                })
+            }
+        })
+
+        // Counter animation for prices
+        pricesRef.current.forEach((priceEl, index) => {
+            if (priceEl) {
+                const finalPrice = index === 0 ? 12 : 2
+                gsap.fromTo(priceEl,
+                    { textContent: 0 },
+                    {
+                        textContent: finalPrice,
+                        duration: 1.5,
+                        delay: 0.5,
+                        snap: { textContent: 1 },
+                        onUpdate: function() {
+                            priceEl.textContent = '$' + Math.round(parseFloat(priceEl.textContent || '0'))
+                        }
+                    }
+                )
+            }
+        })
     }, [])
 
     return (
@@ -18,15 +109,17 @@ export default function RentalInfo() {
                     {/* Pricing & Packages */}
                     <div className="space-y-8">
                         <div
-                            className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden"
-                            style={{
-                                animation: mounted ? 'fadeInUp 0.6s ease-out both' : 'none'
-                            }}
+                            ref={(el) => { cardsRef.current[0] = el }}
+                            className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden card-3d"
                         >
                             <div className="p-8 lg:p-10">
                                 <div className="flex items-center gap-3 mb-8">
                                     <div className="p-3 bg-emerald-50 rounded-xl">
-                                        <DollarSign className="w-8 h-8 text-emerald-600" strokeWidth={2} />
+                                        <DollarSign
+                                            ref={(el) => { iconsRef.current[0] = el }}
+                                            className="w-8 h-8 text-emerald-600"
+                                            strokeWidth={2}
+                                        />
                                     </div>
                                     <h2 className="text-4xl font-extrabold text-gray-900 tracking-tight">
                                         Pricing
@@ -39,7 +132,12 @@ export default function RentalInfo() {
                                         <div className="flex justify-between items-baseline">
                                             <span className="text-base text-gray-600 font-light">Round Tables 60"</span>
                                             <div className="flex items-baseline gap-1">
-                                                <span className="text-3xl font-bold text-emerald-600 tracking-tight">$12</span>
+                                                <span
+                                                    ref={(el) => { pricesRef.current[0] = el }}
+                                                    className="text-3xl font-bold text-emerald-600 tracking-tight"
+                                                >
+                                                    $12
+                                                </span>
                                                 <span className="text-sm text-gray-500 font-light">/day</span>
                                             </div>
                                         </div>
@@ -50,14 +148,22 @@ export default function RentalInfo() {
                                         <div className="flex justify-between items-baseline">
                                             <span className="text-base text-gray-600 font-light">Folding Chairs</span>
                                             <div className="flex items-baseline gap-1">
-                                                <span className="text-3xl font-bold text-emerald-600 tracking-tight">$2</span>
+                                                <span
+                                                    ref={(el) => { pricesRef.current[1] = el }}
+                                                    className="text-3xl font-bold text-emerald-600 tracking-tight"
+                                                >
+                                                    $2
+                                                </span>
                                                 <span className="text-sm text-gray-500 font-light">/day</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="mt-8 bg-gradient-to-r from-amber-50 to-yellow-50 p-5 rounded-xl border border-amber-200">
+                                <div
+                                    ref={highlightBoxRef}
+                                    className="mt-8 bg-gradient-to-r from-amber-50 to-yellow-50 p-5 rounded-xl border border-amber-200"
+                                >
                                     <div className="flex gap-3">
                                         <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                                         <div>
@@ -72,15 +178,17 @@ export default function RentalInfo() {
 
                         {/* Delivery Areas */}
                         <div
-                            className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden"
-                            style={{
-                                animation: mounted ? 'fadeInUp 0.6s ease-out 0.1s both' : 'none'
-                            }}
+                            ref={(el) => { cardsRef.current[1] = el }}
+                            className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden card-3d"
                         >
                             <div className="p-8 lg:p-10">
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className="p-3 bg-blue-50 rounded-xl">
-                                        <MapPin className="w-8 h-8 text-blue-600" strokeWidth={2} />
+                                        <MapPin
+                                            ref={(el) => { iconsRef.current[1] = el }}
+                                            className="w-8 h-8 text-blue-600"
+                                            strokeWidth={2}
+                                        />
                                     </div>
                                     <h2 className="text-4xl font-extrabold text-gray-900 tracking-tight">
                                         Delivery Areas
@@ -101,15 +209,17 @@ export default function RentalInfo() {
                     {/* Policies & Requirements */}
                     <div className="space-y-8">
                         <div
-                            className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden"
-                            style={{
-                                animation: mounted ? 'fadeInUp 0.6s ease-out 0.2s both' : 'none'
-                            }}
+                            ref={(el) => { cardsRef.current[2] = el }}
+                            className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden card-3d"
                         >
                             <div className="p-8 lg:p-10">
                                 <div className="flex items-center gap-3 mb-8">
                                     <div className="p-3 bg-purple-50 rounded-xl">
-                                        <FileText className="w-8 h-8 text-purple-600" strokeWidth={2} />
+                                        <FileText
+                                            ref={(el) => { iconsRef.current[2] = el }}
+                                            className="w-8 h-8 text-purple-600"
+                                            strokeWidth={2}
+                                        />
                                     </div>
                                     <h2 className="text-4xl font-extrabold text-gray-900 tracking-tight">
                                         Rental Policies
@@ -123,23 +233,23 @@ export default function RentalInfo() {
                                             <h3 className="text-xl font-bold text-gray-900 tracking-tight">Booking & Payment</h3>
                                         </div>
                                         <ul className="space-y-3">
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[0] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>No deposit needed to reserve your rental</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[1] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Full payment due at delivery</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[2] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Cash or digital payments accepted: Zelle, CashApp, PayPal</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[3] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Cancel 2+ days in advance at no charge</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[4] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Late cancellations: $20 fee</span>
                                             </li>
@@ -152,19 +262,19 @@ export default function RentalInfo() {
                                             <h3 className="text-xl font-bold text-gray-900 tracking-tight">Rental Times</h3>
                                         </div>
                                         <ul className="space-y-3">
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[5] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Priced per day with overnight use included</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[6] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Perfect for birthday parties and celebrations</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[7] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Delivery & setup between 12pm - 5pm</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[8] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Pickup window: 12pm - 5pm next day</span>
                                             </li>
@@ -176,15 +286,17 @@ export default function RentalInfo() {
 
                         {/* Setup & Delivery */}
                         <div
-                            className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden"
-                            style={{
-                                animation: mounted ? 'fadeInUp 0.6s ease-out 0.3s both' : 'none'
-                            }}
+                            ref={(el) => { cardsRef.current[3] = el }}
+                            className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden card-3d"
                         >
                             <div className="p-8 lg:p-10">
                                 <div className="flex items-center gap-3 mb-8">
                                     <div className="p-3 bg-orange-50 rounded-xl">
-                                        <Truck className="w-8 h-8 text-orange-600" strokeWidth={2} />
+                                        <Truck
+                                            ref={(el) => { iconsRef.current[3] = el }}
+                                            className="w-8 h-8 text-orange-600"
+                                            strokeWidth={2}
+                                        />
                                     </div>
                                     <h2 className="text-4xl font-extrabold text-gray-900 tracking-tight">
                                         Setup & Delivery
@@ -198,15 +310,15 @@ export default function RentalInfo() {
                                             <h3 className="text-xl font-bold text-gray-900 tracking-tight">Delivery & Setup</h3>
                                         </div>
                                         <ul className="space-y-3">
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[9] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>We deliver and set up everything for you</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[10] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>All items arrive sanitized and party-ready</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[11] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Setup at your preferred location on-site</span>
                                             </li>
@@ -219,15 +331,15 @@ export default function RentalInfo() {
                                             <h3 className="text-xl font-bold text-gray-900 tracking-tight">Teardown & Pickup</h3>
                                         </div>
                                         <ul className="space-y-3">
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[12] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>We take care of all breakdown and removal</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[13] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Just wipe down the tables and chairs after your event</span>
                                             </li>
-                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li ref={(el) => { listItemsRef.current[14] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Leave everything out - we'll pack it all up</span>
                                             </li>
@@ -240,16 +352,9 @@ export default function RentalInfo() {
                 </div>
             </div>
 
-            <style jsx global>{`
-                @keyframes fadeInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
+            <style jsx>{`
+                .card-3d {
+                    transform-style: preserve-3d;
                 }
             `}</style>
         </div>
