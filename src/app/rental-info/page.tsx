@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { DollarSign, Truck, FileText, Calendar, Clock, Package, Sparkles, CheckCircle, MapPin } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import inventoryData from '@/data/inventory.json'
 
 export default function RentalInfo() {
     const cardsRef = useRef<(HTMLDivElement | null)[]>([])
@@ -82,10 +83,11 @@ export default function RentalInfo() {
             }
         })
 
-        // Counter animation for prices
+        // Counter animation for prices (dynamically based on inventory count)
         pricesRef.current.forEach((priceEl, index) => {
             if (priceEl) {
-                const finalPrice = index === 0 ? 12 : 2
+                const priceText = priceEl.getAttribute('data-price')
+                const finalPrice = priceText ? parseInt(priceText) : 0
                 gsap.fromTo(priceEl,
                     { textContent: 0 },
                     {
@@ -127,35 +129,49 @@ export default function RentalInfo() {
                                 </div>
 
                                 <div className="space-y-6">
+                                    {/* Tables Section */}
                                     <div className="pb-6 border-b border-gray-100">
                                         <h3 className="text-xl font-bold text-gray-900 mb-4 tracking-tight">Tables</h3>
-                                        <div className="flex justify-between items-baseline">
-                                            <span className="text-base text-gray-600 font-light">Round Tables 60&quot;</span>
-                                            <div className="flex items-baseline gap-1">
-                                                <span
-                                                    ref={(el) => { pricesRef.current[0] = el }}
-                                                    className="text-3xl font-bold text-emerald-600 tracking-tight"
-                                                >
-                                                    $12
-                                                </span>
-                                                <span className="text-sm text-gray-500 font-light">/day</span>
-                                            </div>
+                                        <div className="space-y-3">
+                                            {inventoryData.tables.map((table, index) => (
+                                                <div key={table.id} className="flex justify-between items-baseline">
+                                                    <span className="text-base text-gray-600 font-light">
+                                                        {table.englishName} {table.size}
+                                                    </span>
+                                                    <div className="flex items-baseline gap-1">
+                                                        <span
+                                                            ref={(el) => { pricesRef.current[index] = el }}
+                                                            data-price={table.priceFrom}
+                                                            className="text-3xl font-bold text-emerald-600 tracking-tight"
+                                                        >
+                                                            ${table.priceFrom}
+                                                        </span>
+                                                        <span className="text-sm text-gray-500 font-light">/day</span>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
 
+                                    {/* Chairs Section */}
                                     <div className="pb-6">
                                         <h3 className="text-xl font-bold text-gray-900 mb-4 tracking-tight">Chairs</h3>
-                                        <div className="flex justify-between items-baseline">
-                                            <span className="text-base text-gray-600 font-light">Folding Chairs</span>
-                                            <div className="flex items-baseline gap-1">
-                                                <span
-                                                    ref={(el) => { pricesRef.current[1] = el }}
-                                                    className="text-3xl font-bold text-emerald-600 tracking-tight"
-                                                >
-                                                    $2
-                                                </span>
-                                                <span className="text-sm text-gray-500 font-light">/day</span>
-                                            </div>
+                                        <div className="space-y-3">
+                                            {inventoryData.chairs.map((chair, index) => (
+                                                <div key={chair.id} className="flex justify-between items-baseline">
+                                                    <span className="text-base text-gray-600 font-light">{chair.englishName}</span>
+                                                    <div className="flex items-baseline gap-1">
+                                                        <span
+                                                            ref={(el) => { pricesRef.current[inventoryData.tables.length + index] = el }}
+                                                            data-price={chair.priceFrom}
+                                                            className="text-3xl font-bold text-emerald-600 tracking-tight"
+                                                        >
+                                                            ${chair.priceFrom}
+                                                        </span>
+                                                        <span className="text-sm text-gray-500 font-light">/day</span>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>

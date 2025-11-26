@@ -1,14 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { PartyPopper, Package, MapPin, HelpCircle, Mail } from 'lucide-react'
+import { Package, MapPin, HelpCircle, Mail } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 
 export default function Home() {
   const cardsRef = useRef<(HTMLAnchorElement | null)[]>([])
   const heroRef = useRef<HTMLDivElement>(null)
-  const ctaRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const gradientTextRef = useRef<HTMLSpanElement>(null)
   const subtitleRef = useRef<HTMLParagraphElement>(null)
@@ -19,7 +18,7 @@ export default function Home() {
     const subtitle = subtitleRef.current
 
     // Set initial state to ensure visibility
-    gsap.set([title, gradientText, subtitle, cardsRef.current, ctaRef.current], { clearProps: 'all' })
+    gsap.set([title, gradientText, subtitle, cardsRef.current], { clearProps: 'all' })
 
     // GSAP Timeline for staggered entrance
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
@@ -46,12 +45,6 @@ export default function Home() {
       { y: 60, opacity: 0, scale: 0.8 },
       { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.1, ease: 'back.out(1.4)' },
       '-=0.4'
-    )
-    // Animate CTA button
-    .fromTo(ctaRef.current,
-      { y: 30, opacity: 0, scale: 0.95 },
-      { y: 0, opacity: 1, scale: 1, duration: 0.5 },
-      '-=0.3'
     )
 
     // Continuous floating animation for gradient text
@@ -193,17 +186,6 @@ export default function Home() {
             >
               <Mail className="w-10 h-10 text-purple-600 mx-auto mb-3 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
               <span className="block font-bold text-gray-900 text-lg tracking-tight">Contact</span>
-            </Link>
-          </div>
-
-          {/* CTA Button */}
-          <div ref={ctaRef}>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-5 px-10 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 text-lg"
-            >
-              <PartyPopper className="w-6 h-6 group-hover:rotate-12 transition-transform" strokeWidth={2} />
-              Get Started Today
             </Link>
           </div>
         </div>
