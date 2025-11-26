@@ -20,6 +20,16 @@
             "priceFrom": 12,
             "image": "/images/round-table.jpg",
             "description": "Perfect for birthday parties and family gatherings"
+        },
+        {
+            "id": "tb002",
+            "name": "Rectangular Table",
+            "englishName": "Rectangular Table",
+            "size": "6ft x 30\"",
+            "capacity": "Seats 6-8",
+            "priceFrom": 12,
+            "image": "/images/rectangular-table.jpg",
+            "description": "Great for buffets, serving, and formal events"
         }
     ]
 }
