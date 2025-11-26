@@ -3,6 +3,7 @@ import { Fredoka, Nunito, Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 // Primary display font - fun and rounded for headings
 const fredoka = Fredoka({
@@ -46,6 +47,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   )
