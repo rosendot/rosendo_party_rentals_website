@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Polygon, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useEffect } from 'react'
+import { Truck, Settings, MapPin } from 'lucide-react'
 import freeZonesGeoJSON from '@/data/free-zones.json'
 import twentyDollarZonesGeoJSON from '@/data/20-dollar-zones.json'
 import fortyDollarZonesGeoJSON from '@/data/40-dollar-zones.json'
@@ -71,6 +72,28 @@ const deliveryZones: DeliveryZone[] = [
     }
 ]
 
+// Service features included with delivery
+const includedFeatures = [
+    {
+        icon: Truck,
+        label: 'Delivery & Pickup',
+        color: 'text-blue-600',
+        bgColor: 'bg-blue-50'
+    },
+    {
+        icon: Settings,
+        label: 'Setup Included',
+        color: 'text-emerald-600',
+        bgColor: 'bg-emerald-50'
+    },
+    {
+        icon: MapPin,
+        label: 'Based in Edinburg',
+        color: 'text-purple-600',
+        bgColor: 'bg-purple-50'
+    }
+]
+
 export default function ServiceAreaMap() {
     useEffect(() => {
         // Fix for Leaflet in Next.js
@@ -90,7 +113,9 @@ export default function ServiceAreaMap() {
             {/* Map Legend */}
             <div className="bg-white p-4 rounded-lg border-2 border-purple-200">
                 <h3 className="font-bold text-gray-700 mb-3">Delivery Pricing Zones</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+
+                {/* Existing zone grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                     {deliveryZones.map(zone => (
                         <div key={zone.name} className="flex items-center gap-2">
                             <div
@@ -109,6 +134,31 @@ export default function ServiceAreaMap() {
                                     {zone.regions.split(', ').length > 2 && '...'}
                                 </div>
                             </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Subtle separator */}
+                <div className="border-t border-gray-200 mb-3"></div>
+
+                {/* Included features row - subtle and compact */}
+                <div className="flex flex-wrap items-center justify-center gap-3 text-xs">
+                    {includedFeatures.map((feature, index) => (
+                        <div key={feature.label} className="flex items-center gap-1.5">
+                            {/* Divider between items (not before first) */}
+                            {index > 0 && (
+                                <div className="w-px h-3 bg-gray-300 mr-2"></div>
+                            )}
+
+                            {/* Small icon with subtle background */}
+                            <div className={`${feature.bgColor} p-1 rounded`}>
+                                <feature.icon className={`w-3.5 h-3.5 ${feature.color}`} strokeWidth={2} />
+                            </div>
+
+                            {/* Compact text label */}
+                            <span className="text-gray-700 font-medium whitespace-nowrap">
+                                {feature.label}
+                            </span>
                         </div>
                     ))}
                 </div>
