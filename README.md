@@ -45,58 +45,50 @@ This repository contains a display-only website for Gran Fiesta Rentals, showcas
 ## 📁 Repository Structure
 
 ```
-mi_fiesta_rentals/
-├── frontend/                   # Main website application
-│   ├── src/
-│   │   ├── app/               # Next.js App Router pages
-│   │   │   ├── page.tsx              # Home page
-│   │   │   ├── inventory/            # Product showcase
-│   │   │   ├── service-areas/        # Interactive delivery map
-│   │   │   ├── rental-info/          # Policies & pricing
-│   │   │   ├── faq/                  # FAQ accordion
-│   │   │   ├── contact/              # Contact & quote form
-│   │   │   └── layout.tsx            # Root layout with Header/Footer
-│   │   ├── components/        # Reusable UI components
-│   │   │   ├── Header.tsx            # Navigation header
-│   │   │   ├── Footer.tsx            # Footer with links
-│   │   │   ├── ServiceAreaMap.tsx    # Leaflet map component
-│   │   │   └── ItemCard.tsx          # Product card
-│   │   ├── data/             # JSON-based data storage
-│   │   │   ├── inventory.json        # Tables & chairs catalog
-│   │   │   ├── free-zones.json       # Free delivery GeoJSON
-│   │   │   ├── 20-dollar-zones.json  # $20 delivery GeoJSON
-│   │   │   └── 40-dollar-zones.json  # $40 delivery GeoJSON
-│   │   └── lib/              # Configuration and utilities
-│   │       └── config.ts             # Business info & settings
-│   ├── public/               # Static assets (SVG icons)
-│   └── package.json          # Dependencies and scripts
-├── backend/                   # Reserved for future use (empty)
-└── README.md                 # This file - main project documentation
+gran_fiesta_rentals/
+├── src/
+│   ├── app/                   # Next.js App Router pages
+│   │   ├── page.tsx                  # Home page
+│   │   ├── inventory/                # Product showcase
+│   │   ├── service-areas/            # Interactive delivery map
+│   │   ├── rental-info/              # Policies & pricing
+│   │   ├── faq/                      # FAQ accordion
+│   │   ├── contact/                  # Contact & quote form
+│   │   └── layout.tsx                # Root layout with Header/Footer
+│   ├── components/            # Reusable UI components
+│   │   ├── Header.tsx                # Navigation header
+│   │   ├── Footer.tsx                # Footer with links
+│   │   └── ServiceAreaMap.tsx        # Leaflet map component
+│   ├── data/                  # JSON-based data storage
+│   │   ├── inventory.json            # Tables & chairs catalog
+│   │   ├── free-zones.json           # Free delivery GeoJSON
+│   │   ├── 20-dollar-zones.json      # $20 delivery GeoJSON
+│   │   └── 40-dollar-zones.json      # $40 delivery GeoJSON
+│   └── lib/                   # Configuration and utilities
+│       └── config.ts                 # Business info & settings
+├── public/                    # Static assets (SVG icons)
+├── package.json               # Dependencies and scripts
+└── README.md                  # This file - main project documentation
 ```
 
 ## 🚀 Quick Start
 
-1. **Navigate to the frontend directory**
-   ```bash
-   cd frontend
-   ```
-
-2. **Install dependencies**
+1. **Install dependencies**
    ```bash
    npm install
    ```
 
-3. **Configure business details**
-   - Edit `src/lib/config.ts` with Rosendo's contact information
+2. **Configure business details**
+   - Edit `src/lib/config.ts` with contact information
    - Update `src/data/inventory.json` with actual rental items
    - Add item photos to `public/images/`
 
-4. **Run locally**
+3. **Run locally**
    ```bash
    npm run dev
    ```
-   
-5. **View website**
+
+4. **View website**
    - Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## 📝 Content Management
@@ -104,22 +96,22 @@ mi_fiesta_rentals/
 All content is managed through JSON files and TypeScript configuration - **no backend or database required**.
 
 ### Business Information
-- **Contact Details:** Update in [frontend/src/lib/config.ts](frontend/src/lib/config.ts)
+- **Contact Details:** Update in [src/lib/config.ts](src/lib/config.ts)
   - Phone: (956) 534-2589
-  - Email: mifiestarentals@gmail.com
+  - Email: granfiestarentals@gmail.com
   - Business hours, social media links
-- **Rental Policies:** Edit [frontend/src/app/rental-info/page.tsx](frontend/src/app/rental-info/page.tsx)
-- **FAQ Content:** Modify [frontend/src/app/faq/page.tsx](frontend/src/app/faq/page.tsx)
+- **Rental Policies:** Edit [src/app/rental-info/page.tsx](src/app/rental-info/page.tsx)
+- **FAQ Content:** Modify [src/app/faq/page.tsx](src/app/faq/page.tsx)
 
 ### Inventory Management
-- **Add/Edit Items:** Update [frontend/src/data/inventory.json](frontend/src/data/inventory.json)
+- **Add/Edit Items:** Update [src/data/inventory.json](src/data/inventory.json)
 - **Pricing:** Set per-day rental prices for each item
 - **Descriptions:** Add capacity and feature details
 
 ### Delivery Zone Configuration
-- **Free Zone:** Edit [frontend/src/data/free-zones.json](frontend/src/data/free-zones.json)
-- **$20 Zone:** Edit [frontend/src/data/20-dollar-zones.json](frontend/src/data/20-dollar-zones.json)
-- **$40 Zone:** Edit [frontend/src/data/40-dollar-zones.json](frontend/src/data/40-dollar-zones.json)
+- **Free Zone:** Edit [src/data/free-zones.json](src/data/free-zones.json)
+- **$20 Zone:** Edit [src/data/20-dollar-zones.json](src/data/20-dollar-zones.json)
+- **$40 Zone:** Edit [src/data/40-dollar-zones.json](src/data/40-dollar-zones.json)
 - Format: GeoJSON with Polygon/MultiPolygon geometries
 
 ## 🌐 Deployment Options
