@@ -6,7 +6,6 @@ import { useEffect } from 'react'
 import { Truck, Settings, MapPin } from 'lucide-react'
 import freeZonesGeoJSON from '@/data/free-zones.json'
 import twentyDollarZonesGeoJSON from '@/data/20-dollar-zones.json'
-import fortyDollarZonesGeoJSON from '@/data/40-dollar-zones.json'
 
 // Delivery pricing zones with their regions
 type DeliveryZone = {
@@ -38,12 +37,10 @@ const extractCoordinates = (feature: { geometry: { type: string; coordinates: nu
 // Extract coordinates from merged GeoJSON
 const freeZoneCoordinates = extractCoordinates((freeZonesGeoJSON as { features: Array<{ geometry: { type: string; coordinates: number[][][] | number[][][][] }; properties: { NAME: string } }> }).features[0])
 const twentyDollarZoneCoordinates = extractCoordinates((twentyDollarZonesGeoJSON as { features: Array<{ geometry: { type: string; coordinates: number[][][] | number[][][][] }; properties: { NAME: string } }> }).features[0])
-const fortyDollarZoneCoordinates = extractCoordinates((fortyDollarZonesGeoJSON as { features: Array<{ geometry: { type: string; coordinates: number[][][] | number[][][][] }; properties: { NAME: string } }> }).features[0])
 
 // Extract region names from merged GeoJSON
 const freeZoneNames = (freeZonesGeoJSON as { features: Array<{ properties: { NAME: string } }> }).features[0].properties.NAME
 const twentyDollarZoneNames = (twentyDollarZonesGeoJSON as { features: Array<{ properties: { NAME: string } }> }).features[0].properties.NAME
-const fortyDollarZoneNames = (fortyDollarZonesGeoJSON as { features: Array<{ properties: { NAME: string } }> }).features[0].properties.NAME
 
 const deliveryZones: DeliveryZone[] = [
     {
@@ -61,14 +58,6 @@ const deliveryZones: DeliveryZone[] = [
         fillColor: '#fcd34d',
         regions: twentyDollarZoneNames,
         coordinates: twentyDollarZoneCoordinates
-    },
-    {
-        name: '$40 Delivery Fee',
-        fee: 40,
-        color: '#c2410c',
-        fillColor: '#fed7aa',
-        regions: fortyDollarZoneNames,
-        coordinates: fortyDollarZoneCoordinates
     }
 ]
 
