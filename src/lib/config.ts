@@ -1,8 +1,8 @@
 export const businessConfig = {
-    name: "Mi Fiesta Rentals",
+    name: "Gran Fiesta Rentals",
     tagline: "Quality tables and chairs for your celebration",
     phone: "(956) 534-2589",
-    email: "mifiestarentals@gmail.com",
+    email: "granfiestarentals@gmail.com",
     serviceArea: "Rio Grande Valley",
     cities: [
         "McAllen", "Edinburg", "Mission", "Pharr", "Brownsville",

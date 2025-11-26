@@ -214,7 +214,7 @@ export default function Contact() {
                                 {/* Email Button */}
                                 <a
                                     ref={(el) => { contactButtonsRef.current[3] = el }}
-                                    href={`mailto:${businessConfig.email}?subject=Party Rental Quote Request&body=Hi Mi Fiesta Rentals!%0A%0AEvent Date: ______%0AEvent Time: ______%0ALocation/City: ______%0ANumber of guests: ______%0A%0AItems needed:%0A- ______%0A- ______%0A%0AAdditional details:%0A______%0A%0AThank you!`}
+                                    href={`mailto:${businessConfig.email}?subject=Party Rental Quote Request&body=Hi Gran Fiesta Rentals!%0A%0AEvent Date: ______%0AEvent Time: ______%0ALocation/City: ______%0ANumber of guests: ______%0A%0AItems needed:%0A- ______%0A- ______%0A%0AAdditional details:%0A______%0A%0AThank you!`}
                                     className="group bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 text-center"
                                 >
                                     <Mail

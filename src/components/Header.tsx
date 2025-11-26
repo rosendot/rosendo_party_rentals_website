@@ -28,7 +28,7 @@ export default function Header() {
                         </div>
                         <div>
                             <h1 className="text-2xl lg:text-3xl font-extrabold text-yellow-300 tracking-tight">
-                                Mi Fiesta Rentals
+                                Gran Fiesta Rentals
                             </h1>
                             <p className="text-sm text-purple-100 font-light hidden md:block">
                                 {businessConfig.tagline}

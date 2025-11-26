@@ -29,7 +29,7 @@ export default function Footer() {
                             </div>
                             <div>
                                 <h3 className="text-3xl font-extrabold text-yellow-300 tracking-tight">
-                                    Mi Fiesta Rentals
+                                    Gran Fiesta Rentals
                                 </h3>
                                 <p className="text-purple-200 font-light">{businessConfig.tagline}</p>
                             </div>
@@ -150,7 +150,7 @@ export default function Footer() {
                     }}
                 >
                     <p className="text-purple-200 font-light">
-                        © 2024 Mi Fiesta Rentals. All rights reserved. Made with{' '}
+                        © 2024 Gran Fiesta Rentals. All rights reserved. Made with{' '}
                         <span className="inline-block text-pink-400 hover:scale-125 transition-transform">♥</span>
                         {' '}for the RGV community.
                     </p>

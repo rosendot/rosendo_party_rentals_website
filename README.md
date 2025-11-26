@@ -1,10 +1,10 @@
-# Mi Fiesta Rentals Website
+# Gran Fiesta Rentals Website
 
-A modern, responsive display website for Mi Fiesta Rentals party rental business in the Rio Grande Valley, built with Next.js and TailwindCSS.
+A modern, responsive display website for Gran Fiesta Rentals party rental business in the Rio Grande Valley, built with Next.js and TailwindCSS.
 
 ## 🎯 Project Overview
 
-This repository contains a display-only website for Mi Fiesta Rentals, showcasing tables & chairs rental services for the Rio Grande Valley area. The site provides comprehensive rental information, interactive delivery zone mapping, and multiple contact options for customers to request quotes.
+This repository contains a display-only website for Gran Fiesta Rentals, showcasing tables & chairs rental services for the Rio Grande Valley area. The site provides comprehensive rental information, interactive delivery zone mapping, and multiple contact options for customers to request quotes.
 
 **Current Status:** Display website with JSON-based data management (no backend required)
 **Future Plans:** Integration with Stripe or Shopify for online booking and payments
@@ -183,7 +183,7 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 
 ## 📞 Business Contact
 
-**Mi Fiesta Rentals**
+**Gran Fiesta Rentals**
 - **Phone:** (956) 534-2589
 - **Email:** mifiestarentals@gmail.com
 - **Service Area:** Rio Grande Valley (10 cities)
@@ -267,4 +267,4 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 
 ---
 
-**Built to showcase Mi Fiesta Rentals' services in the Rio Grande Valley community**
+**Built to showcase Gran Fiesta Rentals' services in the Rio Grande Valley community**

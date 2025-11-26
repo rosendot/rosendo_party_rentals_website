@@ -28,7 +28,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Mi Fiesta Rentals - Party Rentals Rio Grande Valley',
+  title: 'Gran Fiesta Rentals - Party Rentals Rio Grande Valley',
   description: '¡Hacemos que tu fiesta sea perfecta! Bounce houses, tables, chairs and party rentals in the Rio Grande Valley. Professional delivery and setup.',
   keywords: 'party rentals, bounce house, Rio Grande Valley, McAllen, Mission, Edinburg, fiesta, party supplies',
 }
