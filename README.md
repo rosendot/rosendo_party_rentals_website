@@ -13,9 +13,10 @@ This repository contains a display-only website for Gran Fiesta Rentals, showcas
 
 - **Responsive Design** - Works perfectly on desktop, tablet, and mobile devices
 - **Inventory Display** - Tables and chairs with pricing and descriptions
+- **Interactive Price Calculator** - Full-featured calculator on inventory page with guest count helper, rental duration, delivery fee calculation, and real-time pricing breakdown
 - **Interactive Delivery Zone Map** - Leaflet-powered map showing three pricing tiers (Free, $20, $40 delivery zones) with GeoJSON polygon boundaries
 - **Multiple Contact Options** - Phone, SMS, WhatsApp, and email integration for easy customer communication
-- **Rental Information Page** - Comprehensive pricing details, delivery areas, setup requirements, and rental policies
+- **Rental Information Page** - Comprehensive pricing details, delivery areas, setup requirements, and rental policies with calculator widget
 - **FAQ Section** - 9 common questions and answers with expandable accordion interface
 - **Service Areas** - Covering 10 cities in the Rio Grande Valley with zone-based delivery pricing
 - **Party-Themed Background** - Festive party landscape background image across all pages with gradient overlay
@@ -50,16 +51,17 @@ gran_fiesta_rentals/
 ├── src/
 │   ├── app/                   # Next.js App Router pages
 │   │   ├── page.tsx                  # Home page
-│   │   ├── inventory/                # Product showcase
+│   │   ├── inventory/                # Product showcase with calculator
 │   │   ├── service-areas/            # Interactive delivery map
-│   │   ├── rental-info/              # Policies & pricing
+│   │   ├── rental-info/              # Policies & pricing with calculator widget
 │   │   ├── faq/                      # FAQ accordion
 │   │   ├── contact/                  # Contact & quote form
 │   │   └── layout.tsx                # Root layout with Header/Footer
 │   ├── components/            # Reusable UI components
 │   │   ├── Header.tsx                # Navigation header
 │   │   ├── Footer.tsx                # Footer with links
-│   │   └── ServiceAreaMap.tsx        # Leaflet map component
+│   │   ├── ServiceAreaMap.tsx        # Leaflet map component
+│   │   └── PriceCalculator.tsx       # Interactive price calculator
 │   ├── data/                  # JSON-based data storage
 │   │   ├── inventory.json            # Tables & chairs catalog
 │   │   ├── free-zones.json           # Free delivery GeoJSON
@@ -129,6 +131,10 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 ### Phase 1: Display Website (✅ Complete)
 - [x] Responsive frontend with Next.js and TypeScript
 - [x] Tables & chairs inventory display
+- [x] Interactive price calculator with guest count helper, rental duration, and delivery fee calculation
+- [x] Real-time pricing breakdown with itemized costs and grand total
+- [x] Delivery zone dropdown with FREE and $20 delivery cities
+- [x] Calculator widget on rental-info page linking to full calculator
 - [x] Interactive delivery zone map with GeoJSON polygons
 - [x] Service areas covering 10 cities in Rio Grande Valley
 - [x] Multiple contact options (phone, SMS, WhatsApp, email)
@@ -141,7 +147,8 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 - [x] Enhanced footer with professional icons and comprehensive navigation
 - [x] GSAP-powered animations throughout the site with 3D effects and interactive elements
 - [x] Advanced home page animations with floating gradient text and card tilt effects
-- [x] Inventory page animations with staggered grid entrance, floating icons, and price counters
+- [x] Inventory page animations with staggered grid entrance, floating icons, price counters, and calculator entrance
+- [x] Calculator widget animations with floating icon, rotation effects, and pulsing shadow
 - [x] Party landscape background image with gradient overlay across all pages
 
 ### Phase 2: Online Booking (Planned)
@@ -165,12 +172,30 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 
 ## 📊 Current Website Pages
 
-1. **Home** (`/`) - Landing page with call-to-action buttons
-2. **Inventory** (`/inventory`) - Tables and chairs catalog with pricing
+1. **Home** (`/`) - Landing page with call-to-action buttons and animated hero
+2. **Inventory** (`/inventory`) - Tables and chairs catalog with pricing and interactive calculator
 3. **Service Areas** (`/service-areas`) - Interactive map with delivery zones and pricing
-4. **Rental Info** (`/rental-info`) - Policies, pricing details, and booking information
+4. **Rental Info** (`/rental-info`) - Policies, pricing details, and calculator widget linking to full calculator
 5. **FAQ** (`/faq`) - Frequently asked questions with expandable answers
 6. **Contact** (`/contact`) - Multiple contact methods and quick quote form
+
+## 💰 Price Calculator Features
+
+The interactive price calculator on the inventory page includes:
+
+- **Guest Count Helper** - Enter number of guests, automatically suggests table and chair quantities (8 guests per table)
+- **Item Selection** - Adjust quantities for Round Tables ($12/day), Rectangular Tables ($12/day), and Folding Chairs ($2/day) with +/- buttons
+- **Rental Duration** - Select number of rental days with increment controls
+- **Delivery Location** - Dropdown menu with delivery fee calculation:
+  - FREE delivery cities (Edinburg, McAllen, Sharyland, Hidalgo, and 13 more)
+  - $20 delivery cities (Mission, Harlingen, Sullivan City, and 20 more)
+- **Real-Time Price Breakdown** - Itemized costs showing:
+  - Each item × quantity × days
+  - Subtotal
+  - Delivery fee based on selected city
+  - Grand total with prominent display
+- **Smooth Animations** - GSAP-powered entrance animation with gentle floating effect
+- **Calculator Widget** - Rental info page features animated link widget with floating icon and pulsing shadow effect
 
 ## 📞 Business Contact
 

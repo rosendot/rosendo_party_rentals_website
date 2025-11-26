@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { DollarSign, Truck, FileText, Calendar, Clock, Package, Sparkles, CheckCircle, MapPin } from 'lucide-react'
+import { DollarSign, Truck, FileText, Calendar, Clock, Package, Sparkles, CheckCircle, MapPin, Calculator } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import inventoryData from '@/data/inventory.json'
@@ -12,6 +12,8 @@ export default function RentalInfo() {
     const pricesRef = useRef<(HTMLSpanElement | null)[]>([])
     const listItemsRef = useRef<(HTMLLIElement | null)[]>([])
     const highlightBoxRef = useRef<HTMLDivElement>(null)
+    const calculatorWidgetRef = useRef<HTMLAnchorElement>(null)
+    const calculatorIconRef = useRef<SVGSVGElement>(null)
 
     useEffect(() => {
         // Clear any previous animations
@@ -62,6 +64,42 @@ export default function RentalInfo() {
             // Continuous gentle pulse
             gsap.to(highlightBoxRef.current, {
                 scale: 1.02,
+                duration: 2,
+                ease: 'sine.inOut',
+                repeat: -1,
+                yoyo: true
+            })
+        }
+
+        // Calculator widget entrance animation
+        if (calculatorWidgetRef.current) {
+            tl.fromTo(calculatorWidgetRef.current,
+                { y: 30, opacity: 0, scale: 0.95 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.7,
+                    ease: 'back.out(1.5)'
+                },
+                '-=0.4'
+            )
+
+            // Gentle floating animation for calculator icon
+            if (calculatorIconRef.current) {
+                gsap.to(calculatorIconRef.current, {
+                    y: -4,
+                    rotation: 5,
+                    duration: 2.5,
+                    ease: 'sine.inOut',
+                    repeat: -1,
+                    yoyo: true
+                })
+            }
+
+            // Pulse effect for the widget
+            gsap.to(calculatorWidgetRef.current, {
+                boxShadow: '0 20px 25px -5px rgba(139, 92, 246, 0.3), 0 10px 10px -5px rgba(139, 92, 246, 0.2)',
                 duration: 2,
                 ease: 'sine.inOut',
                 repeat: -1,
@@ -189,6 +227,40 @@ export default function RentalInfo() {
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* Price Calculator Widget */}
+                                <Link
+                                    ref={calculatorWidgetRef}
+                                    href="/inventory#calculator"
+                                    className="mt-6 block bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 p-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                >
+                                    <div className="flex items-center justify-between text-white">
+                                        <div className="flex items-center gap-3">
+                                            <div className="p-3 bg-white/20 rounded-lg">
+                                                <Calculator ref={calculatorIconRef} className="w-6 h-6" strokeWidth={2} />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xl font-bold mb-1">Calculate Your Total</h3>
+                                                <p className="text-purple-100 text-sm font-light">
+                                                    Get an instant quote with our price calculator
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <svg
+                                            className="w-6 h-6 text-white"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M9 5l7 7-7 7"
+                                            />
+                                        </svg>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
 

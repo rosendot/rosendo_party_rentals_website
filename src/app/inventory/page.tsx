@@ -4,6 +4,7 @@ import inventoryData from '@/data/inventory.json'
 import { Table2, Armchair, Users, Ruler } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import PriceCalculator from '@/components/PriceCalculator'
 
 export default function Inventory() {
     const tableHeaderRef = useRef<HTMLDivElement>(null)
@@ -14,10 +15,11 @@ export default function Inventory() {
     const chairIconsRef = useRef<(SVGSVGElement | null)[]>([])
     const tablePricesRef = useRef<(HTMLSpanElement | null)[]>([])
     const chairPricesRef = useRef<(HTMLSpanElement | null)[]>([])
+    const calculatorSectionRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         // Clear any previous animations
-        gsap.set([tableHeaderRef.current, chairHeaderRef.current, tableCardsRef.current, chairCardsRef.current], { clearProps: 'all' })
+        gsap.set([tableHeaderRef.current, chairHeaderRef.current, tableCardsRef.current, chairCardsRef.current, calculatorSectionRef.current], { clearProps: 'all' })
 
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
@@ -132,6 +134,32 @@ export default function Inventory() {
                 )
             }
         })
+
+        // Animate calculator section with special entrance
+        if (calculatorSectionRef.current) {
+            tl.fromTo(calculatorSectionRef.current,
+                { y: 80, opacity: 0, scale: 0.95, rotateX: -10 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    rotateX: 0,
+                    duration: 1,
+                    ease: 'back.out(1.4)'
+                },
+                '-=0.3'
+            )
+
+            // Gentle floating effect for calculator
+            gsap.to(calculatorSectionRef.current, {
+                y: -8,
+                duration: 3,
+                ease: 'sine.inOut',
+                repeat: -1,
+                yoyo: true,
+                delay: 1
+            })
+        }
     }, [])
 
     const handleCardTilt = (e: React.MouseEvent<HTMLDivElement>, cardRef: HTMLDivElement) => {
@@ -302,6 +330,11 @@ export default function Inventory() {
                             </div>
                         ))}
                     </div>
+                </section>
+
+                {/* Price Calculator Section */}
+                <section ref={calculatorSectionRef} id="calculator" className="mb-16 scroll-mt-20">
+                    <PriceCalculator />
                 </section>
             </div>
 
