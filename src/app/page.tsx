@@ -101,7 +101,7 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 min-h-[calc(100vh-4rem)] flex items-center">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center">
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Title */}

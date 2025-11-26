@@ -43,8 +43,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${fredoka.variable} ${nunito.variable} ${inter.variable} font-nunito antialiased`}>
         <Header />
-        <main className="min-h-screen">
-          {children}
+        <main className="relative min-h-screen bg-cover bg-center bg-no-repeat bg-fixed" style={{ backgroundImage: 'url(/party_landscape.webp)' }}>
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-pink-50/40 to-purple-50/40"></div>
+          <div className="relative z-10">
+            {children}
+          </div>
         </main>
         <Footer />
         <SpeedInsights />

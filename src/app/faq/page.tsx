@@ -122,7 +122,7 @@ export default function FAQ() {
     }
 
     return (
-        <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 min-h-screen py-16">
+        <div className="min-h-screen py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
                 {/* Page Header */}
                 <div

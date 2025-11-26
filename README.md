@@ -18,7 +18,7 @@ This repository contains a display-only website for Gran Fiesta Rentals, showcas
 - **Rental Information Page** - Comprehensive pricing details, delivery areas, setup requirements, and rental policies
 - **FAQ Section** - 9 common questions and answers with expandable accordion interface
 - **Service Areas** - Covering 10 cities in the Rio Grande Valley with zone-based delivery pricing
-- **Party-Themed Design** - Gradient backgrounds, custom animations, and festive styling
+- **Party-Themed Background** - Festive party landscape background image across all pages with gradient overlay
 - **Modern Design System** - Professional iconography, refined typography hierarchy, and micro-interactions
 - **Sticky Header Navigation** - Fixed header with animated underlines and smooth transitions
 - **Enhanced Footer** - Comprehensive site links, contact info, and social media integration
@@ -66,7 +66,8 @@ gran_fiesta_rentals/
 │   │   └── 40-dollar-zones.json      # $40 delivery GeoJSON
 │   └── lib/                   # Configuration and utilities
 │       └── config.ts                 # Business info & settings
-├── public/                    # Static assets (SVG icons)
+├── public/                    # Static assets
+│   └── party_landscape.webp          # Background image
 ├── package.json               # Dependencies and scripts
 └── README.md                  # This file - main project documentation
 ```
@@ -144,6 +145,7 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 - [x] GSAP-powered animations throughout the site with 3D effects and interactive elements
 - [x] Advanced home page animations with floating gradient text and card tilt effects
 - [x] Inventory page animations with staggered grid entrance, floating icons, and price counters
+- [x] Party landscape background image with gradient overlay across all pages
 
 ### Phase 2: Online Booking (Planned)
 - [ ] **Platform Selection** - Choose between Stripe or Shopify integration
