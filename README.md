@@ -1,12 +1,12 @@
 # Gran Fiesta Rentals Website
 
-A modern, responsive display website for Gran Fiesta Rentals party rental business in the Rio Grande Valley, built with Next.js and TailwindCSS.
+A modern, responsive display website for Gran Fiesta Rentals party rental business in the Rio Grande Valley, built with Next.js and TailwindCSS. **Hosted on Vercel.**
 
 ## 🎯 Project Overview
 
 This repository contains a display-only website for Gran Fiesta Rentals, showcasing tables & chairs rental services for the Rio Grande Valley area. The site provides comprehensive rental information, interactive delivery zone mapping, and multiple contact options for customers to request quotes.
 
-**Current Status:** Display website with JSON-based data management (no backend required)
+**Current Status:** Live on Vercel - Display website with JSON-based data management (no backend required)
 **Future Plans:** Integration with Stripe or Shopify for online booking and payments
 
 ## 🚀 Features
@@ -36,6 +36,7 @@ This repository contains a display-only website for Gran Fiesta Rentals, showcas
 - **Maps:** Leaflet 1.9.4 + React-Leaflet 5.0.0 for interactive delivery zones
 - **Data Management:** JSON files for inventory and GeoJSON for delivery zones
 - **Fonts:** Google Fonts (Fredoka, Nunito, Inter)
+- **Analytics:** Vercel Speed Insights for real-user performance monitoring
 - **Deployment:** Optimized for Vercel hosting
 
 ### Future Integration (Planned)
@@ -115,17 +116,13 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 - **$40 Zone:** Edit [src/data/40-dollar-zones.json](src/data/40-dollar-zones.json)
 - Format: GeoJSON with Polygon/MultiPolygon geometries
 
-## 🌐 Deployment Options
+## 🌐 Deployment
 
-### Recommended: Vercel
-- Connect GitHub repository to Vercel
-- Automatic deployments on code changes
-- Free tier available with custom domain support
-
-### Alternative Platforms
-- Netlify
-- Railway
-- DigitalOcean App Platform
+**Currently Hosted on Vercel**
+- ✅ Connected to GitHub repository
+- ✅ Automatic deployments on code changes
+- ✅ Speed Insights enabled for performance monitoring
+- ✅ Production-ready with optimized builds
 
 ## 🔄 Development Roadmap
 
