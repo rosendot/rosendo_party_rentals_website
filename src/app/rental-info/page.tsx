@@ -130,7 +130,7 @@ export default function RentalInfo() {
                                     <div className="pb-6 border-b border-gray-100">
                                         <h3 className="text-xl font-bold text-gray-900 mb-4 tracking-tight">Tables</h3>
                                         <div className="flex justify-between items-baseline">
-                                            <span className="text-base text-gray-600 font-light">Round Tables 60"</span>
+                                            <span className="text-base text-gray-600 font-light">Round Tables 60&quot;</span>
                                             <div className="flex items-baseline gap-1">
                                                 <span
                                                     ref={(el) => { pricesRef.current[0] = el }}
@@ -341,7 +341,7 @@ export default function RentalInfo() {
                                             </li>
                                             <li ref={(el) => { listItemsRef.current[14] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                                                <span>Leave everything out - we'll pack it all up</span>
+                                                <span>Leave everything out - we&apos;ll pack it all up</span>
                                             </li>
                                         </ul>
                                     </div>

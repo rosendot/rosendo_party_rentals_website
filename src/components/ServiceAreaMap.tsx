@@ -19,31 +19,31 @@ type DeliveryZone = {
 }
 
 // Helper function to extract coordinates from GeoJSON (handles both Polygon and MultiPolygon)
-const extractCoordinates = (feature: any): [number, number][][] | [number, number][] => {
+const extractCoordinates = (feature: { geometry: { type: string; coordinates: number[][][] | number[][][][] } }): [number, number][][] | [number, number][] => {
     const geom = feature.geometry
     const coords = geom.coordinates
 
     if (geom.type === 'Polygon') {
         // Single polygon - convert outer ring from [lng, lat] to [lat, lng]
-        return coords[0].map((coord: [number, number]) => [coord[1], coord[0]] as [number, number])
+        return (coords as number[][][])[0].map((coord: number[]) => [coord[1], coord[0]] as [number, number])
     } else if (geom.type === 'MultiPolygon') {
         // Multiple polygons - convert each outer ring
-        return coords.map((polygon: any) =>
-            polygon[0].map((coord: [number, number]) => [coord[1], coord[0]] as [number, number])
+        return (coords as number[][][][]).map((polygon: number[][][]) =>
+            polygon[0].map((coord: number[]) => [coord[1], coord[0]] as [number, number])
         )
     }
     return []
 }
 
 // Extract coordinates from merged GeoJSON
-const freeZoneCoordinates = extractCoordinates((freeZonesGeoJSON as any).features[0])
-const twentyDollarZoneCoordinates = extractCoordinates((twentyDollarZonesGeoJSON as any).features[0])
-const fortyDollarZoneCoordinates = extractCoordinates((fortyDollarZonesGeoJSON as any).features[0])
+const freeZoneCoordinates = extractCoordinates((freeZonesGeoJSON as { features: Array<{ geometry: { type: string; coordinates: number[][][] | number[][][][] }; properties: { NAME: string } }> }).features[0])
+const twentyDollarZoneCoordinates = extractCoordinates((twentyDollarZonesGeoJSON as { features: Array<{ geometry: { type: string; coordinates: number[][][] | number[][][][] }; properties: { NAME: string } }> }).features[0])
+const fortyDollarZoneCoordinates = extractCoordinates((fortyDollarZonesGeoJSON as { features: Array<{ geometry: { type: string; coordinates: number[][][] | number[][][][] }; properties: { NAME: string } }> }).features[0])
 
 // Extract region names from merged GeoJSON
-const freeZoneNames = (freeZonesGeoJSON as any).features[0].properties.NAME
-const twentyDollarZoneNames = (twentyDollarZonesGeoJSON as any).features[0].properties.NAME
-const fortyDollarZoneNames = (fortyDollarZonesGeoJSON as any).features[0].properties.NAME
+const freeZoneNames = (freeZonesGeoJSON as { features: Array<{ properties: { NAME: string } }> }).features[0].properties.NAME
+const twentyDollarZoneNames = (twentyDollarZonesGeoJSON as { features: Array<{ properties: { NAME: string } }> }).features[0].properties.NAME
+const fortyDollarZoneNames = (fortyDollarZonesGeoJSON as { features: Array<{ properties: { NAME: string } }> }).features[0].properties.NAME
 
 const deliveryZones: DeliveryZone[] = [
     {
@@ -97,7 +97,7 @@ const includedFeatures = [
 export default function ServiceAreaMap() {
     useEffect(() => {
         // Fix for Leaflet in Next.js
-        delete (L.Icon.Default.prototype as any)._getIconUrl
+        delete (L.Icon.Default.prototype as { _getIconUrl?: () => string })._getIconUrl
         L.Icon.Default.mergeOptions({
             iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
             iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',

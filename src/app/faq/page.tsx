@@ -192,7 +192,7 @@ export default function FAQ() {
                             Still Have Questions?
                         </h3>
                         <p className="text-xl mb-8 font-light">
-                            We're here to help make your party perfect!
+                            We&apos;re here to help make your party perfect!
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <a
