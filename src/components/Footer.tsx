@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { businessConfig } from '@/lib/config'
-import { PartyPopper, Phone, Mail, MapPin, ChevronRight } from 'lucide-react'
+import { PartyPopper, Phone, Mail, ChevronRight } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export default function Footer() {
@@ -13,7 +13,7 @@ export default function Footer() {
     }, [])
 
     return (
-        <footer className="bg-gradient-to-r from-purple-800 via-purple-700 to-purple-800 text-white">
+        <footer className="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-700 text-white">
             <div className="container mx-auto px-6 lg:px-8 py-16">
                 <div
                     className="grid md:grid-cols-4 gap-12"
@@ -91,17 +91,6 @@ export default function Footer() {
                                 >
                                     {businessConfig.email}
                                 </a>
-                            </div>
-                            <div className="group flex items-start gap-3">
-                                <div className="bg-purple-600/50 p-2.5 rounded-lg group-hover:bg-purple-600 transition-colors mt-0.5">
-                                    <MapPin className="w-4 h-4 text-purple-100" />
-                                </div>
-                                <div>
-                                    <p className="text-purple-100 font-medium">Serving RGV:</p>
-                                    <p className="text-purple-200 font-light text-sm mt-1">
-                                        {businessConfig.cities.slice(0, 4).join(', ')} + more
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     </div>
