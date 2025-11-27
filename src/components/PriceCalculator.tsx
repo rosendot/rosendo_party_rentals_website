@@ -36,8 +36,9 @@ export default function PriceCalculator() {
     // Calculate suggested quantities based on guest count
     useEffect(() => {
         if (guestCount > 0) {
-            const tablesNeeded = Math.ceil(guestCount / 8) // Assuming 8 people per table
-            const chairsNeeded = guestCount
+            const seatedCount = Math.round(guestCount * 0.7) // 70% of guests will be seated at birthday parties
+            const tablesNeeded = Math.ceil(seatedCount / 8) // Assuming 8 people per table
+            const chairsNeeded = seatedCount
 
             setQuantities({
                 'tb001': tablesNeeded,
