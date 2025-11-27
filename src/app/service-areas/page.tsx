@@ -19,7 +19,6 @@ const Map = dynamic(() => import('@/components/ServiceAreaMap'), {
 
 export default function ServiceAreas() {
     const mapSectionRef = useRef<HTMLDivElement>(null)
-    const mapHeaderRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         // Clear any previous animations
@@ -27,16 +26,10 @@ export default function ServiceAreas() {
 
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
-        // Animate map section
+        // Animate entire map section (including header)
         tl.fromTo(mapSectionRef.current,
             { y: 60, opacity: 0, scale: 0.95 },
             { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }
-        )
-        // Animate map header
-        .fromTo(mapHeaderRef.current,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6 },
-            '-=0.4'
         )
     }, [])
 
@@ -47,7 +40,7 @@ export default function ServiceAreas() {
                 <div ref={mapSectionRef} className="mb-12">
                     <div className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden">
                         <div className="p-8 lg:p-10">
-                            <div ref={mapHeaderRef} className="text-center mb-8">
+                            <div className="text-center mb-8">
                                 <h2 className="text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
                                     Delivery Pricing Map
                                 </h2>

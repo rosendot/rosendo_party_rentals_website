@@ -8,20 +8,15 @@ import inventoryData from '@/data/inventory.json'
 
 export default function RentalInfo() {
     const cardsRef = useRef<(HTMLDivElement | null)[]>([])
-    const iconsRef = useRef<(SVGSVGElement | null)[]>([])
     const pricesRef = useRef<(HTMLSpanElement | null)[]>([])
-    const listItemsRef = useRef<(HTMLLIElement | null)[]>([])
-    const highlightBoxRef = useRef<HTMLDivElement>(null)
-    const calculatorWidgetRef = useRef<HTMLAnchorElement>(null)
-    const calculatorIconRef = useRef<SVGSVGElement>(null)
 
     useEffect(() => {
         // Clear any previous animations
-        gsap.set([cardsRef.current, listItemsRef.current], { clearProps: 'all' })
+        gsap.set([cardsRef.current], { clearProps: 'all' })
 
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
-        // Staggered card entrance with 3D rotation
+        // Parallel card entrance with 3D rotation
         tl.fromTo(cardsRef.current,
             { y: 80, opacity: 0, scale: 0.95, rotateX: -15 },
             {
@@ -30,96 +25,11 @@ export default function RentalInfo() {
                 scale: 1,
                 rotateX: 0,
                 duration: 0.8,
-                stagger: 0.15,
+                stagger: 0, // All cards animate at the same time
                 ease: 'back.out(1.4)'
-            }
-        )
-
-        // Animate list items with stagger
-        .fromTo(listItemsRef.current,
-            { x: -20, opacity: 0 },
-            {
-                x: 0,
-                opacity: 1,
-                duration: 0.5,
-                stagger: 0.05,
-                ease: 'power2.out'
             },
-            '-=0.4'
+            0 // Start at timeline position 0
         )
-
-        // Highlight box special effect
-        if (highlightBoxRef.current) {
-            tl.fromTo(highlightBoxRef.current,
-                { scale: 0.9, opacity: 0 },
-                {
-                    scale: 1,
-                    opacity: 1,
-                    duration: 0.6,
-                    ease: 'back.out(1.7)'
-                },
-                '-=0.6'
-            )
-
-            // Continuous gentle pulse
-            gsap.to(highlightBoxRef.current, {
-                scale: 1.02,
-                duration: 2,
-                ease: 'sine.inOut',
-                repeat: -1,
-                yoyo: true
-            })
-        }
-
-        // Calculator widget entrance animation
-        if (calculatorWidgetRef.current) {
-            tl.fromTo(calculatorWidgetRef.current,
-                { y: 30, opacity: 0, scale: 0.95 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.7,
-                    ease: 'back.out(1.5)'
-                },
-                '-=0.4'
-            )
-
-            // Gentle floating animation for calculator icon
-            if (calculatorIconRef.current) {
-                gsap.to(calculatorIconRef.current, {
-                    y: -4,
-                    rotation: 5,
-                    duration: 2.5,
-                    ease: 'sine.inOut',
-                    repeat: -1,
-                    yoyo: true
-                })
-            }
-
-            // Pulse effect for the widget
-            gsap.to(calculatorWidgetRef.current, {
-                boxShadow: '0 20px 25px -5px rgba(139, 92, 246, 0.3), 0 10px 10px -5px rgba(139, 92, 246, 0.2)',
-                duration: 2,
-                ease: 'sine.inOut',
-                repeat: -1,
-                yoyo: true
-            })
-        }
-
-        // Floating animations for header icons
-        iconsRef.current.forEach((icon, index) => {
-            if (icon) {
-                gsap.to(icon, {
-                    y: -6,
-                    duration: 2 + (index * 0.3),
-                    ease: 'sine.inOut',
-                    repeat: -1,
-                    yoyo: true,
-                    delay: index * 0.2
-                })
-            }
-        })
 
         // Counter animation for prices (dynamically based on inventory count)
         pricesRef.current.forEach((priceEl, index) => {
@@ -156,7 +66,6 @@ export default function RentalInfo() {
                                 <div className="flex items-center gap-3 mb-8">
                                     <div className="p-3 bg-emerald-50 rounded-xl">
                                         <DollarSign
-                                            ref={(el) => { iconsRef.current[0] = el }}
                                             className="w-8 h-8 text-emerald-600"
                                             strokeWidth={2}
                                         />
@@ -214,53 +123,51 @@ export default function RentalInfo() {
                                     </div>
                                 </div>
 
-                                <div
-                                    ref={highlightBoxRef}
-                                    className="mt-8 bg-gradient-to-r from-amber-50 to-yellow-50 p-5 rounded-xl border border-amber-200"
-                                >
-                                    <div className="flex gap-3">
-                                        <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-                                        <div>
-                                            <p className="text-amber-900 text-sm font-medium leading-relaxed">
-                                                <strong className="font-bold">Package Deals Available!</strong> Save money by renting multiple tables and chairs together.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Price Calculator Widget */}
-                                <Link
-                                    ref={calculatorWidgetRef}
-                                    href="/inventory#calculator"
-                                    className="mt-6 block bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 p-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                                >
-                                    <div className="flex items-center justify-between text-white">
-                                        <div className="flex items-center gap-3">
-                                            <div className="p-3 bg-white/20 rounded-lg">
-                                                <Calculator ref={calculatorIconRef} className="w-6 h-6" strokeWidth={2} />
-                                            </div>
+                                <div className="mt-8 space-y-6">
+                                    <div className="bg-gradient-to-r from-amber-50 to-yellow-50 p-5 rounded-xl border border-amber-200">
+                                        <div className="flex gap-3">
+                                            <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                                             <div>
-                                                <h3 className="text-xl font-bold mb-1">Calculate Your Total</h3>
-                                                <p className="text-purple-100 text-sm font-light">
-                                                    Get an instant quote with our price calculator
+                                                <p className="text-amber-900 text-sm font-medium leading-relaxed">
+                                                    <strong className="font-bold">Package Deals Available!</strong> Save money by renting multiple tables and chairs together.
                                                 </p>
                                             </div>
                                         </div>
-                                        <svg
-                                            className="w-6 h-6 text-white"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9 5l7 7-7 7"
-                                            />
-                                        </svg>
                                     </div>
-                                </Link>
+
+                                    {/* Price Calculator Widget */}
+                                    <Link
+                                        href="/inventory#calculator"
+                                        className="block bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 p-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                    >
+                                        <div className="flex items-center justify-between text-white">
+                                            <div className="flex items-center gap-3">
+                                                <div className="p-3 bg-white/20 rounded-lg">
+                                                    <Calculator className="w-6 h-6" strokeWidth={2} />
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-xl font-bold mb-1">Calculate Your Total</h3>
+                                                    <p className="text-purple-100 text-sm font-light">
+                                                        Get an instant quote with our price calculator
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <svg
+                                                className="w-6 h-6 text-white"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M9 5l7 7-7 7"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
@@ -273,7 +180,6 @@ export default function RentalInfo() {
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className="p-3 bg-blue-50 rounded-xl">
                                         <MapPin
-                                            ref={(el) => { iconsRef.current[1] = el }}
                                             className="w-8 h-8 text-blue-600"
                                             strokeWidth={2}
                                         />
@@ -304,7 +210,6 @@ export default function RentalInfo() {
                                 <div className="flex items-center gap-3 mb-8">
                                     <div className="p-3 bg-purple-50 rounded-xl">
                                         <FileText
-                                            ref={(el) => { iconsRef.current[2] = el }}
                                             className="w-8 h-8 text-purple-600"
                                             strokeWidth={2}
                                         />
@@ -321,23 +226,23 @@ export default function RentalInfo() {
                                             <h3 className="text-xl font-bold text-gray-900 tracking-tight">Booking & Payment</h3>
                                         </div>
                                         <ul className="space-y-3">
-                                            <li ref={(el) => { listItemsRef.current[0] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>No deposit needed to reserve your rental</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[1] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Full payment due at delivery</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[2] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Cash or digital payments accepted: Zelle, CashApp, PayPal</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[3] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Cancel 2+ days in advance at no charge</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[4] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Late cancellations: $20 fee</span>
                                             </li>
@@ -350,19 +255,19 @@ export default function RentalInfo() {
                                             <h3 className="text-xl font-bold text-gray-900 tracking-tight">Rental Times</h3>
                                         </div>
                                         <ul className="space-y-3">
-                                            <li ref={(el) => { listItemsRef.current[5] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Priced per day with overnight use included</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[6] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Perfect for birthday parties and celebrations</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[7] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Delivery & setup between 12pm - 5pm</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[8] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Pickup window: 12pm - 5pm next day</span>
                                             </li>
@@ -381,7 +286,6 @@ export default function RentalInfo() {
                                 <div className="flex items-center gap-3 mb-8">
                                     <div className="p-3 bg-orange-50 rounded-xl">
                                         <Truck
-                                            ref={(el) => { iconsRef.current[3] = el }}
                                             className="w-8 h-8 text-orange-600"
                                             strokeWidth={2}
                                         />
@@ -398,15 +302,15 @@ export default function RentalInfo() {
                                             <h3 className="text-xl font-bold text-gray-900 tracking-tight">Delivery & Setup</h3>
                                         </div>
                                         <ul className="space-y-3">
-                                            <li ref={(el) => { listItemsRef.current[9] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>We deliver and set up everything for you</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[10] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>All items arrive sanitized and party-ready</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[11] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Setup at your preferred location on-site</span>
                                             </li>
@@ -419,15 +323,15 @@ export default function RentalInfo() {
                                             <h3 className="text-xl font-bold text-gray-900 tracking-tight">Teardown & Pickup</h3>
                                         </div>
                                         <ul className="space-y-3">
-                                            <li ref={(el) => { listItemsRef.current[12] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>We take care of all breakdown and removal</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[13] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Just wipe down the tables and chairs after your event</span>
                                             </li>
-                                            <li ref={(el) => { listItemsRef.current[14] = el }} className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
+                                            <li className="flex gap-3 text-base text-gray-600 font-light leading-relaxed">
                                                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                                 <span>Leave everything out - we&apos;ll pack it all up</span>
                                             </li>

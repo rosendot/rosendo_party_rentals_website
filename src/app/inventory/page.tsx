@@ -26,7 +26,8 @@ export default function Inventory() {
         // Animate Tables header with slide & reveal
         tl.fromTo(tableHeaderRef.current,
             { x: -100, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.8, ease: 'back.out(1.7)' }
+            { x: 0, opacity: 1, duration: 0.8, ease: 'back.out(1.7)' },
+            0 // Start at timeline position 0
         )
         // Staggered grid entrance for table cards
         .fromTo(tableCardsRef.current,
@@ -44,13 +45,13 @@ export default function Inventory() {
                 },
                 ease: 'back.out(1.4)'
             },
-            '-=0.4'
+            0.4 // Start 0.4s after timeline begins (parallel with tables header)
         )
         // Animate Chairs header
         .fromTo(chairHeaderRef.current,
             { x: -100, opacity: 0 },
             { x: 0, opacity: 1, duration: 0.8, ease: 'back.out(1.7)' },
-            '-=0.3'
+            0 // Start at timeline position 0 (same time as tables)
         )
         // Staggered grid entrance for chair cards
         .fromTo(chairCardsRef.current,
@@ -68,7 +69,7 @@ export default function Inventory() {
                 },
                 ease: 'back.out(1.4)'
             },
-            '-=0.4'
+            0.4 // Start 0.4s after timeline begins (parallel with chairs header)
         )
 
         // Continuous floating animation for all icons
@@ -147,7 +148,7 @@ export default function Inventory() {
                     duration: 1,
                     ease: 'back.out(1.4)'
                 },
-                '-=0.3'
+                0 // Start at timeline position 0 (parallel with tables and chairs)
             )
 
             // Gentle floating effect for calculator

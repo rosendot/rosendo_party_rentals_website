@@ -13,12 +13,12 @@ type DeliveryZone = {
 const deliveryZones: DeliveryZone[] = [
     {
         name: 'FREE Delivery',
-        cities: ['Edinburg', 'McAllen', 'Sharyland', 'Hidalgo', 'San Carlos', 'Faysville', 'Lopezville', 'Murillo', 'Pharr', 'San Juan', 'Alamo', 'North Alamo', 'Weslaco', 'Donna', 'Mercedes', 'Elsa', 'Edcouch'],
+        cities: ['Alamo', 'Donna', 'Edcouch', 'Edinburg', 'Elsa', 'Faysville', 'Hidalgo', 'Lopezville', 'McAllen', 'Mercedes', 'Murillo', 'North Alamo', 'Pharr', 'San Carlos', 'San Juan', 'Sharyland', 'Weslaco'].sort(),
         fee: 0
     },
     {
         name: '$20 Delivery Fee',
-        cities: ['Mission', 'Harlingen', 'Sullivan City', 'La Homa', 'Hargill', 'Progreso', 'Puerto Rico-San Manuel', 'Raymondville', 'Lyford', 'Sebastian', 'Lasara', 'San Perlita', 'San Benito', 'La Feria', 'Combes', 'Primera', 'Palm Valley', 'Rangerville', 'Rio Hondo', 'Los Fresnos', 'Alton', 'Palmview', 'Palmhurst'],
+        cities: ['Alton', 'Combes', 'Hargill', 'Harlingen', 'La Feria', 'La Homa', 'Lasara', 'Los Fresnos', 'Lyford', 'Mission', 'Palm Valley', 'Palmhurst', 'Palmview', 'Primera', 'Progreso', 'Puerto Rico-San Manuel', 'Rangerville', 'Raymondville', 'Rio Hondo', 'San Benito', 'San Perlita', 'Sebastian', 'Sullivan City'].sort(),
         fee: 20
     }
 ]

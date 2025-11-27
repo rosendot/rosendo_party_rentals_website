@@ -147,7 +147,8 @@ All content is managed through JSON files and TypeScript configuration - **no ba
 - [x] Enhanced footer with professional icons and comprehensive navigation
 - [x] GSAP-powered animations throughout the site with 3D effects and interactive elements
 - [x] Advanced home page animations with floating gradient text and card tilt effects
-- [x] Inventory page animations with staggered grid entrance, floating icons, price counters, and calculator entrance
+- [x] Inventory page animations with parallel section entrance (tables, chairs, calculator), staggered grid patterns, floating icons, and price counters
+- [x] Contact page animations with parallel form and contact card entrance
 - [x] Calculator widget animations with floating icon, rotation effects, and pulsing shadow
 - [x] Party landscape background image with gradient overlay across all pages
 
@@ -241,6 +242,7 @@ The interactive price calculator on the inventory page includes:
 
 ### Animations
 - **GSAP Timeline Sequences:** Professional entrance animations with coordinated timing
+- **Parallel Animations:** Multiple sections animate simultaneously for faster, more dynamic page loads (inventory and contact pages)
 - **3D Card Tilt:** Mouse-following 3D rotation effects on hover for interactive cards
 - **Staggered Grid Entrance:** Product cards appear in wave patterns with 3D rotation
 - **Floating Elements:** Continuous gentle floating animations for icons and gradient text

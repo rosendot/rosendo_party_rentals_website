@@ -8,123 +8,25 @@ import { gsap } from 'gsap'
 export default function Contact() {
     const contactCardRef = useRef<HTMLDivElement>(null)
     const formCardRef = useRef<HTMLDivElement>(null)
-    const contactHeaderRef = useRef<HTMLDivElement>(null)
-    const formHeaderRef = useRef<HTMLDivElement>(null)
-    const contactInfoBoxRef = useRef<HTMLDivElement>(null)
-    const contactButtonsRef = useRef<(HTMLAnchorElement | null)[]>([])
-    const formFieldsRef = useRef<(HTMLDivElement | null)[]>([])
-    const noteBoxRef = useRef<HTMLDivElement>(null)
-    const submitButtonRef = useRef<HTMLButtonElement>(null)
-    const iconsRef = useRef<(SVGSVGElement | null)[]>([])
 
     useEffect(() => {
         // Clear any previous animations
-        gsap.set([contactCardRef.current, formCardRef.current, contactButtonsRef.current, formFieldsRef.current], { clearProps: 'all' })
+        gsap.set([contactCardRef.current, formCardRef.current], { clearProps: 'all' })
 
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
         // Animate contact card
         tl.fromTo(contactCardRef.current,
             { x: -60, opacity: 0, scale: 0.95 },
-            { x: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }
+            { x: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' },
+            0 // Start at timeline position 0
         )
-        // Animate contact header
-        .fromTo(contactHeaderRef.current,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6 },
-            '-=0.4'
-        )
-        // Animate contact info box with bounce
-        .fromTo(contactInfoBoxRef.current,
-            { scale: 0.9, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.7)' },
-            '-=0.3'
-        )
-        // Stagger contact method buttons
-        .fromTo(contactButtonsRef.current,
-            { y: 30, opacity: 0, scale: 0.9 },
-            {
-                y: 0,
-                opacity: 1,
-                scale: 1,
-                duration: 0.5,
-                stagger: 0.08,
-                ease: 'back.out(1.4)'
-            },
-            '-=0.3'
-        )
-        // Animate form card
+        // Animate form card (parallel with contact card)
         .fromTo(formCardRef.current,
             { x: 60, opacity: 0, scale: 0.95 },
             { x: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' },
-            '-=0.6'
+            0 // Start at timeline position 0 (same time as contact card)
         )
-        // Animate form header
-        .fromTo(formHeaderRef.current,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6 },
-            '-=0.4'
-        )
-        // Stagger form fields
-        .fromTo(formFieldsRef.current,
-            { x: 20, opacity: 0 },
-            {
-                x: 0,
-                opacity: 1,
-                duration: 0.4,
-                stagger: 0.05,
-                ease: 'power2.out'
-            },
-            '-=0.3'
-        )
-        // Animate note box
-        .fromTo(noteBoxRef.current,
-            { scale: 0.95, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.4)' },
-            '-=0.2'
-        )
-        // Animate submit button
-        .fromTo(submitButtonRef.current,
-            { y: 20, opacity: 0, scale: 0.95 },
-            { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' },
-            '-=0.3'
-        )
-
-        // Floating animations for contact icons
-        iconsRef.current.forEach((icon, index) => {
-            if (icon) {
-                gsap.to(icon, {
-                    y: -5,
-                    duration: 1.5 + (index * 0.2),
-                    ease: 'sine.inOut',
-                    repeat: -1,
-                    yoyo: true,
-                    delay: index * 0.15
-                })
-            }
-        })
-
-        // Gentle pulse for info box
-        if (contactInfoBoxRef.current) {
-            gsap.to(contactInfoBoxRef.current, {
-                scale: 1.02,
-                duration: 2.5,
-                ease: 'sine.inOut',
-                repeat: -1,
-                yoyo: true
-            })
-        }
-
-        // Gentle pulse for note box
-        if (noteBoxRef.current) {
-            gsap.to(noteBoxRef.current, {
-                scale: 1.01,
-                duration: 2,
-                ease: 'sine.inOut',
-                repeat: -1,
-                yoyo: true
-            })
-        }
     }, [])
 
     return (
@@ -137,7 +39,7 @@ export default function Contact() {
                         className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden"
                     >
                         <div className="p-8 lg:p-10">
-                            <div ref={contactHeaderRef} className="text-center mb-8">
+                            <div className="text-center mb-8">
                                 <h2 className="text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
                                     Get In Touch
                                 </h2>
@@ -147,7 +49,7 @@ export default function Contact() {
                             </div>
 
                             {/* Contact Info Display */}
-                            <div ref={contactInfoBoxRef} className="text-center mb-8 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                            <div className="text-center mb-8 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-100">
                                 <p className="text-sm text-gray-600 mb-2 font-medium">Call or Text Us</p>
                                 <a
                                     href={`tel:${businessConfig.phone}`}
@@ -168,12 +70,10 @@ export default function Contact() {
                             <div className="grid grid-cols-2 gap-4 mb-8">
                                 {/* Call Button */}
                                 <a
-                                    ref={(el) => { contactButtonsRef.current[0] = el }}
                                     href={`tel:${businessConfig.phone}`}
                                     className="group bg-gradient-to-br from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 text-center"
                                 >
                                     <Phone
-                                        ref={(el) => { iconsRef.current[0] = el }}
                                         className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform"
                                     />
                                     <div className="text-sm">Call Now</div>
@@ -181,12 +81,10 @@ export default function Contact() {
 
                                 {/* Text/SMS Button */}
                                 <a
-                                    ref={(el) => { contactButtonsRef.current[1] = el }}
                                     href={`sms:${businessConfig.phone}?&body=Hi! I need a quote for: DATE: _____ CITY: _____ ITEMS: _____`}
                                     className="group bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 text-center"
                                 >
                                     <MessageSquare
-                                        ref={(el) => { iconsRef.current[1] = el }}
                                         className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform"
                                     />
                                     <div className="text-sm">Text Message</div>
@@ -194,14 +92,12 @@ export default function Contact() {
 
                                 {/* WhatsApp Button */}
                                 <a
-                                    ref={(el) => { contactButtonsRef.current[2] = el }}
                                     href={businessConfig.social.whatsapp}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="group bg-gradient-to-br from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold py-5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 text-center"
                                 >
                                     <svg
-                                        ref={(el) => { iconsRef.current[2] = el }}
                                         className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform"
                                         viewBox="0 0 24 24"
                                         fill="currentColor"
@@ -213,12 +109,10 @@ export default function Contact() {
 
                                 {/* Email Button */}
                                 <a
-                                    ref={(el) => { contactButtonsRef.current[3] = el }}
                                     href={`mailto:${businessConfig.email}?subject=Party Rental Quote Request&body=Hi Gran Fiesta Rentals!%0A%0AEvent Date: ______%0AEvent Time: ______%0ALocation/City: ______%0ANumber of guests: ______%0A%0AItems needed:%0A- ______%0A- ______%0A%0AAdditional details:%0A______%0A%0AThank you!`}
                                     className="group bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-5 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 text-center"
                                 >
                                     <Mail
-                                        ref={(el) => { iconsRef.current[3] = el }}
                                         className="w-8 h-8 mx-auto mb-2 group-hover:scale-110 transition-transform"
                                     />
                                     <div className="text-sm">Email Us</div>
@@ -257,7 +151,7 @@ export default function Contact() {
                         className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden"
                     >
                         <div className="p-8 lg:p-10">
-                            <div ref={formHeaderRef} className="text-center mb-8">
+                            <div className="text-center mb-8">
                                 <h2 className="text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
                                     Quick Quote Form
                                 </h2>
@@ -267,7 +161,7 @@ export default function Contact() {
                             </div>
 
                             <form className="space-y-5">
-                                <div ref={(el) => { formFieldsRef.current[0] = el }}>
+                                <div>
                                     <label className="block text-sm font-bold text-gray-900 mb-2 tracking-tight">
                                         Name *
                                     </label>
@@ -279,7 +173,7 @@ export default function Contact() {
                                     />
                                 </div>
 
-                                <div ref={(el) => { formFieldsRef.current[1] = el }}>
+                                <div>
                                     <label className="block text-sm font-bold text-gray-900 mb-2 tracking-tight">
                                         Phone *
                                     </label>
@@ -291,7 +185,7 @@ export default function Contact() {
                                     />
                                 </div>
 
-                                <div ref={(el) => { formFieldsRef.current[2] = el }}>
+                                <div>
                                     <label className="block text-sm font-bold text-gray-900 mb-2 tracking-tight">
                                         Event Date *
                                     </label>
@@ -302,7 +196,7 @@ export default function Contact() {
                                     />
                                 </div>
 
-                                <div ref={(el) => { formFieldsRef.current[3] = el }}>
+                                <div>
                                     <label className="block text-sm font-bold text-gray-900 mb-2 tracking-tight">
                                         City *
                                     </label>
@@ -315,7 +209,7 @@ export default function Contact() {
                                     </select>
                                 </div>
 
-                                <div ref={(el) => { formFieldsRef.current[4] = el }}>
+                                <div>
                                     <label className="block text-sm font-bold text-gray-900 mb-3 tracking-tight">
                                         Items Needed
                                     </label>
@@ -331,7 +225,7 @@ export default function Contact() {
                                     </div>
                                 </div>
 
-                                <div ref={(el) => { formFieldsRef.current[5] = el }}>
+                                <div>
                                     <label className="block text-sm font-bold text-gray-900 mb-2 tracking-tight">
                                         Additional Details
                                     </label>
@@ -341,7 +235,7 @@ export default function Contact() {
                                     ></textarea>
                                 </div>
 
-                                <div ref={noteBoxRef} className="bg-gradient-to-r from-amber-50 to-yellow-50 p-5 rounded-xl border border-amber-200">
+                                <div className="bg-gradient-to-r from-amber-50 to-yellow-50 p-5 rounded-xl border border-amber-200">
                                     <div className="flex gap-3">
                                         <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                                         <p className="text-sm text-amber-900 leading-relaxed">
@@ -352,7 +246,6 @@ export default function Contact() {
                                 </div>
 
                                 <button
-                                    ref={submitButtonRef}
                                     type="submit"
                                     className="group w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2"
                                 >
